@@ -1,0 +1,13 @@
+{
+  "name": "winter-theme",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "sass assets/scss/main.scss assets/css/main.css --style=compressed --no-source-map",
+    "watch": "sass assets/scss/main.scss assets/css/main.css --style=compressed --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.90.0"
+  }
+}
+
