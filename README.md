@@ -24,6 +24,8 @@ Source Sass lives in `assets/scss/main.scss`; compiled CSS is loaded from `asset
 
 Winter checks `https://github.com/asankalk/webstudiowa-Winter` for GitHub releases. Publish a release or tag such as `v1.0.1`, update `Version:` in `style.css`, and include release notes. WordPress will show the update in Dashboard > Updates and the release body appears as the changelog.
 
+If the repository is private, installed sites need access to GitHub. Define `WINTER_GITHUB_TOKEN` in `wp-config.php` or provide the token with the `winter_github_token` filter.
+
 Use a child theme for site-specific template edits. Content entered through ACF and normal WordPress settings is stored in the database and is preserved during theme updates.
 
 ## License
