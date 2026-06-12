@@ -1,0 +1,55 @@
+<?php
+/**
+ * Single service detail template part.
+ *
+ * @package WebStudioWA
+ */
+
+$service = $args['service'] ?? null;
+
+if (! $service) {
+    return;
+}
+?>
+<section class="section page-hero page-hero--split service-hero">
+    <div class="container page-hero__grid">
+        <div>
+            <p class="eyebrow"><?php esc_html_e('Services', 'winter'); ?></p>
+            <h1><?php echo esc_html($service['title']); ?></h1>
+            <p><?php echo esc_html($service['summary']); ?></p>
+            <div class="hero__actions">
+                <a class="button button--primary" href="<?php echo esc_url(wswa_page_url('contact', $service['slug'])); ?>"><?php esc_html_e('Start this service', 'winter'); ?></a>
+                <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('services')); ?>"><?php esc_html_e('All services', 'winter'); ?></a>
+            </div>
+        </div>
+        <img src="<?php echo esc_url($service['hero_image']); ?>" alt="<?php echo esc_attr($service['title']); ?>">
+    </div>
+</section>
+
+<section class="section">
+    <div class="container content-grid">
+        <div>
+            <p class="eyebrow"><?php echo esc_html($service['number']); ?></p>
+            <h2><?php echo esc_html($service['details']); ?></h2>
+        </div>
+        <div class="rich-text">
+            <p><?php echo esc_html($service['body']); ?></p>
+            <ul class="check-list">
+                <?php foreach ($service['features'] as $feature) : ?>
+                    <li><?php echo esc_html($feature); ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section image-feature">
+    <div class="container image-feature__grid">
+        <img src="<?php echo esc_url($service['support_image']); ?>" alt="<?php echo esc_attr($service['title'] . ' visual'); ?>">
+        <div>
+            <p class="eyebrow"><?php esc_html_e('Built for business websites', 'winter'); ?></p>
+            <h2><?php esc_html_e('A practical path from idea to launch', 'winter'); ?></h2>
+            <p><?php esc_html_e('Web Studio WA keeps the process straightforward: define the goal, shape the content, build the pages, test the experience and support the website after it goes live.', 'winter'); ?></p>
+        </div>
+    </div>
+</section>

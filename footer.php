@@ -20,23 +20,18 @@ $address = wswa_get_field('contact_address');
         </div>
         <div>
             <h2><?php esc_html_e('Company', 'winter'); ?></h2>
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'footer',
-                'container' => false,
-                'fallback_cb' => 'wswa_fallback_menu',
-                'menu_class' => 'footer-menu',
-            ]);
-            ?>
+            <?php wswa_fallback_menu(); ?>
         </div>
-        <div>
-            <h2><?php esc_html_e('Contact Info', 'winter'); ?></h2>
-            <ul class="footer-contact">
-                <li><?php echo esc_html($address); ?></li>
-                <li><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></li>
-                <li><a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>"><?php echo esc_html($phone); ?></a></li>
-            </ul>
-        </div>
+        <?php if (! is_page('contact')) : ?>
+            <div>
+                <h2><?php esc_html_e('Contact Info', 'winter'); ?></h2>
+                <ul class="footer-contact">
+                    <li><?php echo esc_html($address); ?></li>
+                    <li><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a></li>
+                    <li><a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', $phone)); ?>"><?php echo esc_html($phone); ?></a></li>
+                </ul>
+            </div>
+        <?php endif; ?>
     </div>
     <div class="container footer__bottom">
         <p>&copy; <?php echo esc_html(date_i18n('Y')); ?> <?php bloginfo('name'); ?>.</p>
@@ -45,4 +40,3 @@ $address = wswa_get_field('contact_address');
 <?php wp_footer(); ?>
 </body>
 </html>
-

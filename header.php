@@ -28,17 +28,11 @@
             <span class="screen-reader-text"><?php esc_html_e('Menu', 'winter'); ?></span>
         </button>
         <nav class="primary-nav" id="primary-menu" data-primary-nav aria-label="<?php esc_attr_e('Primary navigation', 'winter'); ?>">
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'primary',
-                'container' => false,
-                'fallback_cb' => 'wswa_fallback_menu',
-                'menu_class' => 'menu',
-            ]);
-            ?>
+            <?php wswa_fallback_menu(); ?>
         </nav>
-        <a class="header__cta" href="mailto:<?php echo esc_attr(wswa_get_field('contact_email')); ?>"><?php esc_html_e('Get a quote', 'winter'); ?></a>
+        <?php if (! is_page('contact')) : ?>
+            <a class="header__cta" href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Get a quote', 'winter'); ?></a>
+        <?php endif; ?>
     </div>
 </header>
 <main id="main">
-

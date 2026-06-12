@@ -7,6 +7,34 @@
 
 $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-workspace.svg'));
 ?>
+<?php if (wswa_style_switcher_enabled()) : ?>
+    <aside class="style-switcher" data-style-switcher aria-label="<?php esc_attr_e('Theme colour palette switcher', 'winter'); ?>">
+        <button class="style-switcher__toggle" type="button" data-style-switcher-toggle aria-expanded="false">
+            <i class="fa-solid fa-palette" aria-hidden="true"></i>
+            <span><?php esc_html_e('Colours', 'winter'); ?></span>
+        </button>
+        <div class="style-switcher__panel">
+            <p><?php esc_html_e('Colour palette', 'winter'); ?></p>
+            <button type="button" data-palette-choice="logo" class="is-active">
+                <span style="--swatch-a:#079bd3;--swatch-b:#f79400;--swatch-c:#d9005b;"></span>
+                <?php esc_html_e('Logo Blue', 'winter'); ?>
+            </button>
+            <button type="button" data-palette-choice="dodger">
+                <span style="--swatch-a:#1e90ff;--swatch-b:#f79400;--swatch-c:#d9005b;"></span>
+                <?php esc_html_e('Dodger Blue', 'winter'); ?>
+            </button>
+            <button type="button" data-palette-choice="creative">
+                <span style="--swatch-a:#073f8f;--swatch-b:#1e90ff;--swatch-c:#d9005b;"></span>
+                <?php esc_html_e('Creative Agency', 'winter'); ?>
+            </button>
+            <button type="button" data-palette-choice="premium">
+                <span style="--swatch-a:#1e90ff;--swatch-b:#101827;--swatch-c:#c8d900;"></span>
+                <?php esc_html_e('Premium Blue', 'winter'); ?>
+            </button>
+        </div>
+    </aside>
+<?php endif; ?>
+
 <section class="hero">
     <div class="container hero__grid">
         <div class="hero__content">
@@ -38,7 +66,12 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             <p class="eyebrow"><?php esc_html_e('Strategy, design, build', 'winter'); ?></p>
             <h2><?php echo esc_html(wswa_get_field('intro_title')); ?></h2>
         </div>
-        <p><?php echo esc_html(wswa_get_field('intro_text')); ?></p>
+        <div>
+            <p><?php echo esc_html(wswa_get_field('intro_text')); ?></p>
+            <div class="section__actions section__actions--left">
+                <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('about-us')); ?>"><?php esc_html_e('About Web Studio WA', 'winter'); ?></a>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -49,22 +82,26 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
         <p><?php echo esc_html(wswa_get_field('services_text')); ?></p>
     </div>
     <div class="container service-grid">
-        <?php foreach ((array) wswa_get_field('services') as $service) : ?>
+        <?php foreach (wswa_services() as $service) : ?>
             <article class="service-card">
-                <span><?php echo esc_html($service['number'] ?? ''); ?></span>
+                <img class="service-card__image" src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" loading="lazy">
+                <span class="service-card__icon" aria-hidden="true"><i class="<?php echo esc_attr($service['icon']); ?>"></i></span>
                 <h3><?php echo esc_html($service['title'] ?? ''); ?></h3>
-                <p><?php echo esc_html($service['text'] ?? ''); ?></p>
+                <p><?php echo esc_html($service['summary']); ?></p>
+                <a class="button button--primary service-card__button" href="<?php echo esc_url(wswa_page_url($service['slug'])); ?>"><?php esc_html_e('Read More', 'winter'); ?></a>
             </article>
         <?php endforeach; ?>
     </div>
 </section>
 
 <section class="section hosting" id="hosting">
-    <div class="container hosting__grid">
-        <div class="hosting__content">
-            <p class="eyebrow"><?php esc_html_e('Website Hosting', 'winter'); ?></p>
-            <h2><?php echo esc_html(wswa_get_field('hosting_title')); ?></h2>
-            <p><?php echo esc_html(wswa_get_field('hosting_text')); ?></p>
+    <div class="container hosting-home">
+        <div class="hosting-home__intro">
+            <div class="hosting__content">
+                <p class="eyebrow"><?php esc_html_e('Website Hosting', 'winter'); ?></p>
+                <h2><?php echo esc_html(wswa_get_field('hosting_title')); ?></h2>
+                <p><?php echo esc_html(wswa_get_field('hosting_text')); ?></p>
+            </div>
             <div class="feature-list">
                 <?php foreach ((array) wswa_get_field('hosting_features') as $feature) : ?>
                     <div>
@@ -74,31 +111,58 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
                 <?php endforeach; ?>
             </div>
         </div>
-        <div class="plan-grid">
-            <?php foreach ((array) wswa_get_field('hosting_plans') as $plan) : ?>
+        <div class="plan-grid plan-grid--home">
+            <?php foreach (wswa_hosting_plans() as $plan) : ?>
                 <article class="plan-card">
                     <p><?php echo esc_html($plan['audience'] ?? ''); ?></p>
                     <h3><?php echo esc_html($plan['name'] ?? ''); ?></h3>
                     <div class="price"><strong><?php echo esc_html($plan['price'] ?? ''); ?></strong><span><?php echo esc_html($plan['period'] ?? ''); ?></span></div>
-                    <a href="#contact"><?php esc_html_e('Get Started Now', 'winter'); ?></a>
+                    <dl class="plan-specs">
+                        <div>
+                            <dt><?php esc_html_e('Space', 'winter'); ?></dt>
+                            <dd><?php echo esc_html($plan['storage']); ?></dd>
+                        </div>
+                        <div>
+                            <dt><?php esc_html_e('Domains / websites', 'winter'); ?></dt>
+                            <dd><?php echo esc_html($plan['websites']); ?></dd>
+                        </div>
+                        <div>
+                            <dt><?php esc_html_e('Bandwidth', 'winter'); ?></dt>
+                            <dd><?php echo esc_html($plan['bandwidth']); ?></dd>
+                        </div>
+                        <div>
+                            <dt><?php esc_html_e('Email accounts', 'winter'); ?></dt>
+                            <dd><?php echo esc_html($plan['email_accounts']); ?></dd>
+                        </div>
+                    </dl>
+                    <a class="button button--primary plan-card__button" href="<?php echo esc_url($plan['purchase_url']); ?>" target="_blank" rel="noopener"><?php esc_html_e('Purchase package', 'winter'); ?></a>
                 </article>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
 
-<section class="section clients">
+<section class="section clients" id="clients">
     <div class="container section__heading">
         <p class="eyebrow"><?php esc_html_e('Our Clients', 'winter'); ?></p>
         <h2><?php echo esc_html(wswa_get_field('clients_title')); ?></h2>
+        <p><?php esc_html_e('A look at selected websites and ongoing support work for Australian businesses.', 'winter'); ?></p>
     </div>
-    <div class="container client-grid">
-        <?php foreach ((array) wswa_get_field('clients') as $client) : ?>
-            <article class="client-card">
-                <span><?php echo esc_html($client['type'] ?? ''); ?></span>
-                <h3><?php echo esc_html($client['name'] ?? ''); ?></h3>
-            </article>
-        <?php endforeach; ?>
+    <div class="client-marquee" aria-label="<?php esc_attr_e('Selected client websites', 'winter'); ?>">
+        <div class="client-track">
+            <?php for ($i = 0; $i < 2; $i++) : ?>
+                <?php foreach (wswa_clients() as $client) : ?>
+                    <a class="client-snapshot" href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
+                        <img src="<?php echo esc_url(wswa_client_snapshot($client['url'])); ?>" alt="<?php echo esc_attr($client['name'] . ' website snapshot'); ?>" loading="lazy">
+                        <span><?php echo esc_html($client['type']); ?></span>
+                        <strong><?php echo esc_html($client['name']); ?></strong>
+                    </a>
+                <?php endforeach; ?>
+            <?php endfor; ?>
+        </div>
+    </div>
+    <div class="container section__actions">
+        <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('our-clients')); ?>"><?php esc_html_e('View all clients', 'winter'); ?></a>
     </div>
 </section>
 
@@ -125,6 +189,9 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             <p class="eyebrow"><?php esc_html_e('Contact', 'winter'); ?></p>
             <h2><?php echo esc_html(wswa_get_field('contact_title')); ?></h2>
             <p><?php echo esc_html(wswa_get_field('contact_text')); ?></p>
+            <div class="section__actions section__actions--left">
+                <a class="button button--primary" href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Contact us online', 'winter'); ?></a>
+            </div>
         </div>
         <div class="contact-card">
             <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', wswa_get_field('contact_phone'))); ?>"><?php echo esc_html(wswa_get_field('contact_phone')); ?></a>
@@ -133,4 +200,3 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
         </div>
     </div>
 </section>
-
