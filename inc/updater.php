@@ -50,10 +50,11 @@ function wswa_latest_github_release(): ?array
     if (! $release || empty($release['tag_name'])) {
         $tags = wswa_github_request(WSWA_GITHUB_API . '/tags');
         if (! empty($tags[0]['name'])) {
+            $version = wswa_normalize_version((string) $tags[0]['name']);
             $release = [
                 'tag_name' => $tags[0]['name'],
                 'name' => $tags[0]['name'],
-                'body' => 'See GitHub for release notes.',
+                'body' => wswa_github_changelog_for_version($version, (string) $tags[0]['name']),
                 'html_url' => 'https://github.com/' . WSWA_GITHUB_OWNER . '/' . WSWA_GITHUB_REPO . '/releases',
                 'zipball_url' => $tags[0]['zipball_url'] ?? '',
             ];
@@ -71,6 +72,27 @@ function wswa_latest_github_release(): ?array
 function wswa_normalize_version(string $version): string
 {
     return ltrim(trim($version), "vV \t\n\r\0\x0B");
+}
+
+function wswa_github_changelog_for_version(string $version, string $ref): string
+{
+    $url = 'https://raw.githubusercontent.com/' . WSWA_GITHUB_OWNER . '/' . WSWA_GITHUB_REPO . '/' . rawurlencode($ref) . '/CHANGELOG.md';
+    $response = wp_remote_get($url, [
+        'headers' => ['User-Agent' => 'Winter WordPress Theme'],
+        'timeout' => 12,
+    ]);
+
+    if (is_wp_error($response) || wp_remote_retrieve_response_code($response) >= 400) {
+        return 'See CHANGELOG.md on GitHub for release notes.';
+    }
+
+    $body = (string) wp_remote_retrieve_body($response);
+    $pattern = '/^##\s+\[?' . preg_quote($version, '/') . '\]?.*?\R(?P<section>.*?)(?=^##\s+|\z)/ms';
+    if (preg_match($pattern, $body, $matches) && ! empty(trim($matches['section']))) {
+        return trim($matches['section']);
+    }
+
+    return 'See CHANGELOG.md on GitHub for release notes.';
 }
 
 add_filter('pre_set_site_transient_update_themes', function ($transient) {
@@ -131,4 +153,3 @@ add_action('upgrader_process_complete', function ($upgrader, array $hook_extra) 
         delete_site_transient('winter_github_release');
     }
 }, 10, 2);
-
