@@ -7,34 +7,6 @@
 
 $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-workspace.svg'));
 ?>
-<?php if (wswa_style_switcher_enabled()) : ?>
-    <aside class="style-switcher" data-style-switcher aria-label="<?php esc_attr_e('Theme colour palette switcher', 'winter'); ?>">
-        <button class="style-switcher__toggle" type="button" data-style-switcher-toggle aria-expanded="false">
-            <i class="fa-solid fa-palette" aria-hidden="true"></i>
-            <span><?php esc_html_e('Colours', 'winter'); ?></span>
-        </button>
-        <div class="style-switcher__panel">
-            <p><?php esc_html_e('Colour palette', 'winter'); ?></p>
-            <button type="button" data-palette-choice="logo" class="is-active">
-                <span style="--swatch-a:#079bd3;--swatch-b:#f79400;--swatch-c:#d9005b;"></span>
-                <?php esc_html_e('Logo Blue', 'winter'); ?>
-            </button>
-            <button type="button" data-palette-choice="dodger">
-                <span style="--swatch-a:#1e90ff;--swatch-b:#f79400;--swatch-c:#d9005b;"></span>
-                <?php esc_html_e('Dodger Blue', 'winter'); ?>
-            </button>
-            <button type="button" data-palette-choice="creative">
-                <span style="--swatch-a:#073f8f;--swatch-b:#1e90ff;--swatch-c:#d9005b;"></span>
-                <?php esc_html_e('Creative Agency', 'winter'); ?>
-            </button>
-            <button type="button" data-palette-choice="premium">
-                <span style="--swatch-a:#1e90ff;--swatch-b:#101827;--swatch-c:#c8d900;"></span>
-                <?php esc_html_e('Premium Blue', 'winter'); ?>
-            </button>
-        </div>
-    </aside>
-<?php endif; ?>
-
 <section class="hero">
     <div class="container hero__grid">
         <div class="hero__content">

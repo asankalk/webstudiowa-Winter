@@ -46,21 +46,6 @@ add_action('init', function () {
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 });
 
-function wswa_style_switcher_enabled(): bool
-{
-    $enabled = ! defined('WSWA_DISABLE_STYLE_SWITCHER') || ! WSWA_DISABLE_STYLE_SWITCHER;
-
-    return (bool) apply_filters('wswa_style_switcher_enabled', $enabled);
-}
-
-add_action('wp_head', function () {
-    if (! wswa_style_switcher_enabled()) {
-        return;
-    }
-
-    echo "<script>(function(){try{var p=localStorage.getItem('wswaPalette');if(p){document.documentElement.setAttribute('data-palette',p);}}catch(e){}}());</script>\n";
-}, 0);
-
 function wswa_seo_payload(): array
 {
     $base_keywords = [
