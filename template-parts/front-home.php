@@ -162,7 +162,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
         </div>
     </div>
     <div class="container section__actions">
-        <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('our-clients')); ?>"><?php esc_html_e('View all clients', 'winter'); ?></a>
+        <a class="button button--primary" href="<?php echo esc_url(wswa_page_url('our-clients')); ?>"><?php esc_html_e('View all clients', 'winter'); ?></a>
     </div>
 </section>
 

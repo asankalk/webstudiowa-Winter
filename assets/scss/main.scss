@@ -763,11 +763,11 @@ h3 {
 .hosting .section__heading::before,
 .hosting-home::before {
   position: absolute;
-  inset: -26px auto auto -18px;
-  width: 8px;
-  height: 88px;
+  inset: -18px auto auto 0;
+  width: 104px;
+  height: 5px;
   border-radius: 99px;
-  background: linear-gradient(180deg, var(--color-accent), var(--color-coral));
+  background: linear-gradient(90deg, var(--color-lime), var(--color-accent), var(--color-coral));
   content: "";
 }
 
@@ -798,11 +798,47 @@ h3 {
 }
 
 .feature-list > div {
+  position: relative;
   padding: 18px 18px 18px 22px;
-  border-left: 3px solid var(--color-accent);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--color-lime);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    border-color 0.28s ease,
+    background-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.28s ease;
+}
+
+.feature-list > div::after {
+  position: absolute;
+  inset: auto 18px 14px auto;
+  width: 42px;
+  height: 42px;
+  opacity: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-coral));
+  content: "";
+  transform: scale(0.72);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.feature-list > div:hover,
+.feature-list > div:focus-within {
+  border-color: rgba(255, 255, 255, 0.24);
+  border-left-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
+  transform: translateX(8px);
+}
+
+.feature-list > div:hover::after,
+.feature-list > div:focus-within::after {
+  opacity: 0.18;
+  transform: scale(1);
 }
 
 .feature-list p {
@@ -812,6 +848,7 @@ h3 {
 .plan-grid {
   display: grid;
   gap: 16px;
+  align-items: stretch;
 }
 
 .plan-grid--home {
@@ -822,6 +859,7 @@ h3 {
   position: relative;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
   padding: 30px 26px;
   overflow: hidden;
   color: var(--color-text);
@@ -846,12 +884,11 @@ h3 {
 
 .plan-grid .plan-card:nth-child(2) {
   border-color: rgba(245, 188, 66, 0.72);
-  transform: translateY(-14px);
 }
 
 .plan-grid .plan-card:nth-child(2):hover,
 .plan-grid .plan-card:nth-child(2):focus-within {
-  transform: translateY(-20px);
+  transform: translateY(-8px);
 }
 
 .plan-card p {
