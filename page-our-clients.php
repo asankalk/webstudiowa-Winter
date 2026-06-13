@@ -22,7 +22,7 @@ get_header();
         <?php foreach ($clients as $client) : ?>
             <article class="portfolio-card">
                 <a href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
-                    <img src="<?php echo esc_url(wswa_client_snapshot($client['url'])); ?>" alt="<?php echo esc_attr($client['name'] . ' website snapshot'); ?>">
+                    <img src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name'] . ' logo'); ?>" width="520" height="390" loading="lazy" decoding="async">
                 </a>
                 <div>
                     <span><?php echo esc_html($client['type']); ?></span>

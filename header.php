@@ -17,11 +17,7 @@
 <header class="site-header" data-site-header>
     <div class="container header__inner">
         <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
-            <?php if (has_custom_logo()) : ?>
-                <?php the_custom_logo(); ?>
-            <?php else : ?>
-                <img src="<?php echo esc_url(wswa_asset('img/web-studio-wa.png')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
-            <?php endif; ?>
+            <img src="<?php echo esc_url(wswa_asset('img/web-studio-wa.webp')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" width="190" height="165" decoding="async">
         </a>
         <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-menu">
             <span></span><span></span><span></span>

@@ -31,11 +31,19 @@ add_action('after_setup_theme', function () {
 });
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('winter-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap', [], null);
-    wp_enqueue_style('winter-fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css', [], '7.0.1');
     wp_enqueue_style('winter-style', WSWA_THEME_URI . '/assets/css/main.css', [], WSWA_VERSION);
     wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], WSWA_VERSION);
     wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], WSWA_VERSION, true);
+});
+
+add_action('init', function () {
+    remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_print_styles', 'print_emoji_styles');
+    remove_action('admin_print_scripts', 'print_emoji_detection_script');
+    remove_action('admin_print_styles', 'print_emoji_styles');
+    remove_filter('the_content_feed', 'wp_staticize_emoji');
+    remove_filter('comment_text_rss', 'wp_staticize_emoji');
+    remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
 });
 
 function wswa_style_switcher_enabled(): bool
@@ -217,6 +225,7 @@ add_action('admin_notices', function () {
 function wswa_core_pages(): array
 {
     return [
+        'home' => 'Home',
         'about-us' => 'About us',
         'services' => 'Services',
         'web-design' => 'Web Site Design',
@@ -228,21 +237,98 @@ function wswa_core_pages(): array
     ];
 }
 
-function wswa_ensure_core_pages(): void
+function wswa_core_page_content(string $slug): string
 {
-    foreach (wswa_core_pages() as $slug => $title) {
-        if (get_page_by_path($slug)) {
-            continue;
+    $content = [
+        'home' => '<p>Web Studio WA creates responsive, SEO-friendly websites, custom web applications, ongoing website care and reliable hosting support for businesses across Western Australia.</p>',
+        'about-us' => '<p>Web Studio WA is a Western Australia based web design and hosting support company helping local businesses build clear, modern and practical websites.</p><p>We focus on responsive website design, website redesign, WordPress maintenance and managed hosting support.</p>',
+        'services' => '<p>Our services cover new website design, website redesign and practical website maintenance for small businesses that need a stronger online presence.</p>',
+        'web-design' => '<p>Affordable, custom website design in Perth with responsive layouts, clear messaging and polished user experiences.</p>',
+        'website-redesign' => '<p>Modernise an existing website with stronger structure, SEO-friendly content, mobile responsiveness and better conversion paths.</p>',
+        'website-maintenance' => '<p>Keep your website secure and fresh with content updates, software maintenance, security patches and practical support.</p>',
+        'web-hosting' => '<p>Managed hosting packages are purchased through iWebNode, the hosting platform used by Web Studio WA for client hosting and support.</p>',
+        'our-clients' => '<p>View selected client websites, redesigns and website maintenance work completed by Web Studio WA.</p>',
+        'contact' => '<p>Web Studio WA is a Western Australia based company. Use the contact form to send us your project details.</p>',
+    ];
+
+    return $content[$slug] ?? '';
+}
+
+function wswa_find_core_page(string $slug, string $title): ?WP_Post
+{
+    $pages = get_posts([
+        'post_type' => 'page',
+        'post_status' => ['publish', 'draft', 'pending', 'private', 'future'],
+        'posts_per_page' => -1,
+        'orderby' => 'ID',
+        'order' => 'ASC',
+    ]);
+
+    $title_match = null;
+
+    foreach ($pages as $page) {
+        if ($page->post_name === $slug) {
+            return $page;
         }
 
-        wp_insert_post([
+        if (! $title_match && strcasecmp($page->post_title, $title) === 0) {
+            $title_match = $page;
+        }
+    }
+
+    return $title_match;
+}
+
+function wswa_upsert_core_page(string $slug, string $title): int
+{
+    $page = wswa_find_core_page($slug, $title);
+    $content = wswa_core_page_content($slug);
+
+    if (! $page) {
+        return (int) wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
             'post_type' => 'page',
             'post_status' => 'publish',
-            'post_content' => '',
+            'post_content' => $content,
         ]);
     }
+
+    $updates = [
+        'ID' => $page->ID,
+        'post_title' => $title,
+        'post_name' => $slug,
+        'post_status' => 'publish',
+    ];
+
+    if (trim((string) $page->post_content) === '' && $content) {
+        $updates['post_content'] = $content;
+    }
+
+    wp_update_post($updates);
+
+    return (int) $page->ID;
+}
+
+function wswa_set_static_home_page(): void
+{
+    $home_id = wswa_upsert_core_page('home', 'Home');
+
+    if ($home_id <= 0) {
+        return;
+    }
+
+    update_option('show_on_front', 'page');
+    update_option('page_on_front', $home_id);
+}
+
+function wswa_ensure_core_pages(): void
+{
+    foreach (wswa_core_pages() as $slug => $title) {
+        wswa_upsert_core_page($slug, $title);
+    }
+
+    wswa_set_static_home_page();
 }
 
 function wswa_core_pages_exist(): bool

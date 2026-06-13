@@ -21,7 +21,7 @@ get_header();
                 <a class="button button--primary" href="https://iwebnode.com/" target="_blank" rel="noopener"><?php esc_html_e('Visit iWebNode', 'winter'); ?></a>
             </div>
         </div>
-        <img src="<?php echo esc_url(wswa_asset('img/iwebnode-hosting-section.png')); ?>" alt="<?php esc_attr_e('Website hosting and growth visual', 'winter'); ?>">
+        <img src="<?php echo esc_url(wswa_asset('img/iwebnode-hosting-section.webp')); ?>" alt="<?php esc_attr_e('Website hosting and growth visual', 'winter'); ?>" width="1200" height="900" decoding="async" fetchpriority="high">
     </div>
 </section>
 
@@ -63,7 +63,7 @@ get_header();
 
 <section class="section image-feature">
     <div class="container image-feature__grid">
-        <img src="<?php echo esc_url(wswa_asset('img/iwebnode-hosting-section.png')); ?>" alt="<?php esc_attr_e('iWebNode hosting platform visual', 'winter'); ?>">
+        <img src="<?php echo esc_url(wswa_asset('img/iwebnode-hosting-section.webp')); ?>" alt="<?php esc_attr_e('iWebNode hosting platform visual', 'winter'); ?>" width="1200" height="900" loading="lazy" decoding="async">
         <div>
             <p class="eyebrow"><?php esc_html_e('iWebNode hosting', 'winter'); ?></p>
             <h2><?php esc_html_e('Hosting powered through our dedicated client platform', 'winter'); ?></h2>

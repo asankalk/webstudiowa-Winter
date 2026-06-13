@@ -14,7 +14,7 @@ $address = wswa_get_field('contact_address');
     <div class="container footer__grid">
         <div>
             <a class="brand footer__brand" href="<?php echo esc_url(home_url('/')); ?>">
-                <img src="<?php echo esc_url(wswa_asset('img/web-studio-wa-reversed.png')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                <img src="<?php echo esc_url(wswa_asset('img/web-studio-wa-reversed.webp')); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>" width="190" height="165" loading="lazy" decoding="async">
             </a>
             <p><?php esc_html_e("Web design, development, optimisation and hosting support. Let's bring your vision to life.", 'winter'); ?></p>
         </div>

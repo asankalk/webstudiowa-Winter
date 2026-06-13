@@ -22,7 +22,7 @@ get_header();
         <?php foreach ($services as $service) : ?>
             <article class="detail-card" id="<?php echo esc_attr($service['slug']); ?>">
                 <div class="detail-card__media">
-                    <img src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>">
+                    <img src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
                 <div class="detail-card__content">
                     <span><?php echo esc_html($service['number']); ?></span>
@@ -49,7 +49,7 @@ get_header();
 
 <section class="section image-feature image-feature--reverse">
     <div class="container image-feature__grid">
-        <img src="https://wordpress.validthemes.net/avrix/wp-content/uploads/2023/07/2-1.jpg" alt="<?php esc_attr_e('Web Studio WA design and growth visual', 'winter'); ?>">
+        <img src="<?php echo esc_url(wswa_asset('img/avrix-about.webp')); ?>" alt="<?php esc_attr_e('Web Studio WA design and growth visual', 'winter'); ?>" width="1200" height="800" loading="lazy" decoding="async">
         <div>
             <p class="eyebrow"><?php esc_html_e('Focused service pages', 'winter'); ?></p>
             <h2><?php esc_html_e('Every service has a clear path forward', 'winter'); ?></h2>

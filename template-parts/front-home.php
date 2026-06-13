@@ -47,7 +47,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             </div>
         </div>
         <div class="hero__media">
-            <img src="<?php echo esc_url($hero_image); ?>" alt="<?php esc_attr_e('Modern web design workspace', 'winter'); ?>">
+            <img src="<?php echo esc_url($hero_image); ?>" alt="<?php esc_attr_e('Modern web design workspace', 'winter'); ?>" width="1200" height="900" decoding="async" fetchpriority="high">
         </div>
     </div>
     <div class="container stats">
@@ -84,7 +84,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
     <div class="container service-grid">
         <?php foreach (wswa_services() as $service) : ?>
             <article class="service-card">
-                <img class="service-card__image" src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" loading="lazy">
+                <img class="service-card__image" src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" width="1200" height="900" loading="lazy" decoding="async">
                 <span class="service-card__icon" aria-hidden="true"><i class="<?php echo esc_attr($service['icon']); ?>"></i></span>
                 <h3><?php echo esc_html($service['title'] ?? ''); ?></h3>
                 <p><?php echo esc_html($service['summary']); ?></p>
@@ -153,7 +153,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             <?php for ($i = 0; $i < 2; $i++) : ?>
                 <?php foreach (wswa_clients() as $client) : ?>
                     <a class="client-snapshot" href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
-                        <img src="<?php echo esc_url(wswa_client_snapshot($client['url'])); ?>" alt="<?php echo esc_attr($client['name'] . ' website snapshot'); ?>" loading="lazy">
+                        <img src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name'] . ' logo'); ?>" width="520" height="390" loading="lazy" decoding="async">
                         <span><?php echo esc_html($client['type']); ?></span>
                         <strong><?php echo esc_html($client['name']); ?></strong>
                     </a>

@@ -22,7 +22,7 @@ if (! $service) {
                 <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('services')); ?>"><?php esc_html_e('All services', 'winter'); ?></a>
             </div>
         </div>
-        <img src="<?php echo esc_url($service['hero_image']); ?>" alt="<?php echo esc_attr($service['title']); ?>">
+        <img src="<?php echo esc_url($service['hero_image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" width="1200" height="900" decoding="async" fetchpriority="high">
     </div>
 </section>
 
@@ -45,7 +45,7 @@ if (! $service) {
 
 <section class="section image-feature">
     <div class="container image-feature__grid">
-        <img src="<?php echo esc_url($service['support_image']); ?>" alt="<?php echo esc_attr($service['title'] . ' visual'); ?>">
+        <img src="<?php echo esc_url($service['support_image']); ?>" alt="<?php echo esc_attr($service['title'] . ' visual'); ?>" width="900" height="675" loading="lazy" decoding="async">
         <div>
             <p class="eyebrow"><?php esc_html_e('Built for business websites', 'winter'); ?></p>
             <h2><?php esc_html_e('A practical path from idea to launch', 'winter'); ?></h2>
