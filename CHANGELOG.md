@@ -2,6 +2,14 @@
 
 All notable changes to Winter from Web Studio WA are documented here.
 
+## 1.0.2 - 2026-06-13
+
+- Fixed launch button readability so primary and secondary buttons use blue backgrounds with white text.
+- Reworked the footer into clean Company and Services link columns and removed contact details.
+- Tightened desktop and mobile logo sizing.
+- Made mobile navigation and dropdown backgrounds solid white for readability.
+- Removed service detail number badges and improved client hover contrast.
+
 ## 1.0.1 - 2026-06-13
 
 - Locked the production colour system to the Dodger Blue palette and removed the temporary colour switcher.

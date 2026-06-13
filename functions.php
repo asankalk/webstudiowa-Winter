@@ -9,7 +9,7 @@ if (! defined('ABSPATH')) {
     exit;
 }
 
-define('WSWA_VERSION', '1.0.1');
+define('WSWA_VERSION', '1.0.2');
 define('WSWA_THEME_DIR', get_template_directory());
 define('WSWA_THEME_URI', get_template_directory_uri());
 
