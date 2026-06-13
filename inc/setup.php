@@ -36,6 +36,17 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], WSWA_VERSION, true);
 });
 
+add_action('wp_enqueue_scripts', function () {
+    if (is_admin()) {
+        return;
+    }
+
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('global-styles');
+    wp_dequeue_style('classic-theme-styles');
+}, 100);
+
 add_action('init', function () {
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('wp_print_styles', 'print_emoji_styles');
@@ -44,6 +55,9 @@ add_action('init', function () {
     remove_filter('the_content_feed', 'wp_staticize_emoji');
     remove_filter('comment_text_rss', 'wp_staticize_emoji');
     remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+    remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+    remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+    remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 });
 
 function wswa_seo_payload(): array
@@ -131,6 +145,11 @@ function wswa_seo_payload(): array
     ];
 }
 
+function wswa_rank_math_active(): bool
+{
+    return defined('RANK_MATH_VERSION') || function_exists('rank_math');
+}
+
 add_filter('pre_get_document_title', function ($title) {
     if (is_admin()) {
         return $title;
@@ -141,23 +160,51 @@ add_filter('pre_get_document_title', function ($title) {
     return $payload['title'] ?? $title;
 }, 20);
 
+function wswa_frontend_title(string $title): string
+{
+    if (is_admin()) {
+        return $title;
+    }
+
+    $payload = wswa_seo_payload();
+
+    return $payload['title'] ?? $title;
+}
+
+function wswa_frontend_description(string $description): string
+{
+    if (is_admin()) {
+        return $description;
+    }
+
+    $payload = wswa_seo_payload();
+
+    return $payload['description'] ?? $description;
+}
+
+add_filter('rank_math/frontend/title', 'wswa_frontend_title', 20);
+add_filter('rank_math/frontend/description', 'wswa_frontend_description', 20);
+add_filter('rank_math/opengraph/facebook/title', 'wswa_frontend_title', 20);
+add_filter('rank_math/opengraph/facebook/description', 'wswa_frontend_description', 20);
+add_filter('rank_math/opengraph/twitter/title', 'wswa_frontend_title', 20);
+add_filter('rank_math/opengraph/twitter/description', 'wswa_frontend_description', 20);
+
 add_action('wp_head', function () {
     if (! is_singular() && ! is_front_page()) {
+        return;
+    }
+
+    if (wswa_rank_math_active()) {
         return;
     }
 
     $payload = wswa_seo_payload();
     $title = wp_strip_all_tags($payload['title'] ?? wp_get_document_title());
     $description = wp_strip_all_tags($payload['description'] ?? get_bloginfo('description'));
-    $keywords = implode(', ', array_unique($payload['keywords'] ?? []));
     $canonical = wp_get_canonical_url() ?: home_url(add_query_arg([], $GLOBALS['wp']->request ?? ''));
 
     if ($description) {
         printf('<meta name="description" content="%s">' . "\n", esc_attr($description));
-    }
-
-    if ($keywords) {
-        printf('<meta name="keywords" content="%s">' . "\n", esc_attr($keywords));
     }
 
     printf('<link rel="canonical" href="%s">' . "\n", esc_url($canonical));
@@ -196,6 +243,73 @@ add_action('wp_head', function () {
         echo '<script type="application/ld+json">' . wp_json_encode($schema) . '</script>' . "\n";
     }
 }, 1);
+
+function wswa_sitelink_pages(): array
+{
+    return [
+        'web-design' => [
+            'name' => 'Website Design',
+            'description' => 'Custom responsive website design for Perth and Western Australian businesses.',
+        ],
+        'website-redesign' => [
+            'name' => 'Website Redesign',
+            'description' => 'Modern website redesign services to improve structure, mobile usability and conversions.',
+        ],
+        'website-maintenance' => [
+            'name' => 'Website Maintenance',
+            'description' => 'WordPress maintenance, website care, updates and practical support.',
+        ],
+        'web-hosting' => [
+            'name' => 'Web Hosting',
+            'description' => 'Managed business web hosting packages through iWebNode and Web Studio WA support.',
+        ],
+    ];
+}
+
+add_action('wp_head', function () {
+    if (! is_front_page()) {
+        return;
+    }
+
+    $items = [];
+    $position = 1;
+
+    foreach (wswa_sitelink_pages() as $slug => $item) {
+        $items[] = [
+            '@type' => 'SiteNavigationElement',
+            'position' => $position++,
+            'name' => $item['name'],
+            'description' => $item['description'],
+            'url' => wswa_page_url($slug),
+        ];
+    }
+
+    echo '<script type="application/ld+json">' . wp_json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'ItemList',
+        'name' => 'Web Studio WA primary services',
+        'itemListElement' => $items,
+    ]) . '</script>' . "\n";
+}, 20);
+
+add_action('wp_head', function () {
+    $preload = '';
+
+    if (is_front_page()) {
+        $preload = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/avrix-hero.webp'));
+    } elseif (is_page('about-us')) {
+        $preload = wswa_asset('img/avrix-about.webp');
+    } elseif (is_page('web-hosting')) {
+        $preload = wswa_asset('img/iwebnode-hosting-section.webp');
+    } elseif (is_page(['web-design', 'website-redesign', 'website-maintenance'])) {
+        $service = wswa_service_by_slug((string) get_post_field('post_name', get_queried_object_id()));
+        $preload = $service['hero_image'] ?? '';
+    }
+
+    if ($preload) {
+        printf('<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n", esc_url($preload));
+    }
+}, 2);
 
 add_action('admin_notices', function () {
     if (! current_user_can('activate_plugins') || function_exists('acf_add_local_field_group')) {

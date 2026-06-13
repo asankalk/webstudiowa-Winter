@@ -33,14 +33,7 @@ get_header();
                         <li><?php esc_html_e('SEO-friendly page structure', 'winter'); ?></li>
                         <li><?php esc_html_e('Clear calls to action', 'winter'); ?></li>
                     </ul>
-                    <a class="button button--primary" href="<?php echo esc_url(wswa_page_url($service['slug'])); ?>">
-                        <?php
-                        printf(
-                            esc_html__('Read more about %s', 'winter'),
-                            esc_html($service['title'])
-                        );
-                        ?>
-                    </a>
+                    <a class="button button--primary" href="<?php echo esc_url(wswa_page_url($service['slug'])); ?>" aria-label="<?php echo esc_attr($service['cta_label'] ?? sprintf(__('Read more about %s', 'winter'), $service['title'])); ?>"><?php esc_html_e('Read More', 'winter'); ?></a>
                 </div>
             </article>
         <?php endforeach; ?>

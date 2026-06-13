@@ -60,7 +60,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
                 <span class="service-card__icon" aria-hidden="true"><i class="<?php echo esc_attr($service['icon']); ?>"></i></span>
                 <h3><?php echo esc_html($service['title'] ?? ''); ?></h3>
                 <p><?php echo esc_html($service['summary']); ?></p>
-                <a class="button button--primary service-card__button" href="<?php echo esc_url(wswa_page_url($service['slug'])); ?>"><?php esc_html_e('Read More', 'winter'); ?></a>
+                <a class="button button--primary service-card__button" href="<?php echo esc_url(wswa_page_url($service['slug'])); ?>" aria-label="<?php echo esc_attr($service['cta_label'] ?? sprintf(__('Read more about %s', 'winter'), $service['title'])); ?>"><?php esc_html_e('Read More', 'winter'); ?></a>
             </article>
         <?php endforeach; ?>
     </div>
@@ -162,7 +162,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             <h2><?php echo esc_html(wswa_get_field('contact_title')); ?></h2>
             <p><?php echo esc_html(wswa_get_field('contact_text')); ?></p>
             <div class="section__actions section__actions--left">
-                <a class="button button--primary" href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Contact us online', 'winter'); ?></a>
+                    <a class="button button--primary" href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Contact Us', 'winter'); ?></a>
             </div>
         </div>
         <div class="contact-card">
