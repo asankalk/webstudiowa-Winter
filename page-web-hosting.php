@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Web hosting page template.
  *
@@ -12,7 +13,7 @@ get_header();
 <section class="section page-hero page-hero--split">
     <div class="container page-hero__grid">
         <div>
-            <p class="eyebrow"><?php esc_html_e('Web Hosting', 'winter'); ?></p>
+
             <h1><?php echo esc_html(wswa_get_field('hosting_title')); ?></h1>
             <p><?php echo esc_html(wswa_get_field('hosting_text')); ?></p>
             <p><?php esc_html_e('iWebNode is our dedicated hosting platform for Web Studio WA clients, providing the web hosting store and client portal used for these packages.', 'winter'); ?></p>

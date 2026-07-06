@@ -2,6 +2,12 @@
 
 All notable changes to Winter from Web Studio WA are documented here.
 
+## Unreleased
+
+- Added GitHub Actions deployment workflow for build and SSH `rsync` deployment from `main`.
+- Added deployment documentation covering secrets, SSH setup, backups, rollback, and troubleshooting.
+- Hardened repository ignore rules to keep credentials, backups, logs, keys, and environment files out of Git.
+
 ## 1.0.2 - 2026-06-13
 
 - Fixed launch button readability so primary and secondary buttons use blue backgrounds with white text.

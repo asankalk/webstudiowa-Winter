@@ -1,0 +1,31 @@
+name: Deploy Winter Theme via SFTP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sftp-deploy:
+    name: Example SFTP Deploy
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build compiled assets
+        run: npm run build
+
+      - name: Placeholder
+        run: |
+          echo "SFTP example only."
+          echo "Enable this workflow only after confirming your hosting provider, remote path, and SFTP automation method."

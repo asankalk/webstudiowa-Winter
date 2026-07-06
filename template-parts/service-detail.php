@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Single service detail template part.
  *
@@ -29,7 +30,7 @@ if (! $service) {
 <section class="section">
     <div class="container content-grid">
         <div>
-            <p class="eyebrow"><?php echo esc_html($service['number']); ?></p>
+
             <h2><?php echo esc_html($service['details']); ?></h2>
         </div>
         <div class="rich-text">

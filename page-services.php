@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Services page template.
  *
@@ -11,7 +12,7 @@ get_header();
 ?>
 <section class="section page-hero">
     <div class="container narrow">
-        <p class="eyebrow"><?php esc_html_e('Services', 'winter'); ?></p>
+
         <h1><?php esc_html_e('Web design, redesign and maintenance', 'winter'); ?></h1>
         <p><?php esc_html_e('Choose the service that matches where your website is today. Each service has its own page with more detail, visuals and next steps.', 'winter'); ?></p>
     </div>
@@ -25,7 +26,7 @@ get_header();
                     <img src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
                 <div class="detail-card__content">
-                    <span><?php echo esc_html($service['number']); ?></span>
+
                     <h2><?php echo esc_html($service['title']); ?></h2>
                     <p><?php echo esc_html($service['details']); ?></p>
                     <ul class="check-list">
