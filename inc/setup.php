@@ -60,6 +60,43 @@ add_action('init', function () {
     remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 });
 
+function wswa_preferred_public_origin(): string
+{
+    return 'https://webstudiowa.com.au';
+}
+
+function wswa_preferred_public_url(string $path = '/'): string
+{
+    return trailingslashit(wswa_preferred_public_origin()) . ltrim($path, '/');
+}
+
+function wswa_is_frontend_request(): bool
+{
+    if (is_admin() || wp_doing_ajax() || wp_doing_cron()) {
+        return false;
+    }
+
+    if (defined('REST_REQUEST') && REST_REQUEST) {
+        return false;
+    }
+
+    return true;
+}
+
+add_action('template_redirect', function () {
+    if (! wswa_is_frontend_request()) {
+        return;
+    }
+
+    $request_path = wp_parse_url(home_url(add_query_arg([], $GLOBALS['wp']->request ?? '')), PHP_URL_PATH);
+    $normalized_path = trim((string) $request_path, '/');
+
+    if ($normalized_path === 'hello-world' || $normalized_path === 'category/uncategorized') {
+        wp_safe_redirect(wswa_preferred_public_url(), 301);
+        exit;
+    }
+}, 0);
+
 function wswa_seo_payload(): array
 {
     $base_keywords = [

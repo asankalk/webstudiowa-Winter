@@ -7,6 +7,8 @@ All notable changes to Winter from Web Studio WA are documented here.
 - Added GitHub Actions deployment workflow for build and SSH `rsync` deployment from `main`.
 - Added deployment documentation covering secrets, SSH setup, backups, rollback, and troubleshooting.
 - Hardened repository ignore rules to keep credentials, backups, logs, keys, and environment files out of Git.
+- Added theme-level redirects for default WordPress remnant URLs that should not remain indexable.
+- Added SEO indexing remediation documentation and manual Rank Math cleanup guidance.
 
 ## 1.0.2 - 2026-06-13
 

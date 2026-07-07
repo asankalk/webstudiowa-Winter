@@ -6,10 +6,11 @@ This file lists what has already been completed in the `winter` theme repository
 
 Last known repository state:
 
-- Branch: `main`
+- Branch: `fix/webstudiowa-indexing-cleanup`
 - Remote: `git@github.com:asankalk/webstudiowa-Winter.git`
 - Deployment workflow added and pushed to GitHub
 - Confirmed hosting environment details documented for Web Studio WA
+- SEO indexing remediation branch created for pre-merge validation
 
 ## Completed
 
@@ -75,11 +76,24 @@ npm run build
 - Added project status guide:
   - `docs/project-status.md`
 - Documented confirmed non-secret Web Studio WA hosting details.
+- Added SEO indexing remediation guide:
+  - `docs/seo-indexing-remediation-2026-07-07.md`
 
 ### PHP Check
 
 - Ran PHP syntax linting across the theme.
 - No PHP syntax errors were found in the theme files.
+
+### SEO Indexing Remediation
+
+- Audited theme code for duplicate canonical tags, hardcoded noindex tags, Rank Math overrides, robots handling, redirect logic, and old host references.
+- Confirmed Rank Math appears to own the live canonical and robots output for public pages.
+- Confirmed the live site already redirects `www` and `http` requests to the preferred `https://webstudiowa.com.au/` host.
+- Added safe theme-level `301` redirects for:
+  - `/hello-world/`
+  - `/category/uncategorized/`
+- Confirmed the live author archive is already `noindex`.
+- Confirmed Rank Math sitemap bloat still needs manual cleanup in WordPress admin.
 
 ### Confirmed Hosting Details
 
@@ -96,7 +110,7 @@ npm run build
 
 ### GitHub Secrets
 
-These secrets still need to be added in GitHub Actions:
+These secrets have been added in GitHub Actions:
 
 - `LIVE_HOST`
 - `LIVE_PORT`
@@ -113,8 +127,6 @@ Optional:
 
 These values are still missing and must be confirmed before enabling live deployment:
 
-- SSH port
-- Whether SSH access is available
 - Whether `rsync` is available
 - Whether SSH key authentication is allowed
 - Whether the `webstud5` user can write to `/home/webstud5/public_html/wp-content/themes/winter/`
@@ -131,9 +143,9 @@ These values are still missing and must be confirmed before enabling live deploy
 
 ### Deployment Testing
 
-- Add the required GitHub secrets.
-- Make a small safe theme change locally.
-- Run:
+- GitHub Actions deployment test to live has already been verified with a temporary footer marker.
+- Cleaned up the temporary footer marker after successful deployment verification.
+- Run for future safe changes:
 
 ```bash
 npm install
@@ -156,8 +168,8 @@ npm run build
 ## Suggested Next Actions
 
 1. Collect the live server SSH and path details.
-2. Confirm SSH is enabled for `webstud5` and verify the SSH port.
-3. Back up the current live theme folder.
-4. Add the GitHub secrets.
-5. Test one small deployment to confirm the workflow behaves as expected.
+2. Confirm `rsync` is available for ongoing deployment confidence.
+3. Merge the SEO remediation branch to `main` only after final checks are complete.
+4. Validate the live redirects and sitemap state after deployment.
+5. Apply the remaining manual Rank Math and WordPress admin cleanup steps.
 6. Keep updating this file as tasks are completed.
