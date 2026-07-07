@@ -8,6 +8,26 @@ Deployment flow:
 
 Use `main` as the production branch. Any push to `main` can trigger the deployment workflow after the repository secrets are configured.
 
+The preferred deployment method remains SSH + `rsync`. FTP and explicit FTPS details may be available for the hosting account, but they should only be used if SSH is unavailable or unsuitable for automation.
+
+## Web Studio WA Hosting Details
+
+These confirmed values are safe to document because they are not passwords or private keys:
+
+- cPanel user: `webstud5`
+- Primary domain: `webstudiowa.com.au`
+- Shared IP: `107.6.176.102`
+- Home directory: `/home/webstud5`
+- Live theme path: `/home/webstud5/public_html/wp-content/themes/winter/`
+- FTP server: `ftp.webstudiowa.com.au`
+- FTP / explicit FTPS port: `21`
+
+Important:
+
+- FTP details are available, but the preferred workflow is still SSH + `rsync`.
+- Do not switch to FTP/FTPS deployment unless SSH is confirmed to be unavailable.
+- Do not place real passwords, FTP passwords, or SSH private keys in repository files.
+
 ## Before You Enable Live Deployment
 
 Complete this checklist first:
@@ -27,6 +47,20 @@ cp -a /path/to/wp-content/themes/winter /path/to/wp-content/themes/winter-backup
 ```
 
 Replace the placeholder path with the real live server path before running it.
+
+## Values To Add As GitHub Secrets
+
+Use these values in GitHub Actions after SSH is confirmed:
+
+- `LIVE_HOST`: `webstudiowa.com.au`
+- `LIVE_PORT`: `22`
+- `LIVE_USER`: `webstud5`
+- `LIVE_THEME_PATH`: `/home/webstud5/public_html/wp-content/themes/winter/`
+- `LIVE_SSH_KEY`: private deployment SSH key, generated separately and never committed
+
+Note:
+
+- `LIVE_PORT` should only be set to `22` after confirming SSH is enabled on the hosting account.
 
 ## Required GitHub Secrets
 
@@ -88,6 +122,8 @@ The workflow in `.github/workflows/deploy-theme.yml`:
 5. Connects to the live server over SSH.
 6. Uses `rsync --delete` to sync the theme folder contents to `${{ secrets.LIVE_THEME_PATH }}`.
 
+The current workflow also supports a manual `workflow_dispatch` trigger in GitHub Actions for controlled runs after secrets have been configured.
+
 Deployment exclusions include:
 
 - `.git/`
@@ -122,6 +158,33 @@ npm run build
 8. Confirm the live site updated correctly.
 9. Clear any WordPress/plugin/server/CDN cache if the change is not visible.
 
+## Still Need To Confirm With Hosting
+
+- Is SSH enabled for cPanel user `webstud5`?
+- What is the SSH port?
+- Does the server allow SSH key authentication?
+- Is `rsync` available on the server?
+- Can the `webstud5` user write to `/home/webstud5/public_html/wp-content/themes/winter/`?
+- Is there a staging site available for safer testing?
+
+## First Backup Command
+
+Run this on the server before the first live deployment:
+
+```bash
+cp -a /home/webstud5/public_html/wp-content/themes/winter /home/webstud5/public_html/wp-content/themes/winter-backup-$(date +%Y%m%d-%H%M%S)
+```
+
+## SSH Test Commands
+
+These checks help confirm SSH and `rsync` readiness:
+
+```bash
+ssh webstud5@webstudiowa.com.au
+rsync --version
+ls -la /home/webstud5/public_html/wp-content/themes/
+```
+
 ## Roll Back
 
 If the live deployment causes issues:
@@ -143,6 +206,13 @@ Instead, confirm:
 - The hosting provider allows automated uploads.
 
 At that point, create a separate SFTP-based workflow and keep it disabled until tested. Do not guess the provider-specific settings.
+
+## If SSH Is Not Available
+
+- The current SSH/`rsync` workflow cannot be used without SSH access.
+- The existing SFTP/FTPS example workflow may need to be converted into an active workflow.
+- FTP/FTPS deployment would require separate GitHub Secrets.
+- If possible, create a dedicated FTP account for deployment rather than using the main cPanel password directly.
 
 ## Important Warnings
 
@@ -189,11 +259,6 @@ At that point, create a separate SFTP-based workflow and keep it disabled until 
 ## Missing Details You Still Need To Confirm
 
 Fill in these live server details before enabling deployment:
-
-- Live server host or IP
-- SSH username
-- SSH port
-- Full live WordPress theme path
 - Whether SSH access is available
 - Whether `rsync` is available
 - Hosting provider or server panel in use, such as cPanel, Plesk, Cloudways, SiteGround, or VentraIP

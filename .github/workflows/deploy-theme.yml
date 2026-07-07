@@ -4,6 +4,15 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+# Deployment notes:
+# - This workflow is designed for SSH + rsync deployment, not FTP/FTPS.
+# - All credentials and connection details must be provided through GitHub Secrets.
+# - Store the confirmed live theme path in LIVE_THEME_PATH rather than hardcoding it here.
+# - Do not commit server passwords, SSH private keys, or other secrets to the repository.
+# - The rsync --delete flag can remove files on the live server that no longer exist in Git.
+# - Back up the live theme directory before the first automated deployment.
 
 jobs:
   build:
@@ -59,6 +68,14 @@ jobs:
       - name: Validate deployment path secret
         run: test -n "${{ secrets.LIVE_THEME_PATH }}"
 
+      - name: Confirm deployment secrets are configured
+        run: |
+          test -n "${{ secrets.LIVE_HOST }}"
+          test -n "${{ secrets.LIVE_PORT }}"
+          test -n "${{ secrets.LIVE_USER }}"
+          test -n "${{ secrets.LIVE_SSH_KEY }}"
+          test -n "${{ secrets.LIVE_THEME_PATH }}"
+
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
@@ -84,6 +101,8 @@ jobs:
           LIVE_USER: ${{ secrets.LIVE_USER }}
           LIVE_THEME_PATH: ${{ secrets.LIVE_THEME_PATH }}
         run: |
+          # Uses SSH + rsync with --delete, so confirm the backup is done and the
+          # LIVE_THEME_PATH secret points to the exact live winter theme directory.
           rsync -az --delete \
             --exclude='.git/' \
             --exclude='.github/' \
