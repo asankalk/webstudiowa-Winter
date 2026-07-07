@@ -34,11 +34,7 @@
         </div>
     </div>
     <div class="container footer__bottom">
-        <p>
-            &copy; <?php echo esc_html(date_i18n('Y')); ?> <?php bloginfo('name'); ?>.
-            <!-- Temporary deployment test marker. Remove after GitHub Actions path test. -->
-            <span style="display:inline-block;margin-left:0.5rem;font-size:0.68rem;opacity:0.72;">DEPLOY TEST - WebStudio GitHub Pipeline</span>
-        </p>
+        <p>&copy; <?php echo esc_html(date_i18n('Y')); ?> <?php bloginfo('name'); ?>.</p>
     </div>
 </footer>
 <?php wp_footer(); ?>
