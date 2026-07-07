@@ -78,22 +78,18 @@ Because that host normalization is already being handled upstream, no extra serv
 
 ## Rank Math And Manual WordPress Admin Steps
 
-These items cannot be safely completed from this theme repo because they are controlled in the live WordPress database and Rank Math settings:
-
-### Rank Math SEO > Sitemap Settings
-
-- Disable Posts sitemap if the site is not using blog posts.
-- Disable Categories sitemap if category archives are not part of the SEO strategy.
+Most of the live indexing cleanup is now active from code, but some database-driven cleanup still requires WordPress admin access:
 
 ### Rank Math SEO > Titles & Meta
 
 - Keep Author Archives set to `noindex`.
-- Set Category Archives to `noindex` if category archives remain enabled for any reason.
+- Set Category Archives to `noindex` if category archives are ever re-enabled for any reason.
 
 ### WordPress Content Cleanup
 
-- Delete, trash, or unpublish the default `Hello World` post in WordPress admin.
+- Permanently delete, trash, or unpublish the default `Hello World` post in WordPress admin.
 - Confirm no important content relies on the default `Uncategorized` category archive.
+- This step was not possible from the theme repository alone because the post lives in the live WordPress database.
 
 ### WordPress User/Profile Or Schema Source Cleanup
 
@@ -131,9 +127,9 @@ Also confirmed:
 - `/services/` has one canonical tag.
 - `/author/admin/` currently outputs `follow, noindex`.
 
-### Local Validation To Run Before Merge/Deployment
+### Local Validation Completed
 
-Run:
+Run and passed:
 
 ```bash
 npm install
@@ -143,19 +139,16 @@ find . -name '*.php' -print0 | xargs -0 -n1 php -l
 
 ## Deployment Status
 
-Current branch for remediation work:
+Deployment status:
 
-`fix/webstudiowa-indexing-cleanup`
-
-Important:
-
-- The existing GitHub Actions deployment pipeline deploys from `main`.
-- This remediation branch should be validated first.
-- Merge or push to `main` only after checks are complete and deployment is intended.
+- The first redirect fix was pushed to `fix/webstudiowa-indexing-cleanup` only and therefore did not deploy live.
+- The remediation branch was then merged to `main`.
+- A follow-up `main` commit excluded default WordPress posts and categories from the Rank Math sitemap output.
+- The live GitHub Actions deployment pipeline has now applied the redirect and sitemap cleanup successfully.
 
 ## Post-Deployment Validation
 
-After deployment, run:
+Final live checks:
 
 ```bash
 curl -I https://webstudiowa.com.au/hello-world/
@@ -167,13 +160,20 @@ curl -I https://webstudiowa.com.au/web-hosting/
 curl -I https://webstudiowa.com.au/contact/
 ```
 
-Expected:
+Final results observed live:
 
-- `/hello-world/` returns a single-hop `301` to `https://webstudiowa.com.au/`
-- `/category/uncategorized/` returns a single-hop `301` to `https://webstudiowa.com.au/`
-- Core public pages return `200`
-- Core public pages have one self-referencing canonical
-- Core public pages do not output `noindex`
+- `/hello-world/` returns `HTTP/2 301` with `location: https://webstudiowa.com.au/`
+- `/category/uncategorized/` returns `HTTP/2 301` with `location: https://webstudiowa.com.au/`
+- Homepage returns `HTTP/2 200`
+- `/services/` returns `HTTP/2 200`
+- `/web-design/` returns `HTTP/2 200`
+- `/web-hosting/` returns `HTTP/2 200`
+- `/contact/` returns `HTTP/2 200`
+- `sitemap_index.xml` now includes only `page-sitemap.xml`
+- `post-sitemap.xml` no longer includes `/hello-world/`
+- `category-sitemap.xml` no longer includes `/category/uncategorized/`
+
+This means the live site is no longer exposing those default WordPress remnant URLs as indexable `200` pages, and the sitemap bloat from posts/categories has been removed from the live sitemap index.
 
 ## Google Search Console Validation Steps
 
@@ -195,8 +195,6 @@ Expected:
 
 ## Anything That Could Not Be Completed From Code
 
-- Deleting or unpublishing the default Hello World post
-- Changing Rank Math sitemap settings
-- Disabling post/category sitemaps in Rank Math
+- Deleting or unpublishing the default Hello World post from the live WordPress database
 - Confirming all schema/profile URLs stored in the database
-- Verifying sitemap cleanup after Rank Math settings are changed
+- Clearing WordPress/plugin/server/CDN cache directly from the repository environment
