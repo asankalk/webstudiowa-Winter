@@ -187,6 +187,24 @@ function wswa_rank_math_active(): bool
     return defined('RANK_MATH_VERSION') || function_exists('rank_math');
 }
 
+add_filter('rank_math/sitemap/exclude_post_type', function ($exclude, $type) {
+    if ($type === 'post') {
+        return true;
+    }
+
+    return $exclude;
+}, 10, 2);
+
+add_filter('rank_math/sitemap/exclude_taxonomy', function ($exclude, $type) {
+    if ($type === 'category') {
+        return true;
+    }
+
+    return $exclude;
+}, 10, 2);
+
+add_filter('rank_math/sitemap/enable_caching', '__return_false');
+
 add_filter('pre_get_document_title', function ($title) {
     if (is_admin()) {
         return $title;
