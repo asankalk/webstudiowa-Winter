@@ -348,14 +348,16 @@ function wswa_prepare_client(WP_Post $client_post): array
         ? $client_post->post_excerpt
         : wp_trim_words(wp_strip_all_tags((string) $client_post->post_content), 20);
 
+    $uses_snapshot = false;
     $image = get_the_post_thumbnail_url($client_post, 'large');
-
-    if (! $image) {
-        $image = (string) wswa_client_field_value($client_post->ID, 'client_image_url', '');
-    }
 
     if (! $image && $website_url !== '') {
         $image = wswa_client_snapshot($website_url);
+        $uses_snapshot = true;
+    }
+
+    if (! $image) {
+        $image = (string) wswa_client_field_value($client_post->ID, 'client_image_url', '');
     }
 
     if (! $image) {
@@ -370,6 +372,7 @@ function wswa_prepare_client(WP_Post $client_post): array
         'image' => $image,
         'summary' => $summary,
         'featured' => (bool) wswa_client_field_value($client_post->ID, 'client_featured_on_home', false),
+        'uses_snapshot' => $uses_snapshot,
     ];
 }
 

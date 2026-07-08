@@ -130,7 +130,7 @@ $featured_clients = wswa_clients([
                 <?php foreach ($featured_clients as $client) : ?>
                     <a class="client-snapshot" href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
                         <div class="client-snapshot__media">
-                            <img src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name']); ?>" width="520" height="390" loading="lazy" decoding="async">
+                            <img class="<?php echo ! empty($client['uses_snapshot']) ? 'is-website-preview' : ''; ?>" src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name']); ?>" width="520" height="390" loading="lazy" decoding="async">
                         </div>
                         <div class="client-snapshot__body">
                             <span><?php echo esc_html($client['type']); ?></span>

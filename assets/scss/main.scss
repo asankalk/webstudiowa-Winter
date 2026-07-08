@@ -1453,6 +1453,7 @@ a.button--ghost:visited {
 
 .client-snapshot__media {
   padding: 20px 20px 0;
+  background: transparent;
 
   img {
     width: 100%;
@@ -1462,6 +1463,13 @@ a.button--ghost:visited {
     border-radius: 18px;
     background: var(--color-white);
     transition: transform 0.22s ease;
+  }
+
+  .is-website-preview {
+    padding: 0;
+    object-fit: cover;
+    object-position: center top;
+    background: #edf3fb;
   }
 }
 
@@ -1557,6 +1565,13 @@ a.button--ghost:visited {
     padding: 30px;
     background: transparent;
     transition: transform 0.22s ease;
+  }
+
+  .is-website-preview {
+    padding: 0;
+    object-fit: cover;
+    object-position: center top;
+    background: #edf3fb;
   }
 
   > div {
