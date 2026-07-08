@@ -259,26 +259,85 @@ function wswa_default_clients(): array
             'type' => 'New Website',
             'url' => 'https://www.vendingwa.com.au/',
             'image' => wswa_asset('img/client-vending-wa.webp'),
+            'summary' => 'New brochure website build for a Western Australian vending business.',
         ],
         [
             'name' => 'Pretium Group',
             'type' => 'New Website',
             'url' => 'https://www.pretiumgroup.com.au/',
             'image' => wswa_asset('img/client-pretium-group.webp'),
+            'summary' => 'Corporate website launch with a clearer service structure and polished presentation.',
         ],
         [
             'name' => 'Pretium Funding',
             'type' => 'Website Redesign',
             'url' => 'https://www.pretiumfunding.com.au/',
             'image' => wswa_asset('img/client-pretium-funding.webp'),
+            'summary' => 'Website redesign focused on stronger messaging and a more modern client experience.',
         ],
         [
             'name' => 'HP Debt Solutions',
             'type' => 'Website Redesign',
             'url' => 'https://www.hpdebtsolutions.com.au/',
             'image' => wswa_asset('img/client-hp-debt-solutions.webp'),
+            'summary' => 'Website refresh for a professional services business with improved clarity and trust signals.',
         ],
     ];
+}
+
+function wswa_has_seeded_default_clients(): bool
+{
+    return (bool) get_option('wswa_seeded_default_clients', false);
+}
+
+function wswa_mark_default_clients_seeded(): void
+{
+    update_option('wswa_seeded_default_clients', 1, false);
+}
+
+function wswa_seed_default_clients(): void
+{
+    if (! post_type_exists('wswa_client')) {
+        return;
+    }
+
+    $existing_clients = get_posts([
+        'post_type' => 'wswa_client',
+        'post_status' => ['publish', 'draft', 'pending', 'private'],
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+    ]);
+
+    if (! empty($existing_clients)) {
+        wswa_mark_default_clients_seeded();
+        return;
+    }
+
+    if (wswa_has_seeded_default_clients()) {
+        return;
+    }
+
+    foreach (wswa_default_clients() as $index => $client) {
+        $post_id = wp_insert_post([
+            'post_type' => 'wswa_client',
+            'post_status' => 'publish',
+            'post_title' => $client['name'],
+            'post_excerpt' => $client['summary'] ?? '',
+            'menu_order' => $index,
+        ], true);
+
+        if (is_wp_error($post_id) || ! $post_id) {
+            continue;
+        }
+
+        update_post_meta($post_id, 'client_project_type', $client['type']);
+        update_post_meta($post_id, 'client_website_url', $client['url']);
+        update_post_meta($post_id, 'client_featured_on_home', '1');
+        update_post_meta($post_id, 'client_image_url', $client['image']);
+    }
+
+    wswa_mark_default_clients_seeded();
 }
 
 function wswa_prepare_client(WP_Post $client_post): array
@@ -290,6 +349,10 @@ function wswa_prepare_client(WP_Post $client_post): array
         : wp_trim_words(wp_strip_all_tags((string) $client_post->post_content), 20);
 
     $image = get_the_post_thumbnail_url($client_post, 'large');
+
+    if (! $image) {
+        $image = (string) wswa_client_field_value($client_post->ID, 'client_image_url', '');
+    }
 
     if (! $image && $website_url !== '') {
         $image = wswa_client_snapshot($website_url);

@@ -56,6 +56,14 @@ add_action('init', function () {
     ]);
 });
 
+add_action('admin_init', function () {
+    if (! current_user_can('edit_posts')) {
+        return;
+    }
+
+    wswa_seed_default_clients();
+});
+
 add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     $wp_customize->add_section('winter_contact_details', [
         'title' => __('Web Studio WA Contact Details', 'winter'),
