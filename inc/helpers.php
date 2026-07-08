@@ -124,6 +124,20 @@ function wswa_client_snapshot(string $url): string
     return 'https://s.wordpress.com/mshots/v1/' . rawurlencode($url) . '?w=900';
 }
 
+function wswa_client_field_value(int $post_id, string $field_name, $default = '')
+{
+    if (function_exists('get_field')) {
+        $value = get_field($field_name, $post_id);
+        if ($value !== null && $value !== false && $value !== '') {
+            return $value;
+        }
+    }
+
+    $value = get_post_meta($post_id, $field_name, true);
+
+    return $value !== '' ? $value : $default;
+}
+
 function wswa_services(): array
 {
     return [
@@ -237,7 +251,7 @@ function wswa_hosting_plans(): array
     ];
 }
 
-function wswa_clients(): array
+function wswa_default_clients(): array
 {
     return [
         [
@@ -253,12 +267,6 @@ function wswa_clients(): array
             'image' => wswa_asset('img/client-pretium-group.webp'),
         ],
         [
-            'name' => 'Cricketers Club',
-            'type' => 'Website Maintenance',
-            'url' => 'https://cricketersclub.com.au/',
-            'image' => wswa_asset('img/client-cricketers-club.webp'),
-        ],
-        [
             'name' => 'Pretium Funding',
             'type' => 'Website Redesign',
             'url' => 'https://www.pretiumfunding.com.au/',
@@ -271,6 +279,86 @@ function wswa_clients(): array
             'image' => wswa_asset('img/client-hp-debt-solutions.webp'),
         ],
     ];
+}
+
+function wswa_prepare_client(WP_Post $client_post): array
+{
+    $website_url = (string) wswa_client_field_value($client_post->ID, 'client_website_url', '');
+    $project_type = (string) wswa_client_field_value($client_post->ID, 'client_project_type', __('Client Website', 'winter'));
+    $summary = has_excerpt($client_post)
+        ? $client_post->post_excerpt
+        : wp_trim_words(wp_strip_all_tags((string) $client_post->post_content), 20);
+
+    $image = get_the_post_thumbnail_url($client_post, 'large');
+
+    if (! $image && $website_url !== '') {
+        $image = wswa_client_snapshot($website_url);
+    }
+
+    if (! $image) {
+        $image = wswa_asset('img/avrix-about.webp');
+    }
+
+    return [
+        'id' => $client_post->ID,
+        'name' => get_the_title($client_post),
+        'type' => $project_type,
+        'url' => $website_url !== '' ? $website_url : home_url('/'),
+        'image' => $image,
+        'summary' => $summary,
+        'featured' => (bool) wswa_client_field_value($client_post->ID, 'client_featured_on_home', false),
+    ];
+}
+
+function wswa_clients(array $args = []): array
+{
+    $defaults = [
+        'featured_only' => false,
+        'limit' => -1,
+    ];
+
+    $args = wp_parse_args($args, $defaults);
+
+    $query_args = [
+        'post_type' => 'wswa_client',
+        'post_status' => 'publish',
+        'posts_per_page' => (int) $args['limit'],
+        'orderby' => [
+            'menu_order' => 'ASC',
+            'date' => 'DESC',
+        ],
+        'order' => 'ASC',
+        'no_found_rows' => true,
+    ];
+
+    if ($args['featured_only']) {
+        $query_args['meta_query'] = [
+            [
+                'key' => 'client_featured_on_home',
+                'value' => '1',
+                'compare' => '=',
+            ],
+        ];
+    }
+
+    $client_posts = get_posts($query_args);
+
+    if ($args['featured_only'] && empty($client_posts)) {
+        $query_args['meta_query'] = [];
+        $client_posts = get_posts($query_args);
+    }
+
+    if (empty($client_posts)) {
+        $fallback_clients = wswa_default_clients();
+
+        if ($args['limit'] > 0) {
+            return array_slice($fallback_clients, 0, (int) $args['limit']);
+        }
+
+        return $fallback_clients;
+    }
+
+    return array_map('wswa_prepare_client', $client_posts);
 }
 
 function wswa_defaults(): array
@@ -303,7 +391,7 @@ function wswa_defaults(): array
         ],
         'hosting_plans' => wswa_hosting_plans(),
         'clients_title' => 'Selected client work',
-        'clients' => wswa_clients(),
+        'clients' => wswa_default_clients(),
         'why_title' => 'Unlock revenue growth for your business',
         'why_items' => [
             ['title' => 'Fast Development', 'number' => '01'],

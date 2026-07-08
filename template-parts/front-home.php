@@ -6,6 +6,10 @@
  */
 
 $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-workspace.svg'));
+$featured_clients = wswa_clients([
+    'featured_only' => true,
+    'limit' => 8,
+]);
 ?>
 <section class="hero">
     <div class="container hero__grid">
@@ -118,16 +122,24 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
     <div class="container section__heading">
         <p class="eyebrow"><?php esc_html_e('Our Clients', 'winter'); ?></p>
         <h2><?php echo esc_html(wswa_get_field('clients_title')); ?></h2>
-        <p><?php esc_html_e('A look at selected websites and ongoing support work for Australian businesses.', 'winter'); ?></p>
+        <p><?php esc_html_e('A curated selection of websites, redesigns and support partnerships delivered for Australian businesses.', 'winter'); ?></p>
     </div>
     <div class="client-marquee" aria-label="<?php esc_attr_e('Selected client websites', 'winter'); ?>">
         <div class="client-track">
             <?php for ($i = 0; $i < 2; $i++) : ?>
-                <?php foreach (wswa_clients() as $client) : ?>
+                <?php foreach ($featured_clients as $client) : ?>
                     <a class="client-snapshot" href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
-                        <img src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name'] . ' logo'); ?>" width="520" height="390" loading="lazy" decoding="async">
-                        <span><?php echo esc_html($client['type']); ?></span>
-                        <strong><?php echo esc_html($client['name']); ?></strong>
+                        <div class="client-snapshot__media">
+                            <img src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['name']); ?>" width="520" height="390" loading="lazy" decoding="async">
+                        </div>
+                        <div class="client-snapshot__body">
+                            <span><?php echo esc_html($client['type']); ?></span>
+                            <strong><?php echo esc_html($client['name']); ?></strong>
+                            <?php if (! empty($client['summary'])) : ?>
+                                <p><?php echo esc_html($client['summary']); ?></p>
+                            <?php endif; ?>
+                            <small><?php esc_html_e('View website', 'winter'); ?></small>
+                        </div>
                     </a>
                 <?php endforeach; ?>
             <?php endfor; ?>

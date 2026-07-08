@@ -94,18 +94,6 @@ add_action('acf/init', function () {
             ],
             ['key' => 'field_wswa_clients_tab', 'label' => 'Clients & Contact', 'type' => 'tab'],
             ['key' => 'field_wswa_clients_title', 'label' => 'Clients Title', 'name' => 'clients_title', 'type' => 'text'],
-            [
-                'key' => 'field_wswa_clients',
-                'label' => 'Clients',
-                'name' => 'clients',
-                'type' => 'repeater',
-                'layout' => 'table',
-                'button_label' => 'Add client',
-                'sub_fields' => [
-                    ['key' => 'field_wswa_client_name', 'label' => 'Name', 'name' => 'name', 'type' => 'text'],
-                    ['key' => 'field_wswa_client_type', 'label' => 'Project Type', 'name' => 'type', 'type' => 'text'],
-                ],
-            ],
             ['key' => 'field_wswa_why_title', 'label' => 'Why Title', 'name' => 'why_title', 'type' => 'text'],
             [
                 'key' => 'field_wswa_why_items',
@@ -145,5 +133,46 @@ add_action('acf/init', function () {
         'style' => 'seamless',
         'active' => true,
     ]);
-});
 
+    acf_add_local_field_group([
+        'key' => 'group_wswa_clients',
+        'title' => 'Client Details',
+        'fields' => [
+            [
+                'key' => 'field_wswa_client_project_type',
+                'label' => 'Project Type',
+                'name' => 'client_project_type',
+                'type' => 'text',
+                'instructions' => 'Examples: Website Redesign, New Website, Ongoing Support.',
+            ],
+            [
+                'key' => 'field_wswa_client_website_url',
+                'label' => 'Website URL',
+                'name' => 'client_website_url',
+                'type' => 'url',
+                'instructions' => 'Public website URL for the client card link.',
+            ],
+            [
+                'key' => 'field_wswa_client_featured_on_home',
+                'label' => 'Feature On Homepage',
+                'name' => 'client_featured_on_home',
+                'type' => 'true_false',
+                'ui' => 1,
+                'default_value' => 1,
+                'instructions' => 'Turn this on for clients that should appear in the homepage slider.',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'wswa_client',
+                ],
+            ],
+        ],
+        'position' => 'acf_after_title',
+        'style' => 'default',
+        'active' => true,
+    ]);
+});

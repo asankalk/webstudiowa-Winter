@@ -26,7 +26,7 @@ get_header();
                     <img src="<?php echo esc_url($service['image']); ?>" alt="<?php echo esc_attr($service['title']); ?>" width="1200" height="900" loading="lazy" decoding="async">
                 </div>
                 <div class="detail-card__content">
-
+                    <span><?php echo esc_html($service['number']); ?></span>
                     <h2><?php echo esc_html($service['title']); ?></h2>
                     <p><?php echo esc_html($service['details']); ?></p>
                     <ul class="check-list">

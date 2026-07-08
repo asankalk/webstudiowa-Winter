@@ -30,6 +30,32 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
+add_action('init', function () {
+    register_post_type('wswa_client', [
+        'labels' => [
+            'name' => __('Clients', 'winter'),
+            'singular_name' => __('Client', 'winter'),
+            'add_new' => __('Add Client', 'winter'),
+            'add_new_item' => __('Add New Client', 'winter'),
+            'edit_item' => __('Edit Client', 'winter'),
+            'new_item' => __('New Client', 'winter'),
+            'view_item' => __('View Client', 'winter'),
+            'search_items' => __('Search Clients', 'winter'),
+            'not_found' => __('No clients found.', 'winter'),
+            'not_found_in_trash' => __('No clients found in Trash.', 'winter'),
+            'menu_name' => __('Clients', 'winter'),
+        ],
+        'public' => true,
+        'show_in_rest' => true,
+        'has_archive' => false,
+        'publicly_queryable' => false,
+        'exclude_from_search' => true,
+        'menu_icon' => 'dashicons-format-gallery',
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions'],
+        'rewrite' => false,
+    ]);
+});
+
 add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
     $wp_customize->add_section('winter_contact_details', [
         'title' => __('Web Studio WA Contact Details', 'winter'),
