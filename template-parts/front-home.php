@@ -166,7 +166,7 @@ $hero_image = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/hero-
             </div>
         </div>
         <div class="contact-card">
-            <a href="tel:<?php echo esc_attr(preg_replace('/\s+/', '', wswa_get_field('contact_phone'))); ?>"><?php echo esc_html(wswa_get_field('contact_phone')); ?></a>
+            <?php echo winter_get_business_phone_link(); ?>
             <a href="mailto:<?php echo esc_attr(wswa_get_field('contact_email')); ?>"><?php echo esc_html(wswa_get_field('contact_email')); ?></a>
             <span><?php echo esc_html(wswa_get_field('contact_address')); ?></span>
         </div>

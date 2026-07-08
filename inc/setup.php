@@ -30,6 +30,25 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
+add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
+    $wp_customize->add_section('winter_contact_details', [
+        'title' => __('Web Studio WA Contact Details', 'winter'),
+        'priority' => 160,
+    ]);
+
+    $wp_customize->add_setting('winter_business_phone', [
+        'default' => '0470 442 762',
+        'sanitize_callback' => 'winter_sanitize_business_phone',
+        'transport' => 'refresh',
+    ]);
+
+    $wp_customize->add_control('winter_business_phone', [
+        'label' => __('Phone Number', 'winter'),
+        'section' => 'winter_contact_details',
+        'type' => 'text',
+    ]);
+});
+
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('winter-style', WSWA_THEME_URI . '/assets/css/main.css', [], WSWA_VERSION);
     wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], WSWA_VERSION);
@@ -276,7 +295,7 @@ add_action('wp_head', function () {
             'name' => 'Web Studio WA',
             'url' => home_url('/'),
             'email' => 'hello@webstudiowa.com.au',
-            'telephone' => '0410 930 327',
+            'telephone' => winter_get_business_phone_tel(),
             'areaServed' => [
                 ['@type' => 'AdministrativeArea', 'name' => 'Western Australia'],
                 ['@type' => 'City', 'name' => 'Perth'],

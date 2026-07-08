@@ -27,6 +27,48 @@ function wswa_get_field(string $name, $default = null)
     return array_key_exists($name, $defaults) ? $defaults[$name] : $default;
 }
 
+function winter_sanitize_business_phone(string $phone): string
+{
+    $phone = trim(wp_strip_all_tags($phone));
+
+    return $phone !== '' ? $phone : '0470 442 762';
+}
+
+function winter_get_business_phone(): string
+{
+    $phone = get_theme_mod('winter_business_phone', '0470 442 762');
+
+    return winter_sanitize_business_phone((string) $phone);
+}
+
+function winter_get_business_phone_tel(): string
+{
+    $digits = preg_replace('/\D+/', '', winter_get_business_phone());
+
+    if (! is_string($digits) || $digits === '') {
+        return '+61470442762';
+    }
+
+    if (str_starts_with($digits, '61')) {
+        return '+' . $digits;
+    }
+
+    if (str_starts_with($digits, '0')) {
+        return '+61' . substr($digits, 1);
+    }
+
+    return '+' . $digits;
+}
+
+function winter_get_business_phone_link(): string
+{
+    return sprintf(
+        '<a href="tel:%1$s">%2$s</a>',
+        esc_attr(winter_get_business_phone_tel()),
+        esc_html(winter_get_business_phone())
+    );
+}
+
 function wswa_fallback_menu(): void
 {
     echo '<ul class="menu">';
@@ -272,7 +314,7 @@ function wswa_defaults(): array
         'contact_title' => 'Ready to build something sharper?',
         'contact_text' => 'Talk to Web Studio WA about web design, redesigns, website maintenance, hosting or custom applications.',
         'contact_email' => 'hello@webstudiowa.com.au',
-        'contact_phone' => '0410 930 327',
+        'contact_phone' => '0470 442 762',
         'contact_address' => 'We are a Western Australia based Company',
     ];
 }

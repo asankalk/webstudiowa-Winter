@@ -80,6 +80,14 @@ The difference between the two release paths:
 
 For most day-to-day changes on your own server, push to `main` after testing locally. Use GitHub releases when you want WordPress sites to receive a formal versioned update.
 
+## Customization
+
+Phone number can be updated from:
+
+`Appearance -> Customize -> Web Studio WA Contact Details -> Phone Number`
+
+All public phone number displays should use clickable `tel:` links for mobile users.
+
 ## License
 
 Winter is licensed under GPL-2.0-or-later. See `LICENSE`.
