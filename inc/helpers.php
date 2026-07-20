@@ -155,7 +155,7 @@ function wswa_services(): array
             'icon' => 'fa-solid fa-laptop-code',
             'image' => wswa_asset('img/service-web-design.webp'),
             'hero_image' => wswa_asset('img/service-web-design.webp'),
-            'support_image' => wswa_asset('img/avrix-support-1.webp'),
+            'support_image' => wswa_asset('img/webstudiowa-service-support.jpg'),
             'included_image' => wswa_asset('img/services/webstudio-web-design.jpg'),
             'included_image_alt' => 'Person working on a responsive website design layout',
             'features' => ['Responsive website design', 'SEO-friendly page structure', 'Clear service and enquiry flow', 'Easy-to-manage WordPress setup'],
@@ -174,7 +174,7 @@ function wswa_services(): array
             'icon' => 'fa-solid fa-wand-magic-sparkles',
             'image' => wswa_asset('img/service-website-redesign.webp'),
             'hero_image' => wswa_asset('img/service-website-redesign.webp'),
-            'support_image' => wswa_asset('img/avrix-about.webp'),
+            'support_image' => wswa_asset('img/webstudiowa-about.webp'),
             'included_image' => wswa_asset('img/services/webstudio-website-redesign.jpg'),
             'included_image_alt' => 'Person reviewing a website redesign and visual refresh',
             'features' => ['Modern visual refresh', 'Better mobile experience', 'Improved page structure', 'Cleaner calls to action'],
@@ -193,7 +193,7 @@ function wswa_services(): array
             'icon' => 'fa-solid fa-screwdriver-wrench',
             'image' => wswa_asset('img/service-website-maintenance.webp'),
             'hero_image' => wswa_asset('img/service-website-maintenance.webp'),
-            'support_image' => wswa_asset('img/webstudio-support.webp'),
+            'support_image' => wswa_asset('img/webstudiowa-maintenance-support.webp'),
             'included_image' => wswa_asset('img/services/webstudio-website-maintenance.jpg'),
             'included_image_alt' => 'Person monitoring website maintenance and security updates',
             'features' => ['WordPress and plugin updates', 'Backups and security checks', 'Small content updates', 'Friendly technical support'],
@@ -376,7 +376,7 @@ function wswa_prepare_client(WP_Post $client_post): array
     }
 
     if (! $image) {
-        $image = wswa_asset('img/avrix-about.webp');
+        $image = wswa_asset('img/webstudiowa-about.webp');
     }
 
     return [
@@ -452,7 +452,7 @@ function wswa_defaults(): array
         'hero_primary_url' => wswa_page_url('contact'),
         'hero_secondary_label' => 'View services',
         'hero_secondary_url' => wswa_page_url('services'),
-        'hero_image' => wswa_asset('img/avrix-hero.webp'),
+        'hero_image' => wswa_asset('img/webstudiowa-hero.webp'),
         'stats' => [
             ['value' => '10+', 'label' => 'Years of experience'],
             ['value' => '2017', 'label' => 'Established in WA'],

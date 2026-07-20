@@ -404,9 +404,9 @@ add_action('wp_head', function () {
     $preload = '';
 
     if (is_front_page()) {
-        $preload = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/avrix-hero.webp'));
+        $preload = wswa_image_url(wswa_get_field('hero_image'), wswa_asset('img/webstudiowa-hero.webp'));
     } elseif (is_page('about-us')) {
-        $preload = wswa_asset('img/avrix-about.webp');
+        $preload = wswa_asset('img/webstudiowa-about.webp');
     } elseif (is_page('web-hosting')) {
         $preload = wswa_asset('img/iwebnode-hosting-section.webp');
     } elseif (is_page(['web-design', 'website-redesign', 'website-maintenance'])) {

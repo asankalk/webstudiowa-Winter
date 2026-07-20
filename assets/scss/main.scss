@@ -1187,7 +1187,7 @@ a.button--ghost:visited {
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border: 8px solid var(--color-white);
-    border-radius: 22px;
+    border-radius: 15px;
     box-shadow: var(--shadow-strong);
     background: var(--color-white);
   }
@@ -1230,9 +1230,9 @@ a.button--ghost:visited {
   max-width: 760px;
 
   h2 {
-    max-width: 15ch;
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.14;
+    max-width: 18ch;
+    font-size: clamp(1.85rem, 3.2vw, 2.55rem);
+    line-height: 1.12;
   }
 }
 
@@ -1241,7 +1241,7 @@ a.button--ghost:visited {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 24px;
+  border-radius: 15px;
   background: linear-gradient(145deg, #f7fbff 0%, #eef5ff 100%);
   box-shadow: 0 20px 54px rgba(20, 33, 61, 0.12);
 
@@ -1265,7 +1265,7 @@ a.button--ghost:visited {
 .service-included__body,
 .service-included__support {
   padding: clamp(24px, 3vw, 30px);
-  border-radius: 22px;
+  border-radius: 15px;
 }
 
 .service-included__body {
@@ -1330,7 +1330,7 @@ a.button--ghost:visited {
     aspect-ratio: 4 / 3;
     object-fit: cover;
     border: 8px solid var(--color-white);
-    border-radius: 22px;
+    border-radius: 15px;
     box-shadow: var(--shadow);
     background: var(--color-white);
   }
@@ -1526,7 +1526,7 @@ a.button--ghost:visited {
   min-width: 420px;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 22px;
+  border-radius: 15px;
   background: var(--color-white);
   box-shadow: 0 18px 44px rgba(20, 33, 61, 0.12);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;

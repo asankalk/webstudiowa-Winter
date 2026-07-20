@@ -43,7 +43,7 @@ get_header();
 
 <section class="section image-feature image-feature--reverse">
     <div class="container image-feature__grid">
-        <img src="<?php echo esc_url(wswa_asset('img/avrix-about.webp')); ?>" alt="<?php esc_attr_e('Web Studio WA design and growth visual', 'winter'); ?>" width="1200" height="800" loading="lazy" decoding="async">
+        <img src="<?php echo esc_url(wswa_asset('img/webstudiowa-about.webp')); ?>" alt="<?php esc_attr_e('Web Studio WA design and growth visual', 'winter'); ?>" width="1200" height="800" loading="lazy" decoding="async">
         <div>
             <p class="eyebrow"><?php esc_html_e('Focused service pages', 'winter'); ?></p>
             <h2><?php esc_html_e('Every service has a clear path forward', 'winter'); ?></h2>

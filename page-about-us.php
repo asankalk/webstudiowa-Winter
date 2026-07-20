@@ -14,7 +14,7 @@ get_header();
             <h1><?php esc_html_e('Perth web design with practical support', 'winter'); ?></h1>
             <p><?php esc_html_e('Since 2017, Web Studio WA has helped Western Australian businesses create professional websites that look polished, work smoothly and stay manageable after launch.', 'winter'); ?></p>
         </div>
-        <img src="<?php echo esc_url(wswa_asset('img/avrix-about.webp')); ?>" alt="<?php esc_attr_e('Web Studio WA project workspace', 'winter'); ?>" width="1200" height="800" decoding="async" fetchpriority="high">
+        <img src="<?php echo esc_url(wswa_asset('img/webstudiowa-about.webp')); ?>" alt="<?php esc_attr_e('Web Studio WA project workspace', 'winter'); ?>" width="1200" height="800" decoding="async" fetchpriority="high">
     </div>
 </section>
 
