@@ -157,7 +157,7 @@ function wswa_services(): array
             'hero_image' => wswa_asset('img/service-web-design.webp'),
             'support_image' => wswa_asset('img/avrix-support-1.webp'),
             'included_image' => wswa_asset('img/services/web-design-illustration.svg'),
-            'included_image_alt' => 'Illustration representing web design service',
+            'included_image_alt' => 'Person working on a responsive website design layout',
             'features' => ['Responsive website design', 'SEO-friendly page structure', 'Clear service and enquiry flow', 'Easy-to-manage WordPress setup'],
         ],
         [
@@ -176,7 +176,7 @@ function wswa_services(): array
             'hero_image' => wswa_asset('img/service-website-redesign.webp'),
             'support_image' => wswa_asset('img/avrix-about.webp'),
             'included_image' => wswa_asset('img/services/website-redesign-illustration.svg'),
-            'included_image_alt' => 'Illustration representing website redesign service',
+            'included_image_alt' => 'Person reviewing a website redesign and visual refresh',
             'features' => ['Modern visual refresh', 'Better mobile experience', 'Improved page structure', 'Cleaner calls to action'],
         ],
         [
@@ -195,7 +195,7 @@ function wswa_services(): array
             'hero_image' => wswa_asset('img/service-website-maintenance.webp'),
             'support_image' => wswa_asset('img/avrix-support-5.webp'),
             'included_image' => wswa_asset('img/services/website-maintenance-illustration.svg'),
-            'included_image_alt' => 'Illustration representing website maintenance service',
+            'included_image_alt' => 'Person monitoring website maintenance and security updates',
             'features' => ['WordPress and plugin updates', 'Backups and security checks', 'Small content updates', 'Friendly technical support'],
         ],
     ];
