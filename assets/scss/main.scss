@@ -1345,6 +1345,16 @@ a.button--ghost:visited {
   }
 }
 
+.service-support-image {
+  width: 100%;
+  height: 345px;
+  max-height: 345px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 15px;
+}
+
 .rich-text {
   font-size: 1.06rem;
 
@@ -1866,6 +1876,10 @@ a.button--ghost:visited {
   }
 
   .service-included__media img {
+    height: min(345px, 72vw);
+  }
+
+  .service-support-image {
     height: min(345px, 72vw);
   }
 
