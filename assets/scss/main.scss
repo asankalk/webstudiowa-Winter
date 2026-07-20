@@ -1295,13 +1295,21 @@ a.button--ghost:visited {
   align-content: center;
   overflow: hidden;
   min-height: 100%;
+  color: #e5eefb;
   background: linear-gradient(180deg, #0d182b 0%, #07111f 100%);
   box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.04);
+
+  p,
+  li,
+  a,
+  h3 {
+    color: inherit;
+  }
 }
 
 .service-included__support-label {
   margin: 0 0 14px;
-  color: #8fb4ff;
+  color: inherit;
   font-size: 0.82rem;
   font-weight: 900;
   letter-spacing: 0.04em;
@@ -1312,7 +1320,7 @@ a.button--ghost:visited {
   margin: 0;
 
   li {
-    color: rgba(217, 232, 255, 0.92);
+    color: inherit;
     font-weight: 700;
   }
 
