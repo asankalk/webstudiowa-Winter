@@ -28,18 +28,24 @@ if (! $service) {
 </section>
 
 <section class="section">
-    <div class="container content-grid">
-        <div>
-
-            <h2><?php echo esc_html($service['details']); ?></h2>
+    <div class="container service-included">
+        <div class="service-included__content">
+            <p class="eyebrow"><?php echo esc_html($service['included_eyebrow'] ?? __('What\'s included', 'winter')); ?></p>
+            <h2><?php echo esc_html($service['included_heading'] ?? $service['title']); ?></h2>
+            <p><?php echo esc_html($service['included_text'] ?? $service['details']); ?></p>
         </div>
-        <div class="rich-text">
-            <p><?php echo esc_html($service['body']); ?></p>
-            <ul class="check-list">
-                <?php foreach ($service['features'] as $feature) : ?>
-                    <li><?php echo esc_html($feature); ?></li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="service-included__aside">
+            <figure class="service-included__media">
+                <img src="<?php echo esc_url($service['included_image'] ?? $service['support_image']); ?>" alt="<?php echo esc_attr($service['included_image_alt'] ?? ($service['title'] . ' support visual')); ?>" width="900" height="675" loading="lazy" decoding="async">
+            </figure>
+            <div class="service-included__card">
+                <p class="service-included__card-label"><?php esc_html_e('Included support', 'winter'); ?></p>
+                <ul class="check-list service-included__list">
+                    <?php foreach ($service['features'] as $feature) : ?>
+                        <li><?php echo esc_html($feature); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
