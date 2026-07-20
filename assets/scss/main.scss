@@ -1276,13 +1276,17 @@ a.button--ghost:visited {
   display: flex;
   align-items: center;
   min-height: 100%;
-  background: transparent;
+  background: linear-gradient(180deg, #1a2945 0%, #14213d 100%);
 
   p {
     margin: 0;
-    color: var(--color-text);
+    color: #e5eefb;
     font-size: 1.05rem;
     line-height: 1.72;
+  }
+
+  a {
+    color: #f8fafc;
   }
 }
 
@@ -1291,7 +1295,7 @@ a.button--ghost:visited {
   align-content: center;
   overflow: hidden;
   min-height: 100%;
-  background: linear-gradient(180deg, #10203a 0%, #0b1328 100%);
+  background: linear-gradient(180deg, #0d182b 0%, #07111f 100%);
   box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.04);
 }
 
