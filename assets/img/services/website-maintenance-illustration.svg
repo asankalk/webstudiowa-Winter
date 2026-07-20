@@ -1,0 +1,41 @@
+<svg width="900" height="675" viewBox="0 0 900 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Website maintenance illustration</title>
+  <desc id="desc">A modern illustration showing website maintenance with dashboard, shield, update arrows and support checks.</desc>
+  <defs>
+    <linearGradient id="bg" x1="109" y1="84" x2="783" y2="583" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FF"/>
+      <stop offset="1" stop-color="#F5FAFF"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="593" y1="194" x2="749" y2="343" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E90FF"/>
+      <stop offset="1" stop-color="#0B5FC7"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="675" rx="42" fill="url(#bg)"/>
+  <circle cx="164" cy="145" r="60" fill="#DFF6EE"/>
+  <circle cx="742" cy="528" r="78" fill="#E7F0FF"/>
+  <rect x="126" y="152" width="472" height="334" rx="30" fill="#10203A"/>
+  <rect x="148" y="176" width="428" height="288" rx="24" fill="#FFFFFF"/>
+  <rect x="179" y="212" width="152" height="110" rx="20" fill="#E8F4FF"/>
+  <path d="M248 239C266 239 281 254 281 272C281 290 266 305 248 305C230 305 215 290 215 272" stroke="#0B5FC7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M252 228L278 241L265 267" stroke="#1E90FF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="358" y="215" width="184" height="18" rx="9" fill="#10203A"/>
+  <rect x="358" y="246" width="142" height="14" rx="7" fill="#90A5C2"/>
+  <rect x="358" y="273" width="121" height="14" rx="7" fill="#C0D0E3"/>
+  <rect x="179" y="356" width="363" height="18" rx="9" fill="#A5B9D3"/>
+  <rect x="179" y="389" width="298" height="16" rx="8" fill="#C7D4E1"/>
+  <rect x="179" y="419" width="137" height="30" rx="15" fill="#D9005B"/>
+  <path d="M621 181L671 159L721 181V232C721 288 686 325 671 334C656 325 621 288 621 232V181Z" fill="url(#shield)"/>
+  <path d="M648 241L665 258L696 223" stroke="#FFFFFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="612" y="368" width="178" height="139" rx="28" fill="#FFFFFF" stroke="#DCE8F5" stroke-width="2"/>
+  <rect x="636" y="392" width="130" height="18" rx="9" fill="#10203A"/>
+  <rect x="636" y="426" width="87" height="14" rx="7" fill="#1E90FF" fill-opacity="0.2"/>
+  <rect x="636" y="451" width="108" height="14" rx="7" fill="#A5B9D3"/>
+  <rect x="636" y="476" width="92" height="14" rx="7" fill="#C3D4E6"/>
+  <circle cx="604" cy="541" r="32" fill="#D9005B" fill-opacity="0.12"/>
+  <path d="M592 542L602 552L619 533" stroke="#D9005B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="251" y="514" width="240" height="76" rx="24" fill="#FFFFFF" stroke="#DCE8F5" stroke-width="2"/>
+  <circle cx="289" cy="552" r="14" fill="#1E90FF"/>
+  <rect x="317" y="541" width="82" height="12" rx="6" fill="#10203A"/>
+  <rect x="317" y="564" width="128" height="10" rx="5" fill="#9AB0CC"/>
+</svg>

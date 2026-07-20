@@ -156,8 +156,8 @@ function wswa_services(): array
             'image' => wswa_asset('img/service-web-design.webp'),
             'hero_image' => wswa_asset('img/service-web-design.webp'),
             'support_image' => wswa_asset('img/avrix-support-1.webp'),
-            'included_image' => wswa_asset('img/avrix-support-1.webp'),
-            'included_image_alt' => 'Website planning and design workspace',
+            'included_image' => wswa_asset('img/services/web-design-illustration.svg'),
+            'included_image_alt' => 'Illustration representing web design service',
             'features' => ['Responsive website design', 'SEO-friendly page structure', 'Clear service and enquiry flow', 'Easy-to-manage WordPress setup'],
         ],
         [
@@ -175,8 +175,8 @@ function wswa_services(): array
             'image' => wswa_asset('img/service-website-redesign.webp'),
             'hero_image' => wswa_asset('img/service-website-redesign.webp'),
             'support_image' => wswa_asset('img/avrix-about.webp'),
-            'included_image' => wswa_asset('img/avrix-about.webp'),
-            'included_image_alt' => 'Website redesign planning and improvement workspace',
+            'included_image' => wswa_asset('img/services/website-redesign-illustration.svg'),
+            'included_image_alt' => 'Illustration representing website redesign service',
             'features' => ['Modern visual refresh', 'Better mobile experience', 'Improved page structure', 'Cleaner calls to action'],
         ],
         [
@@ -194,8 +194,8 @@ function wswa_services(): array
             'image' => wswa_asset('img/service-website-maintenance.webp'),
             'hero_image' => wswa_asset('img/service-website-maintenance.webp'),
             'support_image' => wswa_asset('img/avrix-support-5.webp'),
-            'included_image' => wswa_asset('img/avrix-support-5.webp'),
-            'included_image_alt' => 'Website maintenance support dashboard and laptop workspace',
+            'included_image' => wswa_asset('img/services/website-maintenance-illustration.svg'),
+            'included_image_alt' => 'Illustration representing website maintenance service',
             'features' => ['WordPress and plugin updates', 'Backups and security checks', 'Small content updates', 'Friendly technical support'],
         ],
     ];

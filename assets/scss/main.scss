@@ -1229,6 +1229,8 @@ a.button--ghost:visited {
 
 .service-included__content {
   max-width: 620px;
+  display: grid;
+  align-content: start;
 
   h2 {
     max-width: 14ch;
@@ -1245,8 +1247,7 @@ a.button--ghost:visited {
 }
 
 .service-included__aside {
-  display: grid;
-  gap: 18px;
+  display: block;
 }
 
 .service-included__media {
@@ -1274,48 +1275,28 @@ a.button--ghost:visited {
   img {
     width: 100%;
     aspect-ratio: 16 / 10;
-    object-fit: cover;
+    object-fit: contain;
+    padding: clamp(24px, 3vw, 32px);
     border-radius: 24px;
   }
 }
 
-.service-included__card {
-  position: relative;
+.service-included__list {
+  margin: 24px 0 0;
   padding: 24px 24px 26px;
   overflow: hidden;
-  border: 1px solid rgba(30, 144, 255, 0.16);
+  border: 1px solid rgba(30, 144, 255, 0.14);
   border-radius: 22px;
-  background: linear-gradient(180deg, #10203a 0%, #0b1328 100%);
-  box-shadow: 0 18px 44px rgba(16, 24, 47, 0.14);
-
-  &::before {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 5px;
-    background: linear-gradient(180deg, var(--color-primary), var(--color-lime), var(--color-accent));
-    content: "";
-  }
-}
-
-.service-included__card-label {
-  margin: 0 0 14px;
-  color: #8fb4ff;
-  font-size: 0.82rem;
-  font-weight: 900;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.service-included__list {
-  margin: 0;
+  background: linear-gradient(180deg, rgba(247, 251, 255, 0.96) 0%, rgba(238, 245, 255, 0.96) 100%);
+  box-shadow: 0 16px 38px rgba(16, 24, 47, 0.08);
 
   li {
-    color: rgba(217, 232, 255, 0.92);
+    color: var(--color-ink);
     font-weight: 700;
   }
 
   li::before {
-    background: var(--color-lime);
+    background: var(--color-primary);
   }
 }
 
@@ -1866,7 +1847,7 @@ a.button--ghost:visited {
     max-width: none;
   }
 
-  .service-included__card {
+  .service-included__list {
     padding: 20px;
   }
 
