@@ -36,8 +36,8 @@ if (! $service) {
         <figure class="service-included__media">
             <img src="<?php echo esc_url($service['included_image'] ?? $service['support_image']); ?>" alt="<?php echo esc_attr($service['included_image_alt'] ?? ($service['title'] . ' support visual')); ?>" width="900" height="675" loading="lazy" decoding="async">
         </figure>
-        <div class="service-included__bottom">
-            <div class="service-included__body">
+        <div class="service-included__content-card">
+            <div class="service-included__copy">
                 <p><?php echo esc_html($service['included_text'] ?? $service['details']); ?></p>
             </div>
             <div class="service-included__support">

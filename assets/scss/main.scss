@@ -1222,7 +1222,7 @@ a.button--ghost:visited {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: clamp(24px, 4vw, 32px);
+  gap: clamp(18px, 3vw, 24px);
   align-items: start;
 }
 
@@ -1255,23 +1255,28 @@ a.button--ghost:visited {
   }
 }
 
-.service-included__bottom {
+.service-included__content-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr);
-  gap: clamp(20px, 3vw, 28px);
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 0;
   align-items: stretch;
-}
-
-.service-included__body,
-.service-included__support {
-  padding: clamp(24px, 3vw, 30px);
+  overflow: hidden;
+  border: 1px solid rgba(30, 144, 255, 0.14);
   border-radius: 15px;
-}
-
-.service-included__body {
-  border: 1px solid rgba(30, 144, 255, 0.12);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 251, 255, 0.98) 100%);
   box-shadow: 0 16px 38px rgba(16, 24, 47, 0.08);
+}
+
+.service-included__copy,
+.service-included__support {
+  padding: clamp(24px, 3vw, 30px);
+}
+
+.service-included__copy {
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  background: transparent;
 
   p {
     margin: 0;
@@ -1282,10 +1287,12 @@ a.button--ghost:visited {
 }
 
 .service-included__support {
+  display: grid;
+  align-content: center;
   overflow: hidden;
-  border: 1px solid rgba(30, 144, 255, 0.16);
+  min-height: 100%;
   background: linear-gradient(180deg, #10203a 0%, #0b1328 100%);
-  box-shadow: 0 18px 44px rgba(16, 24, 47, 0.14);
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.04);
 }
 
 .service-included__support-label {
@@ -1836,7 +1843,7 @@ a.button--ghost:visited {
     grid-template-columns: 1fr;
   }
 
-  .service-included__bottom {
+  .service-included__content-card {
     grid-template-columns: 1fr;
   }
 
@@ -1870,7 +1877,7 @@ a.button--ghost:visited {
     max-width: none;
   }
 
-  .service-included__body,
+  .service-included__copy,
   .service-included__support {
     padding: 20px;
   }
