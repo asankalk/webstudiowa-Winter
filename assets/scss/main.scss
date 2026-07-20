@@ -1222,7 +1222,7 @@ a.button--ghost:visited {
   position: relative;
   z-index: 1;
   display: grid;
-  gap: clamp(18px, 3vw, 24px);
+  gap: 5px;
   align-items: start;
 }
 
@@ -1241,7 +1241,7 @@ a.button--ghost:visited {
   margin: 0;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
   background: linear-gradient(145deg, #f7fbff 0%, #eef5ff 100%);
   box-shadow: 0 20px 54px rgba(20, 33, 61, 0.12);
 
@@ -1252,6 +1252,7 @@ a.button--ghost:visited {
     object-fit: cover;
     object-position: center;
     display: block;
+    border-radius: 15px 15px 0 0;
   }
 }
 
@@ -1262,7 +1263,7 @@ a.button--ghost:visited {
   align-items: stretch;
   overflow: hidden;
   border: 1px solid rgba(30, 144, 255, 0.14);
-  border-radius: 15px;
+  border-radius: 0 0 15px 15px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 251, 255, 0.98) 100%);
   box-shadow: 0 16px 38px rgba(16, 24, 47, 0.08);
 }
