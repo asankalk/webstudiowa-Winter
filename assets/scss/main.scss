@@ -940,37 +940,11 @@ a.button--ghost:visited {
 }
 
 .footer__brand-column {
-  max-width: 620px;
-}
-
-.site-footer__brand-logos {
-  display: flex;
-  align-items: center;
-  gap: clamp(24px, 3vw, 32px);
-  flex-wrap: wrap;
+  max-width: 430px;
 }
 
 .footer__brand img {
   width: 165px;
-}
-
-.site-footer__partner-logo {
-  display: inline-flex;
-  align-items: center;
-  opacity: 0.92;
-
-  &:hover,
-  &:focus-visible {
-    opacity: 1;
-  }
-}
-
-.site-footer__partner-logo img {
-  display: block;
-  height: 92px;
-  width: auto;
-  max-width: min(100%, 490px);
-  filter: brightness(0) invert(1);
 }
 
 .footer__description {
@@ -1165,15 +1139,6 @@ a.button--ghost:visited {
     gap: 30px;
   }
 
-  .site-footer__brand-logos {
-    align-items: flex-start;
-    gap: 18px 24px;
-  }
-
-  .site-footer__partner-logo img {
-    height: 64px;
-    max-width: min(100%, 340px);
-  }
 }
 
 .text-link {
