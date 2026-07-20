@@ -1286,6 +1286,12 @@ a.button--ghost:visited {
   }
 }
 
+.service-included__intro--website-redesign h2 {
+  max-width: 22ch;
+  font-size: clamp(1.85rem, 3vw, 2.42rem);
+  line-height: 1.08;
+}
+
 .service-included__media {
   position: relative;
   margin: 0;

@@ -29,7 +29,7 @@ if (! $service) {
 
 <section class="section">
     <div class="container service-included">
-        <div class="service-included__intro">
+        <div class="service-included__intro<?php echo ! empty($service['slug']) ? ' service-included__intro--' . sanitize_html_class($service['slug']) : ''; ?>">
             <p class="eyebrow"><?php echo esc_html($service['included_eyebrow'] ?? __('What\'s included', 'winter')); ?></p>
             <h2><?php echo esc_html($service['included_heading'] ?? $service['title']); ?></h2>
         </div>
