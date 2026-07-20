@@ -36,16 +36,18 @@ if (! $service) {
         <figure class="service-included__media">
             <img src="<?php echo esc_url($service['included_image'] ?? $service['support_image']); ?>" alt="<?php echo esc_attr($service['included_image_alt'] ?? ($service['title'] . ' support visual')); ?>" width="900" height="675" loading="lazy" decoding="async">
         </figure>
-        <div class="service-included__body">
-            <p><?php echo esc_html($service['included_text'] ?? $service['details']); ?></p>
-        </div>
-        <div class="service-included__support">
-            <p class="service-included__support-label"><?php esc_html_e('Included support', 'winter'); ?></p>
-            <ul class="check-list service-included__list">
-                <?php foreach ($service['features'] as $feature) : ?>
-                    <li><?php echo esc_html($feature); ?></li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="service-included__bottom">
+            <div class="service-included__body">
+                <p><?php echo esc_html($service['included_text'] ?? $service['details']); ?></p>
+            </div>
+            <div class="service-included__support">
+                <p class="service-included__support-label"><?php esc_html_e('Included support', 'winter'); ?></p>
+                <ul class="check-list service-included__list">
+                    <?php foreach ($service['features'] as $feature) : ?>
+                        <li><?php echo esc_html($feature); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
