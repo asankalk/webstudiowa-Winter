@@ -54,7 +54,7 @@ if (! $service) {
 
 <section class="section image-feature">
     <div class="container image-feature__grid">
-        <img src="<?php echo esc_url($service['support_image']); ?>" alt="<?php echo esc_attr($service['title'] . ' visual'); ?>" width="900" height="675" loading="lazy" decoding="async">
+        <img src="<?php echo esc_url($service['support_image']); ?>" alt="<?php echo esc_attr($service['support_image_alt'] ?? ($service['title'] . ' visual')); ?>" width="900" height="675" loading="lazy" decoding="async">
         <div>
             <p class="eyebrow"><?php esc_html_e('Built for business websites', 'winter'); ?></p>
             <h2><?php esc_html_e('A practical path from idea to launch', 'winter'); ?></h2>

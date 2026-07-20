@@ -194,6 +194,7 @@ function wswa_services(): array
             'image' => wswa_asset('img/service-website-maintenance.webp'),
             'hero_image' => wswa_asset('img/service-website-maintenance.webp'),
             'support_image' => wswa_asset('img/webstudiowa-maintenance-support.webp'),
+            'support_image_alt' => 'Happy professional monitoring website maintenance updates and security',
             'included_image' => wswa_asset('img/services/webstudio-website-maintenance.jpg'),
             'included_image_alt' => 'Person monitoring website maintenance and security updates',
             'features' => ['WordPress and plugin updates', 'Backups and security checks', 'Small content updates', 'Friendly technical support'],
