@@ -940,7 +940,7 @@ a.button--ghost:visited {
 }
 
 .footer__brand-column {
-  max-width: 430px;
+  max-width: 620px;
 }
 
 .site-footer__brand-logos {
@@ -967,9 +967,9 @@ a.button--ghost:visited {
 
 .site-footer__partner-logo img {
   display: block;
+  height: 92px;
   width: auto;
-  max-width: min(100%, 120px);
-  max-height: 38px;
+  max-width: min(100%, 490px);
   filter: brightness(0) invert(1);
 }
 
@@ -1171,8 +1171,8 @@ a.button--ghost:visited {
   }
 
   .site-footer__partner-logo img {
-    max-width: min(100%, 112px);
-    max-height: 34px;
+    height: 64px;
+    max-width: min(100%, 340px);
   }
 }
 
