@@ -275,28 +275,45 @@ function wswa_default_clients(): array
             'type' => 'New Website',
             'url' => 'https://www.vendingwa.com.au/',
             'image' => wswa_asset('img/client-vending-wa.webp'),
+            'image_alt' => 'Vending WA website preview',
             'summary' => 'New brochure website build for a Western Australian vending business.',
+            'featured' => true,
         ],
         [
             'name' => 'Pretium Group',
             'type' => 'New Website',
             'url' => 'https://www.pretiumgroup.com.au/',
             'image' => wswa_asset('img/client-pretium-group.webp'),
+            'image_alt' => 'Pretium Group website preview',
             'summary' => 'Corporate website launch with a clearer service structure and polished presentation.',
+            'featured' => true,
         ],
         [
             'name' => 'Pretium Funding',
             'type' => 'Website Redesign',
             'url' => 'https://www.pretiumfunding.com.au/',
             'image' => wswa_asset('img/client-pretium-funding.webp'),
+            'image_alt' => 'Pretium Funding website preview',
             'summary' => 'Website redesign focused on stronger messaging and a more modern client experience.',
+            'featured' => true,
         ],
         [
             'name' => 'HP Debt Solutions',
             'type' => 'Website Redesign',
             'url' => 'https://www.hpdebtsolutions.com.au/',
             'image' => wswa_asset('img/client-hp-debt-solutions.webp'),
+            'image_alt' => 'HP Debt Solutions website preview',
             'summary' => 'Website refresh for a professional services business with improved clarity and trust signals.',
+            'featured' => true,
+        ],
+        [
+            'name' => 'Origin Facility Services',
+            'type' => 'Website Design',
+            'url' => 'https://www.originfacilityservices.com.au/',
+            'image' => wswa_asset('img/client-origin-facility-services.webp'),
+            'image_alt' => 'Origin Facility Services website preview',
+            'summary' => 'Website design and build for a Perth commercial cleaning business with a clear, service-led layout.',
+            'featured' => true,
         ],
     ];
 }
@@ -358,14 +375,24 @@ function wswa_seed_default_clients(): void
 
 function wswa_prepare_client(WP_Post $client_post): array
 {
+    $client_name = get_the_title($client_post);
     $website_url = (string) wswa_client_field_value($client_post->ID, 'client_website_url', '');
     $project_type = (string) wswa_client_field_value($client_post->ID, 'client_project_type', __('Client Website', 'winter'));
     $summary = has_excerpt($client_post)
         ? $client_post->post_excerpt
         : wp_trim_words(wp_strip_all_tags((string) $client_post->post_content), 20);
+    $image_alt = sprintf(__('%s website preview', 'winter'), $client_name);
 
     $uses_snapshot = false;
     $image = get_the_post_thumbnail_url($client_post, 'large');
+
+    if ($image) {
+        $thumbnail_id = get_post_thumbnail_id($client_post);
+        $thumbnail_alt = trim((string) get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true));
+        if ($thumbnail_alt !== '') {
+            $image_alt = $thumbnail_alt;
+        }
+    }
 
     if (! $image && $website_url !== '') {
         $image = wswa_client_snapshot($website_url);
@@ -382,14 +409,88 @@ function wswa_prepare_client(WP_Post $client_post): array
 
     return [
         'id' => $client_post->ID,
-        'name' => get_the_title($client_post),
+        'name' => $client_name,
         'type' => $project_type,
         'url' => $website_url !== '' ? $website_url : home_url('/'),
         'image' => $image,
+        'image_alt' => $image_alt,
         'summary' => $summary,
         'featured' => (bool) wswa_client_field_value($client_post->ID, 'client_featured_on_home', false),
         'uses_snapshot' => $uses_snapshot,
     ];
+}
+
+function wswa_normalize_client_identity(string $value): string
+{
+    $value = strtolower(trim($value));
+
+    if ($value === '') {
+        return '';
+    }
+
+    $value = preg_replace('#^https?://(www\.)?#', '', $value);
+    $value = untrailingslashit($value);
+    $value = preg_replace('/[^a-z0-9]+/', '-', $value);
+
+    return trim((string) $value, '-');
+}
+
+function wswa_client_identity_key(array $client): string
+{
+    $url_key = wswa_normalize_client_identity((string) ($client['url'] ?? ''));
+
+    if ($url_key !== '') {
+        return $url_key;
+    }
+
+    return wswa_normalize_client_identity((string) ($client['name'] ?? ''));
+}
+
+function wswa_filter_default_clients(array $args = []): array
+{
+    $clients = wswa_default_clients();
+
+    if (! empty($args['featured_only'])) {
+        $clients = array_values(array_filter($clients, static function (array $client): bool {
+            return ! empty($client['featured']);
+        }));
+    }
+
+    if (($args['limit'] ?? -1) > 0) {
+        $clients = array_slice($clients, 0, (int) $args['limit']);
+    }
+
+    return $clients;
+}
+
+function wswa_merge_missing_default_clients(array $clients, array $args = []): array
+{
+    $default_clients = wswa_filter_default_clients($args);
+    $known_clients = [];
+
+    foreach ($clients as $client) {
+        $key = wswa_client_identity_key($client);
+        if ($key !== '') {
+            $known_clients[$key] = true;
+        }
+    }
+
+    foreach ($default_clients as $client) {
+        $key = wswa_client_identity_key($client);
+
+        if ($key === '' || isset($known_clients[$key])) {
+            continue;
+        }
+
+        $clients[] = $client;
+        $known_clients[$key] = true;
+
+        if (($args['limit'] ?? -1) > 0 && count($clients) >= (int) $args['limit']) {
+            break;
+        }
+    }
+
+    return $clients;
 }
 
 function wswa_clients(array $args = []): array
@@ -431,16 +532,10 @@ function wswa_clients(array $args = []): array
     }
 
     if (empty($client_posts)) {
-        $fallback_clients = wswa_default_clients();
-
-        if ($args['limit'] > 0) {
-            return array_slice($fallback_clients, 0, (int) $args['limit']);
-        }
-
-        return $fallback_clients;
+        return wswa_filter_default_clients($args);
     }
 
-    return array_map('wswa_prepare_client', $client_posts);
+    return wswa_merge_missing_default_clients(array_map('wswa_prepare_client', $client_posts), $args);
 }
 
 function wswa_defaults(): array
