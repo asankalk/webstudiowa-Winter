@@ -25,9 +25,17 @@ get_header();
             <?php wp_nonce_field('wswa_contact', 'wswa_contact_nonce'); ?>
             <?php if ($status === 'sent') : ?>
                 <p class="form-alert form-alert--success"><?php esc_html_e('Thanks, your message has been sent.', 'winter'); ?></p>
+            <?php elseif ($status === 'spam_failed') : ?>
+                <p class="form-alert"><?php esc_html_e('Spam protection check failed. Please try again.', 'winter'); ?></p>
             <?php elseif ($status) : ?>
                 <p class="form-alert"><?php esc_html_e('Please check the form details and try again.', 'winter'); ?></p>
             <?php endif; ?>
+            <div class="wswa-honeypot" aria-hidden="true">
+                <label for="company_website">
+                    <?php esc_html_e('Company website', 'winter'); ?>
+                </label>
+                <input id="company_website" type="text" name="company_website" autocomplete="off" tabindex="-1">
+            </div>
             <label>
                 <?php esc_html_e('Name', 'winter'); ?>
                 <input type="text" name="name" required>
@@ -53,6 +61,11 @@ get_header();
                 <?php esc_html_e('Message', 'winter'); ?>
                 <textarea name="message" rows="6" required></textarea>
             </label>
+            <?php if (wswa_get_turnstile_site_key() !== '') : ?>
+                <div class="wswa-turnstile">
+                    <div class="cf-turnstile" data-sitekey="<?php echo esc_attr(wswa_get_turnstile_site_key()); ?>"></div>
+                </div>
+            <?php endif; ?>
             <button class="button button--primary" type="submit"><?php esc_html_e('Send enquiry', 'winter'); ?></button>
         </form>
     </div>

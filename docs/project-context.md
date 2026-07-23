@@ -1,6 +1,8 @@
 # Project Context
 
-Last updated: 2026-07-20
+Last updated: 2026-07-23
+
+Contact form is hard-coded and protected with Cloudflare Turnstile, nonce, and honeypot. See `docs/form-audit.md`.
 
 ## Project Identity
 

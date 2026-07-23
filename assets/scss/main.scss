@@ -1838,6 +1838,17 @@ a.button--ghost:visited {
   }
 }
 
+.wswa-turnstile {
+  margin: 1rem 0;
+}
+
+.wswa-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .form-alert {
   padding: 12px 14px;
   color: #8a371f;

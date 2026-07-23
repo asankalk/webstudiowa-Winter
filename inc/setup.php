@@ -81,12 +81,49 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
         'section' => 'winter_contact_details',
         'type' => 'text',
     ]);
+
+    $wp_customize->add_section('wswa_form_security', [
+        'title' => __('Web Studio WA Form Security', 'winter'),
+        'priority' => 161,
+    ]);
+
+    $wp_customize->add_setting('wswa_turnstile_site_key', [
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ]);
+
+    $wp_customize->add_control('wswa_turnstile_site_key', [
+        'label' => __('Cloudflare Turnstile Site Key', 'winter'),
+        'section' => 'wswa_form_security',
+        'type' => 'text',
+    ]);
+
+    $wp_customize->add_setting('wswa_turnstile_secret_key', [
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+        'transport' => 'refresh',
+    ]);
+
+    $wp_customize->add_control('wswa_turnstile_secret_key', [
+        'label' => __('Cloudflare Turnstile Secret Key', 'winter'),
+        'section' => 'wswa_form_security',
+        'type' => 'password',
+        'input_attrs' => [
+            'autocomplete' => 'off',
+        ],
+    ]);
 });
 
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('winter-style', WSWA_THEME_URI . '/assets/css/main.css', [], WSWA_VERSION);
     wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], WSWA_VERSION);
     wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], WSWA_VERSION, true);
+
+    if (is_page('contact') && wswa_get_turnstile_site_key() !== '') {
+        wp_enqueue_script('wswa-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true);
+        wp_script_add_data('wswa-turnstile', 'defer', true);
+    }
 });
 
 add_action('wp_enqueue_scripts', function () {
@@ -112,6 +149,54 @@ add_action('init', function () {
     remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
     remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
 });
+
+function wswa_get_turnstile_site_key(): string
+{
+    return sanitize_text_field((string) get_theme_mod('wswa_turnstile_site_key', ''));
+}
+
+function wswa_get_turnstile_secret_key(): string
+{
+    return sanitize_text_field((string) get_theme_mod('wswa_turnstile_secret_key', ''));
+}
+
+function wswa_is_turnstile_configured(): bool
+{
+    return wswa_get_turnstile_site_key() !== '' && wswa_get_turnstile_secret_key() !== '';
+}
+
+function wswa_verify_turnstile_token($token): bool
+{
+    $sanitized_token = sanitize_text_field(wp_unslash((string) $token));
+    $secret = wswa_get_turnstile_secret_key();
+
+    if ($sanitized_token === '' || $secret === '') {
+        return false;
+    }
+
+    $body = [
+        'secret' => $secret,
+        'response' => $sanitized_token,
+    ];
+
+    $remote_ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''));
+    if ($remote_ip !== '') {
+        $body['remoteip'] = $remote_ip;
+    }
+
+    $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
+        'body' => $body,
+        'timeout' => 15,
+    ]);
+
+    if (is_wp_error($response)) {
+        return false;
+    }
+
+    $decoded = json_decode(wp_remote_retrieve_body($response), true);
+
+    return is_array($decoded) && ! empty($decoded['success']);
+}
 
 function wswa_preferred_public_origin(): string
 {
@@ -580,10 +665,25 @@ function wswa_handle_contact_form(): void
     $phone = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
     $service = sanitize_text_field(wp_unslash($_POST['service'] ?? ''));
     $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
+    $honeypot = sanitize_text_field(wp_unslash($_POST['company_website'] ?? ''));
 
     if (! $name || ! is_email($email) || ! $message) {
         wp_safe_redirect(add_query_arg('contact', 'missing', wp_get_referer() ?: wswa_page_url('contact')));
         exit;
+    }
+
+    if ($honeypot !== '') {
+        wp_safe_redirect(add_query_arg('contact', 'spam_failed', wp_get_referer() ?: wswa_page_url('contact')));
+        exit;
+    }
+
+    if (wswa_is_turnstile_configured()) {
+        $turnstile_token = $_POST['cf-turnstile-response'] ?? '';
+
+        if (! wswa_verify_turnstile_token($turnstile_token)) {
+            wp_safe_redirect(add_query_arg('contact', 'spam_failed', wp_get_referer() ?: wswa_page_url('contact')));
+            exit;
+        }
     }
 
     $body = "Name: {$name}\nEmail: {$email}\nPhone: {$phone}\nService: {$service}\n\nMessage:\n{$message}";
