@@ -1579,16 +1579,18 @@ a.button--ghost:visited {
 }
 
 .client-snapshot__media {
-  padding: 20px 20px 0;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 15px 15px 0 0;
   background: transparent;
 
   img {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: contain;
-    padding: 26px;
-    border-radius: 18px;
-    background: var(--color-white);
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
     transition: transform 0.22s ease;
   }
 
@@ -1596,7 +1598,7 @@ a.button--ghost:visited {
     padding: 0;
     object-fit: cover;
     object-position: center top;
-    background: #edf3fb;
+    background: transparent;
   }
 
   .client-preview--origin-facility-services {
