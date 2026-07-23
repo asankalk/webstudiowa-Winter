@@ -61,7 +61,7 @@ get_header();
                 <?php esc_html_e('Message', 'winter'); ?>
                 <textarea name="message" rows="6" required></textarea>
             </label>
-            <?php if (wswa_get_turnstile_site_key() !== '') : ?>
+            <?php if (wswa_is_turnstile_configured()) : ?>
                 <div class="wswa-turnstile">
                     <div class="cf-turnstile" data-sitekey="<?php echo esc_attr(wswa_get_turnstile_site_key()); ?>"></div>
                 </div>

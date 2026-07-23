@@ -47,3 +47,12 @@ Domain to use:
 4. Confirm the form still works on mobile.
 5. Confirm the Turnstile widget appears after keys are configured.
 6. Confirm submissions still work if keys are not yet configured and the widget is not shown.
+
+## Troubleshooting
+
+If Turnstile shows Success but the form returns `Spam protection check failed`, check:
+
+- the widget is inside the form
+- `cf-turnstile-response` is submitted with the form
+- the Secret Key is saved correctly
+- the Cloudflare hostname includes `webstudiowa.com.au`

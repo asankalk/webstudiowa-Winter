@@ -120,7 +120,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], WSWA_VERSION);
     wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], WSWA_VERSION, true);
 
-    if (is_page('contact') && wswa_get_turnstile_site_key() !== '') {
+    if (is_page('contact') && wswa_is_turnstile_configured()) {
         wp_enqueue_script('wswa-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true);
         wp_script_add_data('wswa-turnstile', 'defer', true);
     }
@@ -165,37 +165,135 @@ function wswa_is_turnstile_configured(): bool
     return wswa_get_turnstile_site_key() !== '' && wswa_get_turnstile_secret_key() !== '';
 }
 
+function wswa_log_turnstile_debug(string $message): void
+{
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        error_log('[WSWA Turnstile] ' . $message);
+    }
+}
+
 function wswa_verify_turnstile_token($token): bool
 {
     $sanitized_token = sanitize_text_field(wp_unslash((string) $token));
     $secret = wswa_get_turnstile_secret_key();
+    $site_key_exists = wswa_get_turnstile_site_key() !== '';
+    $secret_exists = $secret !== '';
+
+    wswa_log_turnstile_debug('Site key configured: ' . ($site_key_exists ? 'yes' : 'no'));
+    wswa_log_turnstile_debug('Secret key configured: ' . ($secret_exists ? 'yes' : 'no'));
+    wswa_log_turnstile_debug('Token present: ' . ($sanitized_token !== '' ? 'yes' : 'no'));
+    wswa_log_turnstile_debug('Token length: ' . strlen($sanitized_token));
 
     if ($sanitized_token === '' || $secret === '') {
         return false;
     }
 
-    $body = [
-        'secret' => $secret,
-        'response' => $sanitized_token,
-    ];
-
     $remote_ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''));
-    if ($remote_ip !== '') {
-        $body['remoteip'] = $remote_ip;
-    }
-
     $response = wp_remote_post('https://challenges.cloudflare.com/turnstile/v0/siteverify', [
-        'body' => $body,
-        'timeout' => 15,
+        'timeout' => 10,
+        'body' => [
+            'secret' => $secret,
+            'response' => $sanitized_token,
+            'remoteip' => $remote_ip,
+        ],
     ]);
 
     if (is_wp_error($response)) {
+        wswa_log_turnstile_debug('Remote request failed: ' . $response->get_error_message());
         return false;
     }
 
-    $decoded = json_decode(wp_remote_retrieve_body($response), true);
+    $status_code = wp_remote_retrieve_response_code($response);
+    $body = wp_remote_retrieve_body($response);
+    $decoded = json_decode($body, true);
 
-    return is_array($decoded) && ! empty($decoded['success']);
+    if ($status_code < 200 || $status_code >= 300) {
+        wswa_log_turnstile_debug('Unexpected HTTP status: ' . $status_code);
+        return false;
+    }
+
+    if (! is_array($decoded)) {
+        wswa_log_turnstile_debug('Invalid JSON response from Cloudflare.');
+        return false;
+    }
+
+    $success = ! empty($decoded['success']);
+    wswa_log_turnstile_debug('Cloudflare verify success: ' . ($success ? 'yes' : 'no'));
+
+    if (! empty($decoded['error-codes']) && is_array($decoded['error-codes'])) {
+        wswa_log_turnstile_debug('Cloudflare error codes: ' . implode(', ', array_map('sanitize_text_field', $decoded['error-codes'])));
+    }
+
+    if (! empty($decoded['hostname'])) {
+        wswa_log_turnstile_debug('Cloudflare hostname: ' . sanitize_text_field((string) $decoded['hostname']));
+    }
+
+    return $success;
+}
+
+function wswa_contact_status_url(string $status): string
+{
+    $target = wp_get_referer() ?: wswa_page_url('contact');
+    $target = remove_query_arg('contact', $target);
+
+    return add_query_arg('contact', $status, $target);
+}
+
+function wswa_contact_clean_url(): string
+{
+    return remove_query_arg('contact', wswa_page_url('contact'));
+}
+
+function wswa_contact_submission_failed(string $status): void
+{
+    wp_safe_redirect(wswa_contact_status_url($status));
+    exit;
+}
+
+function wswa_contact_submission_complete(bool $sent): void
+{
+    wp_safe_redirect(add_query_arg('contact', $sent ? 'sent' : 'error', wswa_contact_clean_url()));
+    exit;
+}
+
+function wswa_handle_contact_form(): void
+{
+    if (! isset($_POST['wswa_contact_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wswa_contact_nonce'])), 'wswa_contact')) {
+        wswa_contact_submission_failed('invalid');
+    }
+
+    $name = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
+    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
+    $phone = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
+    $service = sanitize_text_field(wp_unslash($_POST['service'] ?? ''));
+    $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
+    $honeypot = sanitize_text_field(wp_unslash($_POST['company_website'] ?? ''));
+    $turnstile_token = isset($_POST['cf-turnstile-response'])
+        ? sanitize_text_field(wp_unslash($_POST['cf-turnstile-response']))
+        : '';
+
+    if (! $name || ! is_email($email) || ! $message) {
+        wswa_contact_submission_failed('missing');
+    }
+
+    if ($honeypot !== '') {
+        wswa_log_turnstile_debug('Honeypot triggered.');
+        wswa_contact_submission_failed('spam_failed');
+    }
+
+    if (wswa_is_turnstile_configured() && ! wswa_verify_turnstile_token($turnstile_token)) {
+        wswa_contact_submission_failed('spam_failed');
+    }
+
+    $body = "Name: {$name}\nEmail: {$email}\nPhone: {$phone}\nService: {$service}\n\nMessage:\n{$message}";
+    $sent = wp_mail(
+        wswa_get_field('contact_email'),
+        sprintf('Website enquiry from %s', $name),
+        $body,
+        ['Reply-To: ' . $name . ' <' . $email . '>']
+    );
+
+    wswa_contact_submission_complete($sent);
 }
 
 function wswa_preferred_public_origin(): string
@@ -652,51 +750,6 @@ add_action('init', function () {
     wswa_ensure_core_pages();
     update_option('wswa_core_pages_ready', WSWA_VERSION);
 }, 5);
-
-function wswa_handle_contact_form(): void
-{
-    if (! isset($_POST['wswa_contact_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['wswa_contact_nonce'])), 'wswa_contact')) {
-        wp_safe_redirect(add_query_arg('contact', 'invalid', wp_get_referer() ?: wswa_page_url('contact')));
-        exit;
-    }
-
-    $name = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
-    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
-    $phone = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
-    $service = sanitize_text_field(wp_unslash($_POST['service'] ?? ''));
-    $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
-    $honeypot = sanitize_text_field(wp_unslash($_POST['company_website'] ?? ''));
-
-    if (! $name || ! is_email($email) || ! $message) {
-        wp_safe_redirect(add_query_arg('contact', 'missing', wp_get_referer() ?: wswa_page_url('contact')));
-        exit;
-    }
-
-    if ($honeypot !== '') {
-        wp_safe_redirect(add_query_arg('contact', 'spam_failed', wp_get_referer() ?: wswa_page_url('contact')));
-        exit;
-    }
-
-    if (wswa_is_turnstile_configured()) {
-        $turnstile_token = $_POST['cf-turnstile-response'] ?? '';
-
-        if (! wswa_verify_turnstile_token($turnstile_token)) {
-            wp_safe_redirect(add_query_arg('contact', 'spam_failed', wp_get_referer() ?: wswa_page_url('contact')));
-            exit;
-        }
-    }
-
-    $body = "Name: {$name}\nEmail: {$email}\nPhone: {$phone}\nService: {$service}\n\nMessage:\n{$message}";
-    $sent = wp_mail(
-        wswa_get_field('contact_email'),
-        sprintf('Website enquiry from %s', $name),
-        $body,
-        ['Reply-To: ' . $name . ' <' . $email . '>']
-    );
-
-    wp_safe_redirect(add_query_arg('contact', $sent ? 'sent' : 'error', wswa_page_url('contact')));
-    exit;
-}
 
 add_action('admin_post_wswa_contact', 'wswa_handle_contact_form');
 add_action('admin_post_nopriv_wswa_contact', 'wswa_handle_contact_form');
