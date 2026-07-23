@@ -314,6 +314,7 @@ function wswa_default_clients(): array
             'image_alt' => 'Origin Facility Services website preview',
             'summary' => 'Website design and build for a Perth commercial cleaning business with a clear, service-led layout.',
             'featured' => true,
+            'uses_snapshot' => true,
         ],
     ];
 }
