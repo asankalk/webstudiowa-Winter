@@ -128,9 +128,10 @@ $featured_clients = wswa_clients([
         <div class="client-track">
             <?php for ($i = 0; $i < 2; $i++) : ?>
                 <?php foreach ($featured_clients as $client) : ?>
+                    <?php $client_slug = sanitize_title($client['name'] ?? ''); ?>
                     <a class="client-snapshot" href="<?php echo esc_url($client['url']); ?>" target="_blank" rel="noopener">
                         <div class="client-snapshot__media">
-                            <img class="<?php echo ! empty($client['uses_snapshot']) ? 'is-website-preview' : ''; ?>" src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['image_alt'] ?? $client['name']); ?>" width="520" height="390" loading="lazy" decoding="async">
+                            <img class="<?php echo esc_attr(trim((! empty($client['uses_snapshot']) ? 'is-website-preview ' : '') . 'client-preview--' . $client_slug)); ?>" src="<?php echo esc_url($client['image']); ?>" alt="<?php echo esc_attr($client['image_alt'] ?? $client['name']); ?>" width="520" height="390" loading="lazy" decoding="async">
                         </div>
                         <div class="client-snapshot__body">
                             <span><?php echo esc_html($client['type']); ?></span>
