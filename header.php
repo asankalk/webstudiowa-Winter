@@ -30,7 +30,7 @@
                 'container'      => false,
                 'menu_class'     => 'menu',
                 'fallback_cb'    => 'wswa_fallback_menu',
-                'depth'          => 2,
+                'depth'          => 3,
             ]);
             ?>
         </nav>

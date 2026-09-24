@@ -30,3 +30,15 @@ The Winter theme provides two WordPress menu locations:
 3. Assign it to **Footer Menu** and save.
 
 Until a menu is assigned, the theme preserves the existing built-in header and footer links as a safe fallback.
+
+## 3-Level Menu Support
+
+The Primary Menu supports three levels. For example:
+
+- WordPress Plugins
+  - SocialFeed
+    - Terms
+    - Privacy
+    - Support
+
+In **Appearance → Menus**, add **SocialFeed** as a child of **WordPress Plugins**. Then drag **Terms**, **Privacy**, and **Support** slightly farther to the right beneath **SocialFeed**. Assign the menu to **Primary Menu** and save it. On desktop, the third level opens as a flyout; on mobile, it appears as an indented list.
