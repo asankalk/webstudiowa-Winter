@@ -16,12 +16,15 @@
         </div>
         <div>
             <h2><?php esc_html_e('Company', 'winter'); ?></h2>
-            <ul class="footer-links">
-                <li><a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'winter'); ?></a></li>
-                <li><a href="<?php echo esc_url(wswa_page_url('about-us')); ?>"><?php esc_html_e('About us', 'winter'); ?></a></li>
-                <li><a href="<?php echo esc_url(wswa_page_url('our-clients')); ?>"><?php esc_html_e('Our clients', 'winter'); ?></a></li>
-                <li><a href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Contact us', 'winter'); ?></a></li>
-            </ul>
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'footer',
+                'container'      => false,
+                'menu_class'     => 'menu footer-menu',
+                'fallback_cb'    => 'wswa_fallback_footer_menu',
+                'depth'          => 2,
+            ]);
+            ?>
         </div>
         <div>
             <h2><?php esc_html_e('Services', 'winter'); ?></h2>

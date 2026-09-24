@@ -86,6 +86,16 @@ function wswa_fallback_menu(): void
     echo '</ul>';
 }
 
+function wswa_fallback_footer_menu(): void
+{
+    echo '<ul class="menu footer-menu">';
+    printf('<li><a href="%s">%s</a></li>', esc_url(home_url('/')), esc_html__('Home', 'winter'));
+    printf('<li><a href="%s">%s</a></li>', esc_url(wswa_page_url('about-us')), esc_html__('About us', 'winter'));
+    printf('<li><a href="%s">%s</a></li>', esc_url(wswa_page_url('our-clients')), esc_html__('Our clients', 'winter'));
+    printf('<li><a href="%s">%s</a></li>', esc_url(wswa_page_url('contact')), esc_html__('Contact us', 'winter'));
+    echo '</ul>';
+}
+
 function wswa_page_url(string $slug, string $anchor = ''): string
 {
     $page = get_page_by_path($slug);

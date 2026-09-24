@@ -14,6 +14,7 @@ Contact form is hard-coded and protected with Cloudflare Turnstile, nonce, and h
 - Current branch at scan time: `main`
 - Live site: `https://webstudiowa.com.au`
 - Live theme path: `/home/webstud5/public_html/wp-content/themes/winter/`
+- Theme navigation supports WordPress-managed `Primary Menu` and `Footer Menu` locations.
 
 ## Theme Folder Structure
 

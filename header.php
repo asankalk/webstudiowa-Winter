@@ -24,7 +24,15 @@
             <span class="screen-reader-text"><?php esc_html_e('Menu', 'winter'); ?></span>
         </button>
         <nav class="primary-nav" id="primary-menu" data-primary-nav aria-label="<?php esc_attr_e('Primary navigation', 'winter'); ?>">
-            <?php wswa_fallback_menu(); ?>
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'primary',
+                'container'      => false,
+                'menu_class'     => 'menu',
+                'fallback_cb'    => 'wswa_fallback_menu',
+                'depth'          => 2,
+            ]);
+            ?>
         </nav>
         <?php if (! is_page('contact')) : ?>
             <a class="header__cta" href="<?php echo esc_url(wswa_page_url('contact')); ?>"><?php esc_html_e('Get a quote', 'winter'); ?></a>
