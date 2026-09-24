@@ -15,6 +15,7 @@ Contact form is hard-coded and protected with Cloudflare Turnstile, nonce, and h
 - Live site: `https://webstudiowa.com.au`
 - Live theme path: `/home/webstud5/public_html/wp-content/themes/winter/`
 - Theme navigation supports WordPress-managed `Primary Menu` and `Footer Menu` locations; Primary Menu supports up to three levels.
+- SocialFeed has a dedicated landing-page template at `/plugins/socialfeed/` (`page-socialfeed.php`) and uses `assets/img/socialfeed-logo.svg`.
 
 ## Theme Folder Structure
 

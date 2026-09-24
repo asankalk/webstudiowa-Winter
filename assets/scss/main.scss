@@ -1136,6 +1136,158 @@ a.button--ghost:visited {
   }
 }
 
+// SocialFeed plugin landing page.
+.socialfeed-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(72px, 10vw, 128px) 0;
+  color: rgba(255, 255, 255, 0.82);
+  background: radial-gradient(circle at 78% 18%, rgba(30, 144, 255, 0.42), transparent 30%), linear-gradient(135deg, #07111f, #073f8f 68%, #7a45a8 130%);
+}
+
+.socialfeed-hero__grid,
+.socialfeed-process__grid,
+.socialfeed-built__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.88fr);
+  gap: clamp(32px, 7vw, 88px);
+  align-items: center;
+}
+
+.socialfeed-hero .eyebrow,
+.socialfeed-process .eyebrow,
+.socialfeed-built .eyebrow,
+.socialfeed-status .eyebrow,
+.socialfeed-cta .eyebrow {
+  color: var(--color-lime);
+}
+
+.socialfeed-logo {
+  width: min(330px, 100%);
+  height: auto;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  background: var(--color-white);
+}
+
+.socialfeed-hero h1,
+.socialfeed-hero h2,
+.socialfeed-process h2,
+.socialfeed-built h2,
+.socialfeed-status h2,
+.socialfeed-cta h2 {
+  color: var(--color-white);
+}
+
+.socialfeed-hero h1 {
+  max-width: 10ch;
+}
+
+.socialfeed-hero__copy > p:not(.eyebrow) {
+  max-width: 590px;
+  font-size: clamp(1.12rem, 2vw, 1.28rem);
+}
+
+.socialfeed-hero .button--ghost {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: transparent;
+}
+
+.socialfeed-preview {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+}
+
+.socialfeed-preview__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  color: #ffffff;
+  background: #10203a;
+
+  span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.48); }
+  strong { margin-left: 8px; font-size: 0.82rem; }
+}
+
+.socialfeed-preview__body { display: grid; grid-template-columns: 128px 1fr; min-height: 300px; }
+.socialfeed-preview__body aside { display: grid; align-content: start; gap: 18px; padding: 24px 16px; color: #63718a; font-size: 0.74rem; background: #f2f6fb; }
+.socialfeed-preview__body aside b { color: #0b5fc7; }
+.socialfeed-preview__content { padding: 26px; color: #172033; }
+.socialfeed-preview__content > p { margin-bottom: 18px; font-size: 0.8rem; font-weight: 800; }
+.socialfeed-preview__profile { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #dce8f5; border-radius: 10px; }
+.socialfeed-preview__profile i { width: 28px; height: 28px; border-radius: 9px; background: linear-gradient(135deg, #d9005b, #f79400); }
+.socialfeed-preview__profile span { display: grid; gap: 2px; font-size: 0.72rem; }
+.socialfeed-preview__profile small { color: #6d7482; }
+.socialfeed-preview__profile em { padding: 3px 7px; margin-left: auto; color: #0b5fc7; font-size: 0.65rem; font-style: normal; font-weight: 800; border-radius: 99px; background: #e8f4ff; }
+.socialfeed-preview__tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+.socialfeed-preview__tiles i { aspect-ratio: 1; border-radius: 7px; background: linear-gradient(135deg, #dceeff, #f4eafb); }
+.socialfeed-preview__tiles i:nth-child(2n) { background: linear-gradient(135deg, #e8f6e9, #dceeff); }
+
+.socialfeed-heading { max-width: 760px; }
+.socialfeed-feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.socialfeed-feature { min-height: 150px; padding: 24px; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-white); box-shadow: 0 12px 32px rgba(16, 24, 47, 0.05); }
+.socialfeed-feature span { color: var(--color-primary); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.08em; }
+.socialfeed-feature h3 { margin-top: 24px; font-size: 1.08rem; }
+
+.socialfeed-interface { background: linear-gradient(180deg, #f5faff, #ffffff); }
+.socialfeed-shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.socialfeed-shot { padding: 16px; border: 1px solid var(--color-line); border-radius: 14px; background: var(--color-white); box-shadow: 0 16px 38px rgba(16, 24, 47, 0.07); }
+.socialfeed-shot__ui { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 16px; min-height: 190px; border-radius: 10px; background: #f3f7fc; }
+.socialfeed-shot__ui span { height: 5px; border-radius: 99px; background: #8fb4ff; }
+.socialfeed-shot__ui span:first-child { grid-column: 1 / -1; width: 42%; background: #0b5fc7; }
+.socialfeed-shot__ui i { grid-column: span 1; min-height: 64px; border: 1px solid #dce8f5; border-radius: 7px; background: #ffffff; }
+.socialfeed-shot__ui i:last-child { grid-column: 1 / -1; min-height: 24px; background: linear-gradient(90deg, #dceeff, #f3eafa); }
+.socialfeed-shot h3 { margin-top: 20px; font-size: 1.08rem; }
+.socialfeed-shot p { margin-top: 8px; font-size: 0.92rem; }
+.socialfeed-shot small { display: block; margin-top: 16px; color: var(--color-muted); font-weight: 700; }
+
+.socialfeed-process { color: rgba(255, 255, 255, 0.78); background: linear-gradient(135deg, #10203a, #073f8f); }
+.socialfeed-steps { display: grid; gap: 16px; padding: 0; margin: 0; list-style: none; }
+.socialfeed-steps li { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+.socialfeed-steps span { display: grid; place-items: center; width: 36px; height: 36px; color: #10203a; font-weight: 900; border-radius: 50%; background: var(--color-lime); }
+.socialfeed-steps h3 { color: var(--color-white); font-size: 1.04rem; }
+.socialfeed-steps p { margin-top: 4px; font-size: 0.94rem; }
+
+.socialfeed-built__grid { align-items: start; }
+.socialfeed-built ul { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.socialfeed-built li { position: relative; padding: 16px 18px 16px 44px; border: 1px solid var(--color-line); border-radius: var(--radius); font-weight: 700; background: var(--color-white); }
+.socialfeed-built li::before { position: absolute; top: 22px; left: 19px; width: 10px; height: 10px; border-radius: 50%; background: var(--color-primary); content: ""; }
+
+.socialfeed-status { padding-top: 0; }
+.socialfeed-status__card { padding: clamp(30px, 5vw, 58px); border-radius: 18px; color: rgba(255, 255, 255, 0.8); background: linear-gradient(135deg, #1f2020, #073f8f); box-shadow: var(--shadow-strong); }
+.socialfeed-status__card > p:not(.eyebrow):not(.socialfeed-status__links) { max-width: 760px; margin-top: 18px; font-size: 1.06rem; }
+.socialfeed-status__links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 28px; }
+.socialfeed-status__links a { color: var(--color-white); font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+
+.socialfeed-faq { background: var(--color-surface); }
+.socialfeed-faq__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.socialfeed-faq__grid article { padding: 24px; border: 1px solid var(--color-line); border-radius: var(--radius); background: var(--color-white); }
+.socialfeed-faq__grid h3 { font-size: 1.05rem; }
+.socialfeed-faq__grid p { margin-top: 10px; }
+
+.socialfeed-cta { padding: clamp(72px, 10vw, 112px) 0; text-align: center; color: rgba(255, 255, 255, 0.82); background: linear-gradient(135deg, #073f8f, #d9005b 180%); }
+.socialfeed-cta h2 { margin-inline: auto; }
+.socialfeed-cta > .container > p:not(.eyebrow) { max-width: 600px; margin: 18px auto 28px; }
+
+@media (max-width: 980px) {
+  .socialfeed-hero__grid, .socialfeed-process__grid, .socialfeed-built__grid { grid-template-columns: 1fr; }
+  .socialfeed-feature-grid, .socialfeed-shot-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .socialfeed-hero { padding: 60px 0; }
+  .socialfeed-preview__body { grid-template-columns: 100px 1fr; }
+  .socialfeed-preview__body aside { padding: 18px 12px; gap: 14px; font-size: 0.67rem; }
+  .socialfeed-preview__content { padding: 18px; }
+  .socialfeed-preview__profile em { display: none; }
+  .socialfeed-feature-grid, .socialfeed-shot-grid, .socialfeed-faq__grid { grid-template-columns: 1fr; }
+}
+
 .text-link {
   display: inline-flex;
   margin-top: 18px;
