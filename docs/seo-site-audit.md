@@ -71,7 +71,17 @@ Use genuine local details only: relevant project locations, service-area proof, 
 4. Review query/page patterns monthly to identify content opportunities; do not react to short-term fluctuations.
 5. In Google Business Profile, keep name, phone, website URL, hours and service details consistent with the site.
 
-## Immediate fixes completed in this task
+## SEO improvement pass completed
+
+- Improved the Resources hub introduction for Perth and Western Australia business owners, WordPress administrators and small teams.
+- Kept all twelve guide cards linked to their published child-page URLs and strengthened the shared article template with category-appropriate product/service links, related guides and a support CTA.
+- Added contextual homepage routes to Website Design, Website Maintenance, Plugins and Resources without displacing the main conversion action.
+- Added service-specific next steps for Website Design, Website Redesign, Website Maintenance and Web Hosting.
+- Strengthened Plugins, Admin Watch and SocialFeed pathways to Resources, maintenance and Contact while retaining cautious plugin claims.
+- Added fallback metadata for SocialFeed and recognised Resource child pages. The Rank Math guard remains in place, so the theme does not output competing description, canonical, Open Graph or schema markup when Rank Math is active.
+- No new JSON-LD was added. Existing homepage LocalBusiness/ProfessionalService schema remains the only theme schema output, avoiding duplicate plugin/article schema.
+
+## Immediate fixes completed in the preceding theme work
 
 - Replaced the awkward Admin Watch wordmark card with a compact official icon badge.
 - Preserved local people-and-dashboard artwork and populated product interface visuals.
@@ -80,9 +90,9 @@ Use genuine local details only: relevant project locations, service-area proof, 
 - Confirmed the plugin grid caps at three columns and the responsive/mobile menu behaviour is preserved.
 - Confirmed Resource cards use real article URLs and the article layout provides headings, checklists, related links and CTAs.
 
-## Next recommended improvements
+## Remaining live-tool and manual work
 
-- Run the resource-page creation script on production and submit the resulting URLs for inspection.
+- Save WordPress permalinks, confirm all twelve created Resources URLs resolve, and inspect them in Search Console.
 - Review live metadata output with and without Rank Math active to ensure one title, description and canonical per page.
 - Add real screenshots for Admin Watch and SocialFeed when available.
 - Add a small number of genuine client outcome stories with clear consent.
@@ -105,8 +115,10 @@ The resource creator is ready but must be run on production before the twelve li
 
 ## 30-day and 90-day action plan
 
-**First 30 days:** create Resource pages, save permalinks, inspect priority URLs, submit the sitemap, and confirm one canonical/title/description per tested page.
+**First 30 days:** save permalinks, inspect priority URLs and all published guides, submit the sitemap, and confirm one canonical/title/description per tested page.
 
 **Within 90 days:** publish the guide clusters, add approved project evidence, review Search Console trends monthly, and improve pages based on verified query and conversion signals.
 
 See docs/google-search-console-checklist.md and docs/google-business-profile-checklist.md for the live-tool and manual-business work.
+
+See `docs/seo-content-plan.md` for the content clusters, publishing order and internal-linking targets.

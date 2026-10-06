@@ -426,6 +426,11 @@ function wswa_seo_payload(): array
             'description' => 'Admin Watch Central helps WordPress site owners review website-changing users, login visibility, active sessions and 404 activity from a privacy-conscious dashboard.',
             'keywords' => ['Admin Watch Central', 'WordPress admin visibility', 'WordPress 404 monitor', 'WordPress session visibility'],
         ],
+        'socialfeed' => [
+            'title' => 'SocialFeed for WordPress | Social Media Feed Plugin | Web Studio WA',
+            'description' => 'SocialFeed is a Web Studio WA WordPress plugin in development for displaying selected Instagram and Facebook content with a client-friendly connection flow.',
+            'keywords' => ['SocialFeed', 'WordPress social feed plugin', 'Instagram feed', 'Facebook feed'],
+        ],
         'resources' => [
             'title' => 'WordPress Resources for Safer, Smarter Websites | Web Studio WA',
             'description' => 'Practical WordPress guides for business owners covering website security, maintenance, accessibility, social feeds and plugin workflows.',
@@ -441,6 +446,17 @@ function wswa_seo_payload(): array
         $slug = (string) get_post_field('post_name', get_queried_object_id());
         if (isset($pages[$slug])) {
             return $pages[$slug];
+        }
+
+        if (function_exists('wswa_get_resource_article_by_slug')) {
+            $article = wswa_get_resource_article_by_slug($slug);
+            if ($article) {
+                return [
+                    'title' => $article['title'] . ' | Web Studio WA Resources',
+                    'description' => $article['excerpt'],
+                    'keywords' => array_merge($base_keywords, [$article['category']]),
+                ];
+            }
         }
     }
 
@@ -593,7 +609,7 @@ function wswa_sitelink_pages(): array
 }
 
 add_action('wp_head', function () {
-    if (! is_front_page()) {
+    if (! is_front_page() || wswa_rank_math_active()) {
         return;
     }
 

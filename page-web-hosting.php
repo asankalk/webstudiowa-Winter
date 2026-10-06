@@ -16,15 +16,18 @@ get_header();
 
             <h1><?php echo esc_html(wswa_get_field('hosting_title')); ?></h1>
             <p><?php echo esc_html(wswa_get_field('hosting_text')); ?></p>
-            <p><?php esc_html_e('iWebNode is our dedicated hosting platform for Web Studio WA clients, providing the web hosting store and client portal used for these packages.', 'winter'); ?></p>
+            <p><?php esc_html_e('iWebNode is our dedicated hosting platform for Web Studio WA clients, providing the web hosting store and client portal used for these packages. Perth and WA businesses can also ask Web Studio WA for practical WordPress hosting support.', 'winter'); ?></p>
             <div class="hero__actions">
                 <a class="button button--primary" href="#packages"><?php esc_html_e('View packages', 'winter'); ?></a>
                 <a class="button button--primary" href="https://iwebnode.com/" target="_blank" rel="noopener"><?php esc_html_e('Visit iWebNode', 'winter'); ?></a>
+                <a class="button button--ghost" href="<?php echo esc_url(home_url('/contact/')); ?>"><?php esc_html_e('Ask about hosting support', 'winter'); ?></a>
             </div>
         </div>
         <img src="<?php echo esc_url(wswa_asset('img/iwebnode-hosting-section.webp')); ?>" alt="<?php esc_attr_e('Website hosting and growth visual', 'winter'); ?>" width="1200" height="900" decoding="async" fetchpriority="high">
     </div>
 </section>
+
+<section class="section service-resources"><div class="container section__heading"><p class="eyebrow"><?php esc_html_e('Ongoing website care', 'winter'); ?></p><h2><?php esc_html_e('Hosting works best alongside practical maintenance', 'winter'); ?></h2><p><?php esc_html_e('Keep your WordPress website current with a clear plan for updates, backups and support when something needs attention.', 'winter'); ?></p><div class="section__actions section__actions--left"><a class="button button--primary" href="<?php echo esc_url(home_url('/website-maintenance/')); ?>"><?php esc_html_e('Explore website maintenance', 'winter'); ?></a><a class="button button--ghost" href="<?php echo esc_url(home_url('/contact/')); ?>"><?php esc_html_e('Contact Web Studio WA', 'winter'); ?></a></div></div></section>
 
 <section class="section hosting hosting--page" id="packages">
     <div class="container section__heading">

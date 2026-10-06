@@ -51,6 +51,20 @@ $featured_clients = wswa_clients([
     </div>
 </section>
 
+<section class="section home-pathways">
+    <div class="container section__heading">
+        <p class="eyebrow"><?php esc_html_e('Practical WordPress support', 'winter'); ?></p>
+        <h2><?php esc_html_e('Website support for Perth and WA businesses', 'winter'); ?></h2>
+        <p><?php esc_html_e('From a new website to ongoing WordPress maintenance, hosting support and useful plugin tools, Web Studio WA helps businesses choose a practical next step.', 'winter'); ?></p>
+        <div class="section__actions section__actions--left">
+            <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('web-design')); ?>"><?php esc_html_e('Website design', 'winter'); ?></a>
+            <a class="button button--ghost" href="<?php echo esc_url(wswa_page_url('website-maintenance')); ?>"><?php esc_html_e('Website maintenance', 'winter'); ?></a>
+            <a class="button button--ghost" href="<?php echo esc_url(home_url('/plugins/')); ?>"><?php esc_html_e('Explore plugins', 'winter'); ?></a>
+            <a class="button button--ghost" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse resources', 'winter'); ?></a>
+        </div>
+    </div>
+</section>
+
 <section class="section services" id="services">
     <div class="container section__heading">
         <p class="eyebrow"><?php esc_html_e('Services We Offer', 'winter'); ?></p>

@@ -12,7 +12,7 @@ get_header();
         <div>
             <p class="eyebrow"><?php esc_html_e('Plugin library', 'winter'); ?></p>
             <h1><?php esc_html_e('Available WordPress plugins', 'winter'); ?></h1>
-            <p><?php esc_html_e('Explore practical WordPress plugins built by Web Studio WA for admin visibility, social content display and better website workflows.', 'winter'); ?></p>
+            <p><?php esc_html_e('Explore practical WordPress plugins built from real website support needs: clearer admin visibility, social content display and better day-to-day website workflows.', 'winter'); ?></p>
         </div>
         <div class="plugins-hero__mockup" aria-label="<?php esc_attr_e('Web Studio WA plugin library preview', 'winter'); ?>">
             <div class="plugins-hero__mockup-bar"><span></span><span></span><span></span></div>
@@ -63,7 +63,7 @@ get_header();
 </section>
 
 <section class="section plugins-future">
-    <div class="container"><p><?php esc_html_e('More plugins are planned as Web Studio WA continues building tools from real client website needs.', 'winter'); ?></p></div>
+    <div class="container"><p><?php esc_html_e('More plugins are planned as Web Studio WA continues building tools from real client website needs. For practical guidance before choosing a tool, browse our WordPress resources or contact us about your website.', 'winter'); ?></p><div class="section__actions section__actions--left"><a class="button button--ghost" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse resources', 'winter'); ?></a><a class="button button--ghost" href="<?php echo esc_url(home_url('/contact/')); ?>"><?php esc_html_e('Contact Web Studio WA', 'winter'); ?></a></div></div>
 </section>
 <section class="section plugins-resources"><div class="container"><p class="eyebrow"><?php esc_html_e('Helpful guidance', 'winter'); ?></p><h2><?php esc_html_e('Explore practical WordPress resources', 'winter'); ?></h2><p><?php esc_html_e('Read plain-language guides on website access, maintenance, image accessibility and social feed connections before choosing your next step.', 'winter'); ?></p><a class="text-link" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse WordPress resources', 'winter'); ?> →</a></div></section>
 
