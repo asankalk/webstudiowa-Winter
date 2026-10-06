@@ -1492,6 +1492,13 @@ a.button--ghost:visited {
 .resource-article__aside h2 { margin-top: 12px; font-size: 1.4rem; }
 .resource-article__aside p:not(.eyebrow) { margin: 14px 0 20px; }
 .resource-article__aside .text-link { margin-top: 18px; }
+.resource-article__related { background: #fff; }
+.resource-article__related h2 { margin-top: 12px; }
+.resource-article__related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+.resource-article__related-grid a { display: grid; gap: 10px; min-height: 142px; padding: 22px; color: inherit; border: 1px solid var(--color-line); border-radius: var(--radius); background: #f8fbff; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.resource-article__related-grid a:hover, .resource-article__related-grid a:focus-visible { color: inherit; border-color: rgba(30,144,255,.48); box-shadow: var(--shadow); transform: translateY(-3px); }
+.resource-article__related-grid span { color: var(--color-primary-dark); font-size: .76rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.resource-article__related-grid strong { font-size: 1.02rem; }
 .resource-article__cta { padding: clamp(68px,9vw,106px) 0; text-align: center; color: rgba(255,255,255,.84); background: linear-gradient(135deg,#10203a,#073f8f); }
 .resource-article__cta h2 { max-width: 18ch; margin-inline: auto; color: #fff; }
 .resource-article__cta > .container > p:not(.eyebrow) { max-width: 650px; margin: 18px auto 28px; }
@@ -1502,12 +1509,14 @@ a.button--ghost:visited {
   .admin-watch-feature-grid, .admin-watch-shot-grid, .admin-watch-audience__grid { grid-template-columns: repeat(2,1fr); }
   .resources-category-grid, .planned-article-grid { grid-template-columns: repeat(2,1fr); }
   .resource-article__grid { grid-template-columns: 1fr; }
+  .resource-article__related-grid { grid-template-columns: repeat(2,1fr); }
   .resource-article__aside { position: static; }
 }
 
 @media (max-width: 640px) {
   .admin-watch-dashboard__grid, .admin-watch-feature-grid, .admin-watch-shot-grid, .admin-watch-audience__grid, .admin-watch-faq__grid, .resources-category-grid, .planned-article-grid { grid-template-columns: 1fr; }
   .resources-hero__visual { max-width: 380px; }
+  .resource-article__related-grid { grid-template-columns: 1fr; }
 }
 
 .text-link {

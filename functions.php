@@ -15,5 +15,6 @@ define('WSWA_THEME_URI', get_template_directory_uri());
 
 require_once WSWA_THEME_DIR . '/inc/setup.php';
 require_once WSWA_THEME_DIR . '/inc/helpers.php';
+require_once WSWA_THEME_DIR . '/inc/resource-articles.php';
 require_once WSWA_THEME_DIR . '/inc/acf.php';
 require_once WSWA_THEME_DIR . '/inc/updater.php';

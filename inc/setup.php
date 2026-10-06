@@ -42,7 +42,7 @@ add_filter('template_include', function (string $template): string {
     }
 
     $parent = get_post($page->post_parent);
-    if (! $parent || $parent->post_name !== 'resources' || ! function_exists('wswa_resource_article') || ! wswa_resource_article($page->post_name)) {
+    if (! $parent || $parent->post_name !== 'resources' || ! function_exists('wswa_get_resource_article_by_slug') || ! wswa_get_resource_article_by_slug($page->post_name)) {
         return $template;
     }
 

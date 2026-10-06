@@ -4,9 +4,9 @@
 
 ## Article template
 
-`page-resource-article.php` is a shared layout. `inc/helpers.php` holds the starter copy, checklists and internal CTAs. `inc/setup.php` automatically selects that layout for a recognised child page of Resources; no template needs to be chosen in the editor.
+`page-resource-article.php` is a shared layout. `inc/resource-articles.php` exposes the starter content, excerpts, sections, checklists, related guides and internal CTAs. `inc/setup.php` automatically selects that layout for a recognised child page of Resources; no template needs to be chosen in the editor.
 
-Create these child pages under **Pages → Resources** in WordPress Admin, using the matching title and slug, then publish them:
+Use the safe page creator described in [create-resource-pages.md](create-resource-pages.md) to create these child pages. It skips existing pages without changing them:
 
 - `/resources/how-to-check-who-can-edit-your-wordpress-website/`
 - `/resources/why-wordpress-admin-access-should-be-reviewed-regularly/`
@@ -22,6 +22,13 @@ Create these child pages under **Pages → Resources** in WordPress Admin, using
 - `/resources/meta-app-review-explained-for-wordpress-website-owners/`
 
 The category strategy is WordPress Security, WordPress Maintenance, WordPress Plugins, SEO & Accessibility, Social Media Feeds and Website Care. Each guide links to an appropriate Admin Watch, SocialFeed, Plugins, maintenance or contact next step.
+
+Run on GreenGeeks/cPanel Terminal:
+
+    cd /home/webstud5/public_html
+    php wp-content/themes/winter/tools/create-resource-pages.php
+
+Then go to **WordPress Admin → Settings → Permalinks → Save Changes**.
 
 ## Menu suggestion
 

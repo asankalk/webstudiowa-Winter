@@ -1,6 +1,6 @@
 <?php
 /** Resources hub template. @package WebStudioWA */
-$articles = wswa_resource_articles();
+$articles = wswa_get_resource_articles();
 get_header();
 ?>
 <section class="resources-hero"><div class="container resources-hero__grid"><div>
@@ -15,9 +15,9 @@ get_header();
 <article class="resource-card"><h3><?php echo esc_html($title); ?></h3><p><?php echo esc_html($text); ?></p></article>
 <?php endforeach; ?></div></section>
 
-<section class="section resources-articles" id="resource-articles"><div class="container section__heading"><p class="eyebrow"><?php esc_html_e('Featured guides', 'winter'); ?></p><h2><?php esc_html_e('Featured guides and upcoming resources', 'winter'); ?></h2></div><div class="container planned-article-grid">
+<section class="section resources-articles" id="resource-articles"><div class="container section__heading"><p class="eyebrow"><?php esc_html_e('Featured guides', 'winter'); ?></p><h2><?php esc_html_e('Featured WordPress guides', 'winter'); ?></h2><p><?php esc_html_e('Practical guides for WordPress security, maintenance, accessibility, social feeds and plugin workflows.', 'winter'); ?></p></div><div class="container planned-article-grid">
 <?php foreach ($articles as $slug => $article) : ?>
-<a class="planned-article-card" href="<?php echo esc_url(home_url('/resources/' . $slug . '/')); ?>"><span><?php echo esc_html($article['category']); ?></span><h3><?php echo esc_html($article['title']); ?></h3><p><?php echo esc_html($article['summary']); ?></p><strong><?php esc_html_e('Read guide', 'winter'); ?> <b aria-hidden="true">→</b></strong></a>
+<a class="planned-article-card" href="<?php echo esc_url(home_url('/resources/' . $slug . '/')); ?>"><span><?php echo esc_html($article['category']); ?></span><h3><?php echo esc_html($article['title']); ?></h3><p><?php echo esc_html($article['excerpt']); ?></p><strong><?php esc_html_e('Read guide', 'winter'); ?> <b aria-hidden="true">→</b></strong></a>
 <?php endforeach; ?></div></section>
 
 <section class="resources-plugin-cta"><div class="container"><p class="eyebrow"><?php esc_html_e('Web Studio WA plugins', 'winter'); ?></p><h2><?php esc_html_e('Explore Web Studio WA plugins', 'winter'); ?></h2><p><?php esc_html_e('Our plugins are built from real website support needs, with a focus on practical admin workflows, clean display and ongoing maintenance.', 'winter'); ?></p><a class="button button--primary" href="<?php echo esc_url(home_url('/plugins/')); ?>"><?php esc_html_e('View WordPress plugins', 'winter'); ?></a></div></section>

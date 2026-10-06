@@ -1,11 +1,13 @@
 <?php
 /**
+ * Template Name: Resource Article
+ *
  * Shared template for Resources child pages.
  *
  * @package WebStudioWA
  */
 
-$article = wswa_resource_article((string) get_post_field('post_name', get_queried_object_id()));
+$article = wswa_get_resource_article_by_slug((string) get_post_field('post_name', get_queried_object_id()));
 
 if (! $article) {
     get_template_part('page');
@@ -23,8 +25,10 @@ get_header();
     </div></header>
 
     <section class="section resource-article__content"><div class="container resource-article__grid"><div>
-        <h2><?php esc_html_e('What to consider', 'winter'); ?></h2>
-        <?php foreach ($article['points'] as $point) : ?><p><?php echo esc_html($point); ?></p><?php endforeach; ?>
+        <?php foreach ($article['sections'] as $section) : ?>
+            <h2><?php echo esc_html($section['heading']); ?></h2>
+            <?php foreach ($section['paragraphs'] as $paragraph) : ?><p><?php echo esc_html($paragraph); ?></p><?php endforeach; ?>
+        <?php endforeach; ?>
         <h2><?php esc_html_e('A practical checklist', 'winter'); ?></h2>
         <ul><?php foreach ($article['checklist'] as $item) : ?><li><?php echo esc_html($item); ?></li><?php endforeach; ?></ul>
         <h2><?php esc_html_e('Keep the next step simple', 'winter'); ?></h2>
@@ -35,6 +39,18 @@ get_header();
         <a class="button button--primary" href="<?php echo esc_url(home_url($article['cta_url'])); ?>"><?php echo esc_html($article['cta_label']); ?></a>
         <a class="text-link" href="<?php echo esc_url(home_url($article['secondary_url'])); ?>"><?php echo esc_html($article['secondary_label']); ?> →</a>
     </aside></div></section>
+
+    <?php if (! empty($article['related_slugs'])) : ?>
+        <section class="section resource-article__related"><div class="container">
+            <p class="eyebrow"><?php esc_html_e('Keep reading', 'winter'); ?></p>
+            <h2><?php esc_html_e('Related WordPress guides', 'winter'); ?></h2>
+            <div class="resource-article__related-grid">
+                <?php foreach (array_slice($article['related_slugs'], 0, 3) as $related_slug) : $related = wswa_get_resource_article_by_slug($related_slug); if (! $related) { continue; } ?>
+                    <a href="<?php echo esc_url(home_url('/resources/' . $related_slug . '/')); ?>"><span><?php echo esc_html($related['category']); ?></span><strong><?php echo esc_html($related['title']); ?> →</strong></a>
+                <?php endforeach; ?>
+            </div>
+        </div></section>
+    <?php endif; ?>
 
     <section class="resource-article__cta"><div class="container"><p class="eyebrow"><?php esc_html_e('Web Studio WA resources', 'winter'); ?></p><h2><?php esc_html_e('Practical guidance for better website decisions', 'winter'); ?></h2><p><?php esc_html_e('Browse more WordPress guides, explore our plugins, or speak with Web Studio WA about ongoing website care.', 'winter'); ?></p><div class="hero__actions"><a class="button button--primary" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse resources', 'winter'); ?></a><a class="button button--ghost" href="<?php echo esc_url(home_url('/plugins/')); ?>"><?php esc_html_e('View plugins', 'winter'); ?></a></div></div></section>
 </article>
