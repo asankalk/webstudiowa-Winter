@@ -12,11 +12,11 @@ get_header();
         <div>
             <p class="eyebrow"><?php esc_html_e('Web Studio WA Plugins', 'winter'); ?></p>
             <h1><?php esc_html_e('WordPress plugins built for practical websites', 'winter'); ?></h1>
-            <p><?php esc_html_e('Explore Web Studio WA plugins designed to help business websites connect services, display content and support better day-to-day website management.', 'winter'); ?></p>
+            <p><?php esc_html_e('Explore Web Studio WA plugins designed to help business websites improve admin visibility, display content and support better day-to-day website management.', 'winter'); ?></p>
         </div>
         <div class="plugins-hero__mockup" aria-label="<?php esc_attr_e('Web Studio WA plugin library preview', 'winter'); ?>">
             <div class="plugins-hero__mockup-bar"><span></span><span></span><span></span></div>
-            <div class="plugins-hero__mockup-card"><i></i><div><strong><?php esc_html_e('SocialFeed', 'winter'); ?></strong><small><?php esc_html_e('Social media feeds', 'winter'); ?></small></div><em><?php esc_html_e('Plugin', 'winter'); ?></em></div>
+            <div class="plugins-hero__mockup-card"><i></i><div><strong><?php esc_html_e('Admin Watch Central', 'winter'); ?></strong><small><?php esc_html_e('WordPress admin visibility', 'winter'); ?></small></div><em><?php esc_html_e('Plugin', 'winter'); ?></em></div>
             <div class="plugins-hero__mockup-lines"><i></i><i></i><i></i></div>
         </div>
     </div>
@@ -28,6 +28,19 @@ get_header();
         <h2><?php esc_html_e('Available plugins', 'winter'); ?></h2>
     </div>
     <div class="container plugins-listing__grid">
+        <article class="plugin-card">
+            <div class="plugin-card__visual plugin-card__visual--admin-watch">
+                <img src="<?php echo esc_url(wswa_asset('img/admin-watch-logo.svg')); ?>" alt="<?php esc_attr_e('Admin Watch Central', 'winter'); ?>" width="330" height="82">
+                <div class="plugin-card__watch"><i><?php esc_html_e('Access', 'winter'); ?></i><i><?php esc_html_e('Sessions', 'winter'); ?></i><i><?php esc_html_e('404s', 'winter'); ?></i><i><?php esc_html_e('Privacy', 'winter'); ?></i></div>
+            </div>
+            <div class="plugin-card__content">
+                <div class="plugin-card__meta"><span><?php esc_html_e('WordPress admin visibility', 'winter'); ?></span><b class="plugin-card__status--available"><?php esc_html_e('Available on WordPress.org', 'winter'); ?></b></div>
+                <h2><?php esc_html_e('Admin Watch Central', 'winter'); ?></h2>
+                <p><?php esc_html_e('Review website-changing users, login visibility, active sessions and 404 activity from a privacy-conscious WordPress admin dashboard.', 'winter'); ?></p>
+                <ul><li><?php esc_html_e('User access visibility', 'winter'); ?></li><li><?php esc_html_e('Login and password change visibility', 'winter'); ?></li><li><?php esc_html_e('Active sessions overview', 'winter'); ?></li><li><?php esc_html_e('404 monitoring', 'winter'); ?></li></ul>
+                <a class="button button--primary" href="<?php echo esc_url(home_url('/plugins/admin-watch/')); ?>"><?php esc_html_e('View Admin Watch', 'winter'); ?></a>
+            </div>
+        </article>
         <article class="plugin-card">
             <div class="plugin-card__visual">
                 <img src="<?php echo esc_url(wswa_asset('img/socialfeed-logo.svg')); ?>" alt="<?php esc_attr_e('SocialFeed', 'winter'); ?>" width="330" height="82">

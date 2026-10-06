@@ -36,9 +36,10 @@ Until a menu is assigned, the theme preserves the existing built-in header and f
 The Primary Menu supports three levels. For example:
 
 - WordPress Plugins
+  - Admin Watch
   - SocialFeed
     - Terms
     - Privacy
     - Support
 
-In **Appearance → Menus**, add **SocialFeed** as a child of **WordPress Plugins**. Then drag **Terms**, **Privacy**, and **Support** slightly farther to the right beneath **SocialFeed**. Assign the menu to **Primary Menu** and save it. On desktop, the third level opens as a flyout; on mobile, it appears as an indented list.
+In **Appearance → Menus**, add **WordPress Plugins** (or Plugins) to the Primary Menu, then add **Admin Watch** and **SocialFeed** as child items. Drag **Terms**, **Privacy**, and **Support** slightly farther to the right beneath SocialFeed if needed, and add **Resources** as a top-level item. Assign the menu to **Primary Menu** and save it. On desktop, the third level opens as a flyout; on mobile, it appears as an indented list.
