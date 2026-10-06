@@ -1380,15 +1380,17 @@ a.button--ghost:visited {
 
 // Admin Watch Central landing page.
 .admin-watch-hero, .admin-watch-process, .admin-watch-download, .admin-watch-cta { color: rgba(255, 255, 255, 0.86); background: radial-gradient(circle at 78% 18%, rgba(0, 198, 189, .31), transparent 25%), radial-gradient(circle at 92% 88%, rgba(240, 20, 120, .24), transparent 30%), linear-gradient(135deg, #101936, #143c9d 70%, #6f23b9 140%); }
-.admin-watch-hero { padding: clamp(72px, 10vw, 128px) 0; }
-.admin-watch-hero__grid, .admin-watch-process__grid, .admin-watch-privacy__grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(320px, .88fr); gap: clamp(32px, 7vw, 88px); align-items: center; }
+.admin-watch-hero { padding: clamp(48px, 6vw, 76px) 0; }
+.admin-watch-hero__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .78fr); gap: clamp(28px, 5vw, 62px); align-items: center; }
+.admin-watch-process__grid, .admin-watch-privacy__grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(320px, .88fr); gap: clamp(32px, 7vw, 88px); align-items: center; }
 .admin-watch-hero .eyebrow, .admin-watch-process .eyebrow, .admin-watch-privacy .eyebrow, .admin-watch-download .eyebrow, .admin-watch-cta .eyebrow { color: var(--color-lime); }
-.admin-watch-hero h1, .admin-watch-process h2, .admin-watch-download h2, .admin-watch-cta h2 { max-width: 12ch; color: var(--color-white); }
-.admin-watch-hero > .container p:not(.eyebrow) { max-width: 620px; font-size: 1.15rem; }
-.admin-watch-brand { display: inline-flex; gap: 10px; align-items: center; padding: 7px 12px 7px 8px; margin: 0 0 20px; color: #fff; font-size: .82rem; font-weight: 900; border: 1px solid rgba(255,255,255,.24); border-radius: 99px; background: rgba(8,24,70,.28); }
-.admin-watch-brand img { width: 32px; height: 32px; object-fit: contain; }
+.admin-watch-hero h1 { max-width: 13ch; color: var(--color-white); font-size: clamp(2.5rem, 4.6vw, 4.35rem); }
+.admin-watch-process h2, .admin-watch-download h2, .admin-watch-cta h2 { max-width: 12ch; color: var(--color-white); }
+.admin-watch-hero > .container p:not(.eyebrow) { max-width: 570px; font-size: 1.08rem; }
+.admin-watch-brand { display: inline-flex; gap: 9px; align-items: center; padding: 6px 11px 6px 7px; margin: 0 0 14px; color: #fff; font-size: .78rem; font-weight: 900; border: 1px solid rgba(255,255,255,.24); border-radius: 99px; background: rgba(8,24,70,.28); }
+.admin-watch-brand img { width: 28px; height: 28px; object-fit: contain; }
 .admin-watch-hero .button--ghost, .admin-watch-download .button--ghost, .admin-watch-cta .button--ghost { border-color: rgba(255, 255, 255, .7); background: transparent; }
-.admin-watch-hero__visual { margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.35); border-radius: 24px; background: #edf7ff; box-shadow: 0 30px 76px rgba(2,12,42,.34); }
+.admin-watch-hero__visual { width: min(100%, 510px); margin: 0 0 0 auto; overflow: hidden; border: 1px solid rgba(255,255,255,.35); border-radius: 20px; background: #edf7ff; box-shadow: 0 24px 58px rgba(2,12,42,.3); }
 .admin-watch-hero__visual img { width: 100%; height: auto; }
 .admin-watch-dashboard { margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.3); border-radius: 18px; background: #f8fbff; box-shadow: 0 28px 70px rgba(0,0,0,.3); }
 .admin-watch-dashboard img { width: 100%; height: auto; }
@@ -1518,6 +1520,7 @@ a.button--ghost:visited {
   .resource-article__grid { grid-template-columns: 1fr; }
   .resource-article__related-grid { grid-template-columns: repeat(2,1fr); }
   .resource-article__aside { position: static; }
+  .admin-watch-hero__visual { margin: 0; }
 }
 
 @media (max-width: 640px) {
