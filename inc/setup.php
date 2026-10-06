@@ -416,6 +416,21 @@ function wswa_seo_payload(): array
             'description' => 'Contact Web Studio WA, a Western Australia based company for web design, website redesign, WordPress maintenance and business web hosting.',
             'keywords' => array_merge($base_keywords, ['contact web designer Perth', 'website quote Perth']),
         ],
+        'plugins' => [
+            'title' => 'WordPress Plugins for Practical Website Workflows | Web Studio WA',
+            'description' => 'Explore practical WordPress plugins from Web Studio WA for admin visibility, social content display and better website workflows.',
+            'keywords' => array_merge($base_keywords, ['WordPress plugins', 'WordPress admin visibility']),
+        ],
+        'admin-watch' => [
+            'title' => 'Admin Watch Central | WordPress Admin Visibility Plugin',
+            'description' => 'Admin Watch Central helps WordPress site owners review website-changing users, login visibility, active sessions and 404 activity from a privacy-conscious dashboard.',
+            'keywords' => ['Admin Watch Central', 'WordPress admin visibility', 'WordPress 404 monitor', 'WordPress session visibility'],
+        ],
+        'resources' => [
+            'title' => 'WordPress Resources for Safer, Smarter Websites | Web Studio WA',
+            'description' => 'Practical WordPress guides for business owners covering website security, maintenance, accessibility, social feeds and plugin workflows.',
+            'keywords' => array_merge($base_keywords, ['WordPress resources', 'WordPress security guides', 'WordPress accessibility']),
+        ],
     ];
 
     if (is_front_page()) {

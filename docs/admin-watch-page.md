@@ -12,7 +12,7 @@ Public links:
 - [WordPress.org](https://wordpress.org/plugins/adminwatch-central/)
 - [Support forum](https://wordpress.org/support/plugin/adminwatch-central/)
 
-The official Admin Watch logo assets were copied from the local Admin Watch plugin's `logos/` folder into the theme. Public GitHub links were removed because the repository is private. The hero uses a local SVG illustration of a business user reviewing access and activity in an Admin Watch-style dashboard; the five interface cards are populated CSS mini-dashboard visuals that can be replaced with product screenshots later. The Plugins index uses the official Admin Watch icon and the SocialFeed SVG logo.
+The official Admin Watch logo assets were copied from the local Admin Watch plugin's `logos/` folder into the theme. Public GitHub links were removed because the repository is private. The hero uses the official icon in a compact product badge rather than a large floating wordmark card, alongside a local SVG illustration of a business user reviewing access and activity in an Admin Watch-style dashboard. The five interface cards are populated CSS mini-dashboard visuals that can be replaced with product screenshots later. The Plugins index uses the official Admin Watch icon and the SocialFeed SVG logo.
 
 The Plugins index uses an auto-fit grid: two plugins use two equal-width columns; three or more plugins use no more than three columns. It becomes two columns at tablet widths and one on mobile.
 

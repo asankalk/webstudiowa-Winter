@@ -6,7 +6,7 @@ $support_url = 'https://wordpress.org/support/plugin/adminwatch-central/';
 ?>
 <section class="admin-watch-hero"><div class="container admin-watch-hero__grid"><div class="admin-watch-hero__copy">
 <p class="eyebrow"><?php esc_html_e('Visibility, not fear', 'winter'); ?></p>
-<img class="admin-watch-logo" src="<?php echo esc_url(wswa_asset('img/admin-watch/admin-watch-wordmark.png')); ?>" alt="<?php esc_attr_e('Admin Watch Central', 'winter'); ?>" width="457" height="429">
+<div class="admin-watch-brand"><img src="<?php echo esc_url(wswa_asset('img/admin-watch/admin-watch-icon.png')); ?>" alt="" width="1254" height="1254"><span><?php esc_html_e('Admin Watch Central', 'winter'); ?></span></div>
 <h1><?php esc_html_e('Know who can change your WordPress website', 'winter'); ?></h1>
 <p><?php esc_html_e('Admin Watch Central gives site owners and administrators a clearer view of website-changing access, recent login activity, session visibility and 404 patterns, without storing unnecessary sensitive data.', 'winter'); ?></p>
 <div class="hero__actions"><a class="button button--primary" href="<?php echo esc_url($wordpress_url); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('View on WordPress.org', 'winter'); ?></a><a class="button button--ghost" href="<?php echo esc_url($support_url); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Plugin support', 'winter'); ?></a></div>
