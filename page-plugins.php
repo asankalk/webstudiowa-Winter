@@ -10,9 +10,9 @@ get_header();
 <section class="plugins-hero">
     <div class="container plugins-hero__grid">
         <div>
-            <p class="eyebrow"><?php esc_html_e('Web Studio WA Plugins', 'winter'); ?></p>
-            <h1><?php esc_html_e('WordPress plugins built for practical websites', 'winter'); ?></h1>
-            <p><?php esc_html_e('Explore Web Studio WA plugins designed to help business websites improve admin visibility, display content and support better day-to-day website management.', 'winter'); ?></p>
+            <p class="eyebrow"><?php esc_html_e('Plugin library', 'winter'); ?></p>
+            <h1><?php esc_html_e('Available plugins', 'winter'); ?></h1>
+            <p><?php esc_html_e('Explore WordPress plugins built by Web Studio WA for practical business websites.', 'winter'); ?></p>
         </div>
         <div class="plugins-hero__mockup" aria-label="<?php esc_attr_e('Web Studio WA plugin library preview', 'winter'); ?>">
             <div class="plugins-hero__mockup-bar"><span></span><span></span><span></span></div>
@@ -25,7 +25,7 @@ get_header();
 <section class="section plugins-listing">
     <div class="container section__heading">
         <p class="eyebrow"><?php esc_html_e('Plugin library', 'winter'); ?></p>
-        <h2><?php esc_html_e('Available plugins', 'winter'); ?></h2>
+        <h2><?php esc_html_e('Built for practical websites', 'winter'); ?></h2>
     </div>
     <div class="container plugins-listing__grid">
         <article class="plugin-card">

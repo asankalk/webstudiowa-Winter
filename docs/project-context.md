@@ -15,7 +15,7 @@ Contact form is hard-coded and protected with Cloudflare Turnstile, nonce, and h
 - Live site: `https://webstudiowa.com.au`
 - Live theme path: `/home/webstud5/public_html/wp-content/themes/winter/`
 - Theme navigation supports WordPress-managed `Primary Menu` and `Footer Menu` locations; Primary Menu supports up to three levels.
-- The plugin index uses `page-plugins.php` at `/plugins/`; SocialFeed uses `page-socialfeed.php` at `/plugins/socialfeed/`; Admin Watch Central uses `page-admin-watch.php` at `/plugins/admin-watch/`; Resources uses `page-resources.php` at `/resources/`. Logo assets are `assets/img/socialfeed-logo.svg` and `assets/img/admin-watch-logo.svg`. Create the Plugins parent page, SocialFeed/Admin Watch child pages, and Resources page in WordPress admin; templates apply automatically.
+- The plugin index uses `page-plugins.php` at `/plugins/`; SocialFeed uses `page-socialfeed.php` at `/plugins/socialfeed/`; Admin Watch Central uses `page-admin-watch.php` at `/plugins/admin-watch/`; Resources uses `page-resources.php` at `/resources/`. Logo assets are `assets/img/socialfeed-logo.svg` and `assets/img/admin-watch-logo.svg`; the local Admin Watch hero dashboard mockup is `assets/img/admin-watch-dashboard-mockup.svg`. The plugin grid supports up to four cards per desktop row. Create the Plugins parent page, SocialFeed/Admin Watch child pages, and Resources page in WordPress admin; templates apply automatically.
 
 ## Theme Folder Structure
 
