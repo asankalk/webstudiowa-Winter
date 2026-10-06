@@ -43,3 +43,7 @@ The Primary Menu supports three levels. For example:
     - Support
 
 In **Appearance → Menus**, add **WordPress Plugins** (or Plugins) to the Primary Menu, then add **Admin Watch** and **SocialFeed** as child items. Drag **Terms**, **Privacy**, and **Support** slightly farther to the right beneath SocialFeed if needed, and add **Resources** as a top-level item. Assign the menu to **Primary Menu** and save it. On desktop, the third level opens as a flyout; on mobile, it appears as an indented list.
+
+## Desktop header layout
+
+The desktop header is compacted for the expanded Primary Menu: the logo, menu gap and navigation type are reduced slightly, while top-level links and the **Get a quote** CTA are kept on one line. At widths below 980px, the existing mobile menu toggle takes over so desktop links do not wrap.

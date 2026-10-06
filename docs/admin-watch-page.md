@@ -2,18 +2,19 @@
 
 - **Template:** `page-admin-watch.php`
 - **URL:** `/plugins/admin-watch/`
-- **Logo:** `assets/img/admin-watch-logo.svg`
-- **Hero visual:** `assets/img/admin-watch-dashboard-mockup.svg`
+- **Official logo assets:** `assets/img/admin-watch/admin-watch-icon.png` and `assets/img/admin-watch/admin-watch-wordmark.png`
+- **Hero visual:** `assets/img/admin-watch/admin-watch-team-dashboard.svg`
 
 The landing page includes a plugin hero/dashboard placeholder, problem overview, features, screenshot placeholders, process, privacy positioning, audience, download links, FAQ, and CTA.
 
-External links:
+Public links:
 
 - [WordPress.org](https://wordpress.org/plugins/adminwatch-central/)
 - [Support forum](https://wordpress.org/support/plugin/adminwatch-central/)
-- [GitHub](https://github.com/asankalk/admin-watch-free)
 
-The hero uses the local SVG dashboard mockup, including Site Health, Website Access, Active Sessions, 404 Errors and recent login activity. The four screenshot cards are CSS-based mini-interface visuals and can be replaced when product screenshots are ready. The page uses `assets/img/admin-watch-logo.svg`; the Plugins index uses the Admin Watch and SocialFeed SVG logos in a responsive card grid that supports up to four cards per large desktop row, two at tablet sizes, and one on mobile.
+The official Admin Watch logo assets were copied from the local Admin Watch plugin's `logos/` folder into the theme. Public GitHub links were removed because the repository is private. The hero uses a local SVG illustration of a business user reviewing access and activity in an Admin Watch-style dashboard; the five interface cards are populated CSS mini-dashboard visuals that can be replaced with product screenshots later. The Plugins index uses the official Admin Watch icon and the SocialFeed SVG logo.
+
+The Plugins index uses an auto-fit grid: two plugins use two equal-width columns; three or more plugins use no more than three columns. It becomes two columns at tablet widths and one on mobile.
 
 ## WordPress admin setup
 

@@ -124,15 +124,19 @@ h3 {
 .header__inner {
   display: flex;
   align-items: center;
-  min-height: 82px;
-  gap: 24px;
+  min-height: 72px;
+  gap: 16px;
 }
 
+.brand { flex: 0 0 auto; }
+
 .brand img {
-  width: min(150px, 38vw);
+  width: min(132px, 38vw);
 }
 
 .primary-nav {
+  flex: 1 1 auto;
+  min-width: 0;
   margin-left: auto;
 }
 
@@ -140,16 +144,25 @@ h3 {
 .footer-menu {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 14px;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
 .menu a {
+  white-space: nowrap;
   font-weight: 700;
   color: var(--color-ink);
 }
+
+.primary-nav > .menu {
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  font-size: 0.88rem;
+}
+
+.primary-nav > .menu > li { flex: 0 0 auto; }
 
 .menu a:hover,
 .menu a:focus-visible {
@@ -237,6 +250,14 @@ h3 {
   border-radius: var(--radius);
   font-weight: 800;
   line-height: 1;
+}
+
+.header__cta {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding-inline: 14px;
+  white-space: nowrap;
+  font-size: 0.9rem;
 }
 
 a.button,
@@ -1026,6 +1047,8 @@ a.button--ghost:visited {
 }
 
 @media (max-width: 980px) {
+  .header__inner { min-height: 72px; }
+
   .header__cta {
     display: none;
   }
@@ -1314,12 +1337,13 @@ a.button--ghost:visited {
 
 .plugins-listing { background: linear-gradient(180deg, #ffffff, #f5faff); }
 .plugins-listing { padding-bottom: clamp(84px, 10vw, 132px); }
-.plugins-listing__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.plugins-listing__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 24px; align-items: stretch; }
 .plugin-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid rgba(30, 144, 255, 0.18); border-radius: 18px; background: var(--color-white); box-shadow: 0 16px 42px rgba(16, 24, 47, 0.08); transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
 .plugin-card:hover, .plugin-card:focus-within { border-color: rgba(30, 144, 255, 0.44); box-shadow: var(--shadow-strong); transform: translateY(-6px); }
 .plugin-card__visual { display: grid; align-content: center; gap: 24px; min-height: 218px; padding: 28px; background: linear-gradient(150deg, #10203a, #073f8f); }
 .plugin-card__visual--admin-watch { background: linear-gradient(150deg, #0b1328, #0b5fc7); }
 .plugin-card__visual img { width: 100%; max-width: 330px; padding: 12px; margin-inline: auto; border-radius: 12px; background: #ffffff; }
+.plugin-card__visual .plugin-card__official-logo { width: 118px; max-width: 42%; padding: 0; border-radius: 0; background: transparent; box-shadow: 0 14px 30px rgba(0,0,0,.18); }
 .plugin-card__feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .plugin-card__feed i { aspect-ratio: 1; border-radius: 8px; background: linear-gradient(135deg, #8fb4ff, #dceeff); }
 .plugin-card__feed i:nth-child(2n) { background: linear-gradient(135deg, #f79400, #d9005b); }
@@ -1341,10 +1365,6 @@ a.button--ghost:visited {
 .plugins-cta h2 { margin-inline: auto; }
 .plugins-cta > .container > p:not(.eyebrow) { max-width: 620px; margin: 18px auto 28px; }
 
-@media (max-width: 1080px) {
-  .plugins-listing__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-
 @media (max-width: 760px) {
   .plugins-hero__grid { grid-template-columns: 1fr; }
   .plugins-hero__mockup { max-width: 480px; }
@@ -1356,15 +1376,16 @@ a.button--ghost:visited {
 }
 
 // Admin Watch Central landing page.
-.admin-watch-hero, .admin-watch-process, .admin-watch-download, .admin-watch-cta { color: rgba(255, 255, 255, 0.82); background: linear-gradient(135deg, #07111f, #073f8f 72%, #7a45a8 150%); }
+.admin-watch-hero, .admin-watch-process, .admin-watch-download, .admin-watch-cta { color: rgba(255, 255, 255, 0.86); background: radial-gradient(circle at 78% 18%, rgba(0, 198, 189, .31), transparent 25%), radial-gradient(circle at 92% 88%, rgba(240, 20, 120, .24), transparent 30%), linear-gradient(135deg, #101936, #143c9d 70%, #6f23b9 140%); }
 .admin-watch-hero { padding: clamp(72px, 10vw, 128px) 0; }
 .admin-watch-hero__grid, .admin-watch-process__grid, .admin-watch-privacy__grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(320px, .88fr); gap: clamp(32px, 7vw, 88px); align-items: center; }
 .admin-watch-hero .eyebrow, .admin-watch-process .eyebrow, .admin-watch-privacy .eyebrow, .admin-watch-download .eyebrow, .admin-watch-cta .eyebrow { color: var(--color-lime); }
 .admin-watch-hero h1, .admin-watch-process h2, .admin-watch-download h2, .admin-watch-cta h2 { max-width: 12ch; color: var(--color-white); }
 .admin-watch-hero > .container p:not(.eyebrow) { max-width: 620px; font-size: 1.15rem; }
-.admin-watch-logo { width: min(360px, 100%); height: auto; padding: 12px 16px; margin-bottom: 24px; border-radius: 14px; background: #fff; }
+.admin-watch-logo { display: block; width: 184px; height: 116px; margin: 0 0 18px; object-fit: contain; object-position: left center; border-radius: 14px; background: #fff; }
 .admin-watch-hero .button--ghost, .admin-watch-download .button--ghost, .admin-watch-cta .button--ghost { border-color: rgba(255, 255, 255, .7); background: transparent; }
-.admin-watch-github { display: inline-block; margin-top: 18px; color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+.admin-watch-hero__visual { margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.35); border-radius: 24px; background: #edf7ff; box-shadow: 0 30px 76px rgba(2,12,42,.34); }
+.admin-watch-hero__visual img { width: 100%; height: auto; }
 .admin-watch-dashboard { margin: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.3); border-radius: 18px; background: #f8fbff; box-shadow: 0 28px 70px rgba(0,0,0,.3); }
 .admin-watch-dashboard img { width: 100%; height: auto; }
 .admin-watch-dashboard__bar { display: flex; align-items: center; gap: 6px; padding: 12px 16px; color: #fff; background: #10203a; }
@@ -1378,24 +1399,34 @@ a.button--ghost:visited {
 .admin-watch-features { background: #f5faff; }
 .admin-watch-feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .admin-watch-feature-grid article, .admin-watch-audience__grid article, .admin-watch-faq__grid article { padding: 22px; border: 1px solid var(--color-line); border-radius: var(--radius); background: #fff; }
+.admin-watch-feature-grid article { position: relative; overflow: hidden; padding-top: 58px; box-shadow: 0 12px 30px rgba(16,24,47,.05); transition: transform .2s ease, box-shadow .2s ease; }
+.admin-watch-feature-grid article:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+.admin-watch-feature-grid article > span { position: absolute; top: 16px; left: 18px; color: #0b5fc7; font-size: .74rem; font-weight: 900; letter-spacing: .09em; }
+.admin-watch-feature-grid article::after { position: absolute; top: 15px; right: 16px; width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg,#00c6bd,#1e90ff); content: ""; }
 .admin-watch-feature-grid h3 { font-size: 1.05rem; }
 .admin-watch-feature-grid p, .admin-watch-faq__grid p { margin-top: 10px; }
 .admin-watch-shots { background: linear-gradient(180deg, #fff, #f5faff); }
-.admin-watch-shot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.admin-watch-shot-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .admin-watch-shot-grid article { padding: 16px; border: 1px solid var(--color-line); border-radius: 14px; background: #fff; box-shadow: 0 12px 30px rgba(16,24,47,.06); transition: transform .2s ease, box-shadow .2s ease; }
 .admin-watch-shot-grid article:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
-.admin-watch-shot__ui { position: relative; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; min-height: 180px; padding: 14px; overflow: hidden; border: 1px solid #dce8f5; border-radius: 9px; background: linear-gradient(145deg,#f8fbff,#edf5fd); }
-.admin-watch-shot__ui::before { position: absolute; inset: 0 0 auto; height: 24px; background: #10203a; content: ""; }
-.admin-watch-shot__ui span { z-index: 1; grid-column: 1 / -1; width: 58%; height: 6px; margin-top: 28px; border-radius: 99px; background: #0b5fc7; }
-.admin-watch-shot__ui i { min-height: 54px; border: 1px solid #dce8f5; border-radius: 7px; background: #fff; box-shadow: 0 5px 12px rgba(16,24,47,.04); }
+.admin-watch-shot__ui { display: grid; gap: 10px; min-height: 180px; padding: 14px; overflow: hidden; border: 1px solid #dce8f5; border-radius: 9px; background: linear-gradient(145deg,#f8fbff,#edf5fd); }
+.admin-watch-shot__top { display: flex; gap: 4px; align-items: center; height: 16px; margin: -14px -14px 3px; padding: 0 10px; background: #152244; }
+.admin-watch-shot__top i { width: 5px; height: 5px; min-height: 0; border: 0; border-radius: 50%; background: #5be2d9; }
+.admin-watch-shot__ui > strong { color: #23324f; font-size: .72rem; }
+.admin-watch-shot__ui > span { width: 62%; height: 6px; border-radius: 99px; background: #0b5fc7; }
+.admin-watch-shot__tiles { display: grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
+.admin-watch-shot__tiles i { min-height: 44px; border: 1px solid #dce8f5; border-radius: 7px; background: #fff; box-shadow: 0 5px 12px rgba(16,24,47,.04); }
+.admin-watch-shot__tiles i:last-child { grid-column: 1 / -1; min-height: 22px; }
+.admin-watch-shot--2 .admin-watch-shot__ui > span { background: #6f23b9; }.admin-watch-shot--3 .admin-watch-shot__ui > span { background: #00a99d; }.admin-watch-shot--4 .admin-watch-shot__ui > span { background: #ff8d18; }.admin-watch-shot--5 .admin-watch-shot__ui > span { background: #ef1478; }
 .admin-watch-shot-grid h3 { margin-top: 18px; font-size: 1.02rem; }
-.admin-watch-shot-grid small { display: block; margin-top: 10px; color: var(--color-muted); font-weight: 700; }
+.admin-watch-shot-grid p { margin-top: 10px; color: var(--color-muted); font-size: .85rem; font-weight: 700; }
 .admin-watch-process { background: linear-gradient(135deg, #10203a, #073f8f); }
 .admin-watch-process ol { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; }
 .admin-watch-process li { display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.14); }
 .admin-watch-process li span { display: grid; place-items: center; width: 34px; height: 34px; color: #10203a; font-weight: 900; border-radius: 50%; background: var(--color-lime); }
 .admin-watch-process li p { font-weight: 700; }
 .admin-watch-privacy__grid { align-items: start; }
+.admin-watch-privacy__grid > div > p:not(.eyebrow) { max-width: 410px; margin-top: 18px; }
 .admin-watch-privacy ul { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
 .admin-watch-privacy li { position: relative; padding: 15px 18px 15px 42px; border: 1px solid var(--color-line); border-radius: var(--radius); font-weight: 700; background: #fff; }
 .admin-watch-privacy li::before { position: absolute; top: 21px; left: 18px; width: 9px; height: 9px; border-radius: 50%; background: var(--color-primary); content: ""; }

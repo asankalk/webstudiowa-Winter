@@ -30,7 +30,7 @@ get_header();
     <div class="container plugins-listing__grid">
         <article class="plugin-card">
             <div class="plugin-card__visual plugin-card__visual--admin-watch">
-                <img src="<?php echo esc_url(wswa_asset('img/admin-watch-logo.svg')); ?>" alt="<?php esc_attr_e('Admin Watch Central', 'winter'); ?>" width="330" height="82">
+                <img class="plugin-card__official-logo" src="<?php echo esc_url(wswa_asset('img/admin-watch/admin-watch-icon.png')); ?>" alt="<?php esc_attr_e('Admin Watch Central eye logo', 'winter'); ?>" width="1254" height="1254">
                 <div class="plugin-card__watch"><i><?php esc_html_e('Access', 'winter'); ?></i><i><?php esc_html_e('Sessions', 'winter'); ?></i><i><?php esc_html_e('404s', 'winter'); ?></i><i><?php esc_html_e('Privacy', 'winter'); ?></i></div>
             </div>
             <div class="plugin-card__content">
