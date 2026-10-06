@@ -13,7 +13,7 @@ External links:
 - [Support forum](https://wordpress.org/support/plugin/adminwatch-central/)
 - [GitHub](https://github.com/asankalk/admin-watch-free)
 
-The hero uses a local SVG dashboard mockup. The four screenshot cards are CSS-based placeholder visuals and can be replaced when product screenshots are ready. The Plugins index uses the Admin Watch and SocialFeed SVG logos in a responsive card grid that supports up to four cards per large desktop row, two at tablet sizes, and one on mobile.
+The hero uses the local SVG dashboard mockup, including Site Health, Website Access, Active Sessions, 404 Errors and recent login activity. The four screenshot cards are CSS-based mini-interface visuals and can be replaced when product screenshots are ready. The page uses `assets/img/admin-watch-logo.svg`; the Plugins index uses the Admin Watch and SocialFeed SVG logos in a responsive card grid that supports up to four cards per large desktop row, two at tablet sizes, and one on mobile.
 
 ## WordPress admin setup
 

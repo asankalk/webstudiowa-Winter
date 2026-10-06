@@ -30,6 +30,26 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
+/** Use the shared guide template for recognised child pages of Resources. */
+add_filter('template_include', function (string $template): string {
+    if (! is_page()) {
+        return $template;
+    }
+
+    $page = get_queried_object();
+    if (! $page instanceof WP_Post || ! $page->post_parent) {
+        return $template;
+    }
+
+    $parent = get_post($page->post_parent);
+    if (! $parent || $parent->post_name !== 'resources' || ! function_exists('wswa_resource_article') || ! wswa_resource_article($page->post_name)) {
+        return $template;
+    }
+
+    $resource_template = WSWA_THEME_DIR . '/page-resource-article.php';
+    return file_exists($resource_template) ? $resource_template : $template;
+});
+
 add_action('init', function () {
     register_post_type('wswa_client', [
         'labels' => [

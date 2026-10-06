@@ -11,8 +11,8 @@ get_header();
     <div class="container plugins-hero__grid">
         <div>
             <p class="eyebrow"><?php esc_html_e('Plugin library', 'winter'); ?></p>
-            <h1><?php esc_html_e('Available plugins', 'winter'); ?></h1>
-            <p><?php esc_html_e('Explore WordPress plugins built by Web Studio WA for practical business websites.', 'winter'); ?></p>
+            <h1><?php esc_html_e('Available WordPress plugins', 'winter'); ?></h1>
+            <p><?php esc_html_e('Explore practical WordPress plugins built by Web Studio WA for admin visibility, social content display and better website workflows.', 'winter'); ?></p>
         </div>
         <div class="plugins-hero__mockup" aria-label="<?php esc_attr_e('Web Studio WA plugin library preview', 'winter'); ?>">
             <div class="plugins-hero__mockup-bar"><span></span><span></span><span></span></div>
@@ -63,7 +63,7 @@ get_header();
 </section>
 
 <section class="section plugins-future">
-    <div class="container"><p><?php esc_html_e('More Web Studio WA plugins will be added here as they become available.', 'winter'); ?></p></div>
+    <div class="container"><p><?php esc_html_e('More plugins are planned as Web Studio WA continues building tools from real client website needs.', 'winter'); ?></p></div>
 </section>
 
 <section class="plugins-cta">
