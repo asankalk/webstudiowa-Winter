@@ -65,6 +65,7 @@ get_header();
 <section class="section plugins-future">
     <div class="container"><p><?php esc_html_e('More plugins are planned as Web Studio WA continues building tools from real client website needs.', 'winter'); ?></p></div>
 </section>
+<section class="section plugins-resources"><div class="container"><p class="eyebrow"><?php esc_html_e('Helpful guidance', 'winter'); ?></p><h2><?php esc_html_e('Explore practical WordPress resources', 'winter'); ?></h2><p><?php esc_html_e('Read plain-language guides on website access, maintenance, image accessibility and social feed connections before choosing your next step.', 'winter'); ?></p><a class="text-link" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse WordPress resources', 'winter'); ?> →</a></div></section>
 
 <section class="plugins-cta">
     <div class="container">

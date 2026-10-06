@@ -27,6 +27,10 @@ if (! $service) {
     </div>
 </section>
 
+<?php if (($service['slug'] ?? '') === 'website-maintenance') : ?>
+<section class="section service-resources"><div class="container section__heading"><p class="eyebrow"><?php esc_html_e('Practical WordPress support', 'winter'); ?></p><h2><?php esc_html_e('Useful guidance for ongoing website care', 'winter'); ?></h2><p><?php esc_html_e('Explore practical WordPress resources or use Admin Watch Central when you need clearer visibility of website-changing access and activity.', 'winter'); ?></p><div class="section__actions section__actions--left"><a class="button button--primary" href="<?php echo esc_url(home_url('/resources/')); ?>"><?php esc_html_e('Browse WordPress resources', 'winter'); ?></a><a class="button button--ghost" href="<?php echo esc_url(home_url('/plugins/admin-watch/')); ?>"><?php esc_html_e('Explore Admin Watch', 'winter'); ?></a></div></div></section>
+<?php endif; ?>
+
 <section class="section">
     <div class="container service-included">
         <div class="service-included__intro<?php echo ! empty($service['slug']) ? ' service-included__intro--' . sanitize_html_class($service['slug']) : ''; ?>">

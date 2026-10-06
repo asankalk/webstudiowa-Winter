@@ -90,3 +90,23 @@ Use genuine local details only: relevant project locations, service-area proof, 
 ## Future content plan
 
 Publish the twelve prepared Resources guides in themed clusters: access and website care first, image accessibility second, then social-feed connection guides. Link each new guide from one relevant service/plugin page and one related guide. Review Search Console data after sufficient indexing time and expand only topics showing useful demand or conversion intent.
+
+## SEO improvement pass completed
+
+- Added contextual reading links from Admin Watch to access-review and security guides.
+- Added SocialFeed links to social connection and Meta-permission guides.
+- Added a Plugins-to-Resources route and a Website Maintenance route to Resources and Admin Watch.
+- Added dedicated Google Search Console and Google Business Profile operating checklists.
+- Kept the current Rank Math-aware metadata/schema safeguards; no duplicate JSON-LD was added.
+
+## Resource creation dependency
+
+The resource creator is ready but must be run on production before the twelve linked URLs can resolve. Run php wp-content/themes/winter/tools/create-resource-pages.php from /home/webstud5/public_html, then save permalinks.
+
+## 30-day and 90-day action plan
+
+**First 30 days:** create Resource pages, save permalinks, inspect priority URLs, submit the sitemap, and confirm one canonical/title/description per tested page.
+
+**Within 90 days:** publish the guide clusters, add approved project evidence, review Search Console trends monthly, and improve pages based on verified query and conversion signals.
+
+See docs/google-search-console-checklist.md and docs/google-business-profile-checklist.md for the live-tool and manual-business work.
