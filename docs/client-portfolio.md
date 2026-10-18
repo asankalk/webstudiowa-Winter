@@ -41,7 +41,7 @@ The base card CSS uses `object-fit: cover`. The image must therefore occupy the 
 
 1. Check `git status`, fetch the current `origin/main`, and create a dedicated `codex/` feature branch from it.
 2. Verify the prospective website, make and inspect a desktop-viewport screenshot using Origin Facility Services as the visual reference, then add the WebP under `assets/img/`.
-3. Add one record to `wswa_default_clients()` in `inc/helpers.php`. Use the canonical URL, category, exact approved copy, a full-preview alt attribute and `uses_snapshot => true` for screenshots.
+3. Add one record to `wswa_default_clients()` in `inc/helpers.php`. Use the canonical URL, category, exact approved copy, a descriptive desktop-preview alt attribute and `uses_snapshot => true` for screenshots.
 4. Do not edit the shared card markup or existing client records unless the requested change requires it. The template applies external-link behaviour uniformly.
 5. Run `php -l inc/helpers.php`, `npm ci`, `npm run build`, `git diff --check`, and inspect `git diff --stat` / the staged diff. Check the responsive source rules: the portfolio is two columns above 980 px and one column at 980 px and below.
 6. Commit the PHP, WebP and documentation; push the feature branch and open a pull request. Never merge the pull request without explicit approval because `.github/workflows/deploy-theme.yml` runs on pushes to `main`.
@@ -65,4 +65,4 @@ The base card CSS uses `object-fit: cover`. The image must therefore occupy the 
 
 - The initial Applecross thumbnail was rejected because it proportionally shrank a full-page screenshot into a padded canvas. This left excessive blank side space and made the website content unreadably small.
 - Replaced it with a 1240 x 720 WebP desktop-viewport capture showing the club header and hero. It uses the same full-canvas, readable header-and-hero approach as the approved Origin Facility Services thumbnail.
-- The portfolio copy, category, URL, image alt text, card markup, CSS, Origin image and every other client thumbnail remain unchanged.
+- The portfolio copy, category, URL, card markup, CSS, Origin image and every other client thumbnail remain unchanged. The Applecross alt text was subsequently corrected to identify it as a desktop website preview, rather than a full-page preview.

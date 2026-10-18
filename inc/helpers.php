@@ -313,7 +313,7 @@ function wswa_default_clients(): array
             'type' => 'New Website',
             'url' => 'https://applecrossjuniorcricketclub.com/',
             'image' => wswa_asset('img/client-applecross-junior-cricket-club.webp'),
-            'image_alt' => 'Full-page Applecross Junior Cricket Club website preview',
+            'image_alt' => 'Applecross Junior Cricket Club desktop website preview',
             'summary' => 'Website design and development for a Perth junior cricket club, featuring club information, registrations, fixtures and community updates.',
             'featured' => true,
             'uses_snapshot' => true,
