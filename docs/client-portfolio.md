@@ -42,3 +42,10 @@ The base card CSS uses `object-fit: cover`; a precomposed 16:10 canvas is theref
 - The current live club homepage was available and showed the current club design, registration, fixtures and community content at capture time.
 - This branch starts from `origin/main` commit `97bbdfb`; branch, commit, pull request, test evidence and deployment status are recorded in the accompanying Google Drive handover after the GitHub workflow completes.
 - Deployment status: awaiting review and explicit approval; no merge or production deployment is authorised by this change.
+
+## 2026-10-19: Production deployment confirmed
+
+- PR [#2](https://github.com/asankalk/webstudiowa-Winter/pull/2) was merged into `main` with merge commit `8f34746d2954b1cd5d90c834406c21feed8aa477` after explicit user approval.
+- GitHub Actions run [#52](https://github.com/asankalk/webstudiowa-Winter/actions/runs/39166404322) completed successfully. Both the Build Theme job and the Deploy To Live Server SSH/rsync job passed.
+- Live verification passed at `https://webstudiowa.com.au/our-clients/`: the portfolio contains six cards, including Applecross Junior Cricket Club. Its full-page WebP loads at 1240 x 775 with the expected descriptive alt text; all three card links use the intended HTTPS destination, `target="_blank"`, and `rel="noopener"`.
+- Responsive verification passed: the live grid is two columns at a 1440 px viewport and one column at 390 px. The thumbnail was checked after scrolling it into view so its lazy-loaded image had completed.
