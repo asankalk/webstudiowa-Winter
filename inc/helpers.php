@@ -309,6 +309,16 @@ function wswa_default_clients(): array
 {
     return [
         [
+            'name' => 'Applecross Junior Cricket Club',
+            'type' => 'New Website',
+            'url' => 'https://applecrossjuniorcricketclub.com/',
+            'image' => wswa_asset('img/client-applecross-junior-cricket-club.webp'),
+            'image_alt' => 'Full-page Applecross Junior Cricket Club website preview',
+            'summary' => 'Website design and development for a Perth junior cricket club, featuring club information, registrations, fixtures and community updates.',
+            'featured' => true,
+            'uses_snapshot' => true,
+        ],
+        [
             'name' => 'Vending WA',
             'type' => 'New Website',
             'url' => 'https://www.vendingwa.com.au/',
