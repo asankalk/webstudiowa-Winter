@@ -47,3 +47,7 @@ In **Appearance → Menus**, add **WordPress Plugins** (or Plugins) to the Prima
 ## Desktop header layout
 
 The desktop header is compacted for the expanded Primary Menu: the logo, menu gap and navigation type are reduced slightly, while top-level links and the **Get a quote** CTA are kept on one line. At widths below 980px, the existing mobile menu toggle takes over so desktop links do not wrap.
+
+## 2026-10-19 mobile interaction update
+
+Up to 1100px, the menu starts closed and each submenu starts collapsed. Separate accessible buttons toggle sibling accordions at each hierarchy level; parent links continue to navigate. The panel scrolls within the available dynamic viewport height. See [mobile navigation standards](mobile-responsiveness.md) for keyboard, close, safe-area and testing requirements. This supersedes the earlier always-visible mobile indented-list behaviour and 980px header breakpoint above.

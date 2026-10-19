@@ -1046,7 +1046,7 @@ a.button--ghost:visited {
   margin-top: 1em;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1100px) {
   .header__inner { min-height: 72px; }
 
   .header__cta {
@@ -1096,6 +1096,9 @@ a.button--ghost:visited {
     }
   }
 
+}
+
+@media (max-width: 980px) {
   .hero__grid,
   .intro__grid,
   .why__grid,
@@ -1112,8 +1115,9 @@ a.button--ghost:visited {
   }
 
   .footer__grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .footer__grid > :first-child { grid-column: 1 / -1; }
 }
 
 @media (max-width: 640px) {
@@ -1141,8 +1145,7 @@ a.button--ghost:visited {
   .stats,
   .service-grid,
   .client-grid,
-  .plan-grid--home,
-  .footer__grid {
+  .plan-grid--home {
     grid-template-columns: 1fr;
   }
 
@@ -1547,6 +1550,8 @@ a.button--ghost:visited {
 .section__actions {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-top: 28px;
 
   &--left {
@@ -2371,4 +2376,57 @@ a.button--ghost:visited {
   .service-card {
     min-height: auto;
   }
+}
+
+// Responsive invariants: shrink grid items before their content can widen the page.
+.container { max-width: 100%; }
+:where(main, footer) :where(h1, h2, h3, p, a, li, dt, dd) { overflow-wrap: anywhere; }
+:where([class*="__grid"], [class*="-grid"], .hero__grid, .footer__grid) > * { min-width: 0; }
+.button { max-width: 100%; min-width: 0; padding-block: 12px; text-align: center; line-height: 1.3; }
+.submenu-toggle { display: none; }
+.primary-nav .sub-menu[hidden] { display: none; }
+
+@media (max-width: 1100px) {
+  .menu-toggle { flex: 0 0 44px; }
+  .primary-nav {
+    inset: var(--nav-top, 114px) 14px auto;
+    max-height: calc(100vh - var(--nav-top, 114px) - 14px);
+    max-height: calc(100dvh - var(--nav-top, 114px) - 14px);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
+  }
+  .primary-nav > .menu { display: block; font-size: 1rem; }
+  .primary-nav li { position: relative; min-width: 0; }
+  .primary-nav a { display: flex; align-items: center; min-height: 44px; padding: 10px; white-space: normal; overflow-wrap: anywhere; }
+  .primary-nav .menu-item-has-children > a { margin-right: 48px; }
+  .primary-nav .menu-item-has-children > a::after { content: none; }
+  .primary-nav .submenu-toggle {
+    position: absolute; top: 0; right: 0; display: block;
+    width: 44px; height: 44px; font: inherit; font-size: 1.3rem;
+    color: var(--color-primary-dark); background: var(--color-surface);
+    border: 1px solid var(--color-line); border-radius: 6px; cursor: pointer;
+  }
+  .primary-nav .menu .sub-menu { margin: 0 0 8px 8px; padding: 4px; transform: none; }
+  .primary-nav .menu .sub-menu .sub-menu { padding-left: 4px; }
+  .footer__grid a { display: flex; align-items: center; min-height: 44px; white-space: normal; }
+  .footer__grid .sub-menu a { padding: 4px 0; }
+}
+@media (max-width: 640px) {
+  h1 { font-size: clamp(2.3rem, 9vw, 3.1rem); }
+  .hero__actions, .section__actions { flex-direction: column; align-items: stretch; }
+  .hero__actions .button, .section__actions .button { width: 100%; }
+  .about-hero .page-hero__grid { grid-template-columns: minmax(0, 1fr); }
+  .footer__grid { gap: 24px 16px; }
+  .footer__grid h2 { margin-bottom: 8px; }
+  .footer__grid .menu, .footer-links { gap: 4px; }
+  .contact-card a { font-size: 1.05rem; }
+  .price { flex-wrap: wrap; }
+  .contact-form :where(input, select, textarea), .contact-form label { min-width: 0; }
+  .plugins-hero__mockup-card { flex-wrap: wrap; }
+  .plugins-hero__mockup-card em { margin-left: 0; }
+}
+@media (max-width: 299px) {
+  .footer__grid { grid-template-columns: minmax(0, 1fr); }
 }

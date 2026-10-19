@@ -63,7 +63,7 @@ get_header();
             </label>
             <?php if (wswa_is_turnstile_configured()) : ?>
                 <div class="wswa-turnstile">
-                    <div class="cf-turnstile" data-sitekey="<?php echo esc_attr(wswa_get_turnstile_site_key()); ?>"></div>
+                    <div class="cf-turnstile" data-size="compact" data-sitekey="<?php echo esc_attr(wswa_get_turnstile_site_key()); ?>"></div>
                 </div>
             <?php endif; ?>
             <button class="button button--primary" type="submit"><?php esc_html_e('Send enquiry', 'winter'); ?></button>

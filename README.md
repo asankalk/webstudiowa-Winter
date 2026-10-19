@@ -96,3 +96,7 @@ Winter is licensed under GPL-2.0-or-later. See `LICENSE`.
 
 Default copy and contact details were adapted from `https://webstudiowa.com.au/`.
 Hosting plan names, prices and hosting feature copy were adapted from `https://iwebnode.com/`.
+
+## Mobile release standard
+
+All future website changes must pass mobile responsiveness testing before production deployment. See [mobile responsiveness standards and checklist](docs/mobile-responsiveness.md) for navigation, overflow, buttons, footer, Chromium/WebKit checks, physical iPhone Safari verification and rollback.
