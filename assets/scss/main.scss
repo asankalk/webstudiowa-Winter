@@ -124,8 +124,9 @@ h3 {
 .header__inner {
   display: flex;
   align-items: center;
+  width: min(1280px, calc(100vw - 40px));
   min-height: 72px;
-  gap: 16px;
+  gap: 26px;
 }
 
 .brand { flex: 0 0 auto; }
@@ -159,6 +160,7 @@ h3 {
 .primary-nav > .menu {
   justify-content: flex-end;
   flex-wrap: nowrap;
+  gap: 24px;
   font-size: 0.88rem;
 }
 
@@ -175,9 +177,14 @@ h3 {
 
     > a::after {
       display: inline-block;
-      margin-left: 7px;
-      font-size: 0.78em;
-      content: "v";
+      width: 0.44em;
+      height: 0.44em;
+      margin-left: 0.55em;
+      vertical-align: 0.15em;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      content: "";
+      transform: rotate(45deg);
     }
 
     &:hover > .sub-menu,
@@ -236,6 +243,18 @@ h3 {
     .menu-item-has-children:focus-within > .sub-menu {
       transform: translateX(0);
     }
+  }
+}
+
+// Keep the expanded desktop rhythm while allowing the complete header to fit
+// before the accessible mobile navigation takes over at 1100px.
+@media (max-width: 1280px) and (min-width: 1101px) {
+  .header__inner {
+    gap: 24px;
+  }
+
+  .primary-nav > .menu {
+    gap: 16px;
   }
 }
 

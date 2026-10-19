@@ -46,7 +46,9 @@ In **Appearance → Menus**, add **WordPress Plugins** (or Plugins) to the Prima
 
 ## Desktop header layout
 
-The desktop header is compacted for the expanded Primary Menu: the logo, menu gap and navigation type are reduced slightly, while top-level links and the **Get a quote** CTA are kept on one line. At widths below 980px, the existing mobile menu toggle takes over so desktop links do not wrap.
+At desktop widths above 1280px, the header uses a dedicated 1280px maximum layout track so the existing-size logo, WordPress-managed top-level links and **Get a quote** CTA are balanced without increasing header height. Top-level menu items use a consistent 24px gap; the CTA is separated from Contact by the shared 26px header gap. Dropdown labels use a small CSS chevron, not a text `v`.
+
+Between 1101px and 1280px, the header progressively reduces the shared gap to 24px and the menu gap to 16px so it remains on one line with no overlap or horizontal scrolling. At 1100px and below, preserve the accessible hamburger/menu-panel implementation rather than trying to compress desktop navigation further. Do not hardcode links: menu content must remain WordPress-managed.
 
 ## 2026-10-19 mobile interaction update
 
