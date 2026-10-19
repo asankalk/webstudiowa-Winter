@@ -34,6 +34,7 @@ fs.mkdirSync(output,{recursive:true});
    const response=await p.goto(base+'/our-clients/?portfolio-audit=20261019',{waitUntil:'networkidle',timeout:60000});
    assert(response.ok());
    await p.locator('.portfolio-card img').evaluateAll(async images=>{images.forEach(i=>i.loading='eager');await Promise.all(images.map(i=>i.decode()));});
+   await p.locator('.footer__brand img').evaluate(async image=>{image.loading='eager';await image.decode();});
    const content=await p.locator('.portfolio-card').evaluateAll(cards=>cards.map(c=>({name:c.querySelector('h2').textContent.trim(),details:c.querySelector('.portfolio-card__details').textContent.trim(),links:[...c.querySelectorAll('a')].map(a=>({url:a.href,target:a.target,rel:a.rel})),image:c.querySelector('img').currentSrc})));
    assert.equal(content.length,6);
    assert.equal(new Set(content.map(c=>c.name)).size,6);
@@ -41,6 +42,8 @@ fs.mkdirSync(output,{recursive:true});
    fs.writeFileSync(path.join(output,engine+'-content.json'),JSON.stringify(content,null,2));
    for(const width of widths){
     await p.setViewportSize({width,height:1000});
+    await p.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await p.waitForTimeout(50);
     const metrics=await p.locator('.portfolio-card').evaluateAll(cards=>cards.map(c=>{
      const img=c.querySelector('img'),media=c.querySelector('.portfolio-card__media'),panel=c.querySelector('.portfolio-card__details');
      const ir=img.getBoundingClientRect(),mr=media.getBoundingClientRect(),css=getComputedStyle(img);
