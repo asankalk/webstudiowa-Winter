@@ -136,9 +136,9 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
 });
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('winter-style', WSWA_THEME_URI . '/assets/css/main.css', [], WSWA_VERSION);
-    wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], WSWA_VERSION);
-    wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], WSWA_VERSION, true);
+    wp_enqueue_style('winter-style', WSWA_THEME_URI . '/assets/css/main.css', [], (string) filemtime(WSWA_THEME_DIR . '/assets/css/main.css'));
+    wp_enqueue_style('winter-custom', WSWA_THEME_URI . '/assets/css/custom.css', ['winter-style'], (string) filemtime(WSWA_THEME_DIR . '/assets/css/custom.css'));
+    wp_enqueue_script('winter-main', WSWA_THEME_URI . '/assets/js/main.js', [], (string) filemtime(WSWA_THEME_DIR . '/assets/js/main.js'), true);
 
     if (is_page('contact') && wswa_is_turnstile_configured()) {
         wp_enqueue_script('wswa-turnstile', 'https://challenges.cloudflare.com/turnstile/v0/api.js', [], null, true);

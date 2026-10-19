@@ -262,3 +262,7 @@ Fill in these live server details before enabling deployment:
 - Whether SSH access is available
 - Whether `rsync` is available
 - Hosting provider or server panel in use, such as cPanel, Plesk, Cloudways, SiteGround, or VentraIP
+
+## 2026-10-19 release gate and rollback update
+
+The active workflow now requires PHP/JS syntax, build and all-published-page Chromium/WebKit responsive checks before SSH deployment. Runs are serialized. A verified theme archive is saved outside the web root immediately before rsync; backup failure blocks deployment. See [mobile release standards](mobile-responsiveness.md) for the full reusable release checklist, backup location and rollback procedure. This supersedes the earlier first-deployment-only backup guidance above.

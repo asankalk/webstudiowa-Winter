@@ -34,3 +34,10 @@ All notable changes to Winter from Web Studio WA are documented here.
 - Added ACF-powered editable homepage sections.
 - Added Sass source and compiled production CSS.
 - Added GitHub release-based WordPress theme update support.
+
+## 2026-10-19 — mobile responsiveness
+
+- Collapsible accessible mobile navigation, per-level accordion toggles, bounded viewport scrolling and close/keyboard handling.
+- Corrected intrinsic grid overflow, responsive CTA spacing/stacks, headings, About layout, contact controls and two-column mobile footer.
+- Added published-page Chromium/WebKit regression checks, a production deployment test gate and verified server-side theme snapshots.
+- Added permanent mobile standards/checklist and asset modification-time cache invalidation.
