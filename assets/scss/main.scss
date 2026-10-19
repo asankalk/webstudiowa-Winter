@@ -2095,6 +2095,7 @@ a.button--ghost:visited {
   > a {
     position: relative;
     display: block;
+    aspect-ratio: 1240 / 720;
     overflow: hidden;
     background: linear-gradient(135deg, #f6faff 0%, #eef5ff 100%);
 
@@ -2115,9 +2116,12 @@ a.button--ghost:visited {
 
   img {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: contain;
-    padding: 30px;
+    height: 100%;
+    max-width: none;
+    aspect-ratio: 1240 / 720;
+    object-fit: cover;
+    object-position: center top;
+    padding: 0;
     background: transparent;
     transition: transform 0.22s ease;
   }
@@ -2354,13 +2358,6 @@ a.button--ghost:visited {
   .client-snapshot {
     width: 290px;
     min-width: 290px;
-  }
-
-  .portfolio-card {
-    img {
-      max-width: 190px;
-      margin-inline: auto;
-    }
   }
 
   .detail-card,
