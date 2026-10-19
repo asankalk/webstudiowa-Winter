@@ -54,6 +54,7 @@ jobs:
         run: |
           npm run test:responsive -- --local
           npm run test:navigation -- --local
+          npm run test:portfolio -- --local
 
       - name: Preserve responsive audit evidence
         if: always()

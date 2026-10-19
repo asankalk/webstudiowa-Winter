@@ -6,7 +6,8 @@
     "build": "sass assets/scss/main.scss assets/css/main.css --style=compressed --no-source-map",
     "watch": "sass assets/scss/main.scss assets/css/main.css --style=compressed --watch",
     "test:responsive": "node tests/responsive.cjs",
-    "test:navigation": "node tests/navigation.cjs"
+    "test:navigation": "node tests/navigation.cjs",
+    "test:portfolio": "node tests/portfolio.cjs"
   },
   "devDependencies": {
     "playwright": "^1.64.1",

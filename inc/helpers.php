@@ -542,6 +542,27 @@ function wswa_merge_missing_default_clients(array $clients, array $args = []): a
     return $clients;
 }
 
+/** Curated full-canvas previews for the portfolio, without changing stored client content. */
+function wswa_portfolio_preview(array $client): array
+{
+    foreach (wswa_default_clients() as $default) {
+        if (wswa_client_identity_key($client) !== wswa_client_identity_key($default)) {
+            continue;
+        }
+
+        $filename = basename((string) parse_url($default['image'], PHP_URL_PATH));
+        $path = WSWA_THEME_DIR . '/assets/img/' . $filename;
+        if (is_file($path)) {
+            $client['image'] = add_query_arg('ver', (string) filemtime($path), $default['image']);
+            $client['image_alt'] = $default['image_alt'];
+            $client['uses_snapshot'] = true;
+        }
+        break;
+    }
+
+    return $client;
+}
+
 function wswa_clients(array $args = []): array
 {
     $defaults = [
