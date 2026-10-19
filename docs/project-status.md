@@ -173,3 +173,7 @@ npm run build
 4. Validate the live redirects and sitemap state after deployment.
 5. Apply the remaining manual Rank Math and WordPress admin cleanup steps.
 6. Keep updating this file as tasks are completed.
+
+## 2026-10-19 — mobile responsiveness deployed
+
+PR #5 merged as `f666827f4a2f782ba9905271a300d1d6641e0f36`; [production run 39192949308](https://github.com/asankalk/webstudiowa-Winter/actions/runs/39192949308) succeeded. Candidate and live audits each passed 540/540 cases across all 30 published pages, nine widths, Chromium and WebKit; short-screen/keyboard/navigation checks passed. Root causes, fixes, future release rules, backup/rollback details and verification boundaries are in [mobile responsiveness](mobile-responsiveness.md). Physical iPhone Safari remains a manual follow-up; the tested browsers have no remaining reproducible major issue.

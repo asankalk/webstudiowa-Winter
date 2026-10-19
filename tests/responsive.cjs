@@ -54,7 +54,7 @@ async function overflow(page) {
       await context.route('**/contact/**', async route=>{
         if(route.request().resourceType()!=='document') return route.continue();
         const r=await route.fetch();
-        await route.fulfill({response:r,body:(await r.text()).replace('class="cf-turnstile"','class="cf-turnstile" data-size="compact"')});
+        await route.fulfill({response:r,body:(await r.text()).replace(/class="cf-turnstile"(?: data-size="[^"]*")?/, 'class="cf-turnstile" data-size="compact"')});
       });
     }
     const page = await context.newPage();
