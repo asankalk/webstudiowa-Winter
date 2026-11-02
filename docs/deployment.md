@@ -1,5 +1,7 @@
 # Winter Theme Deployment
 
+> Current workflow policy: [RH-25 deployment safety gate](rh25-deployment-safety.md). Main pushes validate only; remote actions require separately approved manual dispatch, rollout opt-in and the production environment. Automatic main-push deployment and old-host values below are historical instructions, not an activation procedure. Do not retarget secrets or dispatch deployment during archival.
+
 ## Overview
 
 Deployment flow:

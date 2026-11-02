@@ -52,6 +52,8 @@ The production Actions build runs these checks before the dependent SSH deployme
 
 ## Deployment and rollback
 
+The current [RH-25 safety gate](rh25-deployment-safety.md) supersedes the automatic main-push activation/rollback steps below: main pushes validate only. A separately approved manual dispatch and rollout opt-in are required for remote operations. The dated 2026-10-19 release evidence remains historical.
+
 Use `.github/workflows/deploy-theme.yml`, the existing main-triggered SSH/rsync workflow. The build job gates deployment on syntax/build and responsive tests. Production runs are serialized without cancellation. Immediately before rsync, the deploy job checks the existing winter theme, saves `$HOME/winter-deploy-backups/winter-<run-id>-<attempt>.tar.gz` on the server outside the web root, validates the archive and logs its SHA-256. Backup failure prevents rsync. This is a theme snapshot, not a database backup; this release does not change WordPress data. Existing WPvivid restore-point freshness has not been independently verified.
 
 For code rollback, revert the release merge on main and push; the same checks and deployment run. For emergency restoration with authorised hosting SSH access, inspect the archive with `tar -tzf`, preserve the failed theme, then extract the recorded archive into the parent themes directory. Restore its original winter directory name and permissions, purge hosting/WordPress caches, verify Home/navigation/Contact, and reconcile Git with the restored code. Never guess the destination or restore database data for a CSS/JS rollback. Keep backups until the release is accepted; prune only under an agreed retention policy. Repository baseline for this release: `03f10d06611d2093643143fc480ffa58f3dfb32c`.
