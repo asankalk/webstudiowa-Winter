@@ -23,7 +23,8 @@ on:
 permissions:
   contents: read
 
-# A main push validates only. Remote access additionally needs manual dispatch,
+# A main push validates only, including the existing live-page browser audit.
+# SSH/rsync deployment access additionally needs manual dispatch,
 # the production environment, and the repository rollout variable below.
 # Do not enable the rollout variable until target metadata and the production
 # environment's required reviewer protections have been independently verified.
